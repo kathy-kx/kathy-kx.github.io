@@ -119,17 +119,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -154,6 +154,96 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">搭建Hexo博客过程中出现EACCES权限错误的解决方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-14 18:39:31 / 修改时间：20:19:08" itemprop="dateCreated datePublished" datetime="2023-04-14T18:39:31+08:00">2023-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/bug-fix/" itemprop="url" rel="index"><span itemprop="name">bug fix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在终端输入<code>npm install -g hexo-cli</code>尝试安装 Hexo 的过程中，出现了EACCES权限错误(eacces permissions errors)。<br>官方文档强烈建议<strong>不要</strong>使用 root、sudo 等方法覆盖权限，我刚好没看到，用了<code>sudo npm install -g hexo-cli</code>，后续又会出现无权限的问题。</p>
+<p>这个错误是因为，你没有足够的权限在&#x2F;usr&#x2F;local&#x2F;lib&#x2F;node_modules目录下创建新的目录。可以通过下面的方法解决这个问题：</p>
+<h1 id="方法1：使用node版本管理工具nvm，安装Node-js和npm"><a href="#方法1：使用node版本管理工具nvm，安装Node-js和npm" class="headerlink" title="方法1：使用node版本管理工具nvm，安装Node.js和npm"></a>方法1：使用node版本管理工具nvm，安装Node.js和npm</h1><p>注：不推荐使用Node installer，因为它会把npm安装到具有本地权限的目录中，在全局运行npm时可能会导致EACCES权限错误。我们直接使用nvm安装即可。</p>
+<h2 id="1-下载和安装nvm"><a href="#1-下载和安装nvm" class="headerlink" title="1. 下载和安装nvm"></a>1. 下载和安装nvm</h2><p>1.1 在终端执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -199,7 +289,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-14 18:24:03" itemprop="dateModified" datetime="2023-04-14T18:24:03+08:00">2023-04-14</time>
+      <time title="修改时间：2023-04-14 18:29:37" itemprop="dateModified" datetime="2023-04-14T18:29:37+08:00">2023-04-14</time>
     </span>
 
   
@@ -222,25 +312,14 @@
 <p>或者</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash</span><br></pre></td></tr></table></figure>
 <p>此处链接可以直接复制，这是v0.39.3版本，你也可以在github获取最新版本地址：<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm#installing-and-updating">https://github.com/nvm-sh/nvm#installing-and-updating</a><br>2.1.2 验证是否安装成功：<br>在终端输入<code>command -v nvm</code>，如果输出 <code>nvm</code> 则说明安装成功。</p>
-<h2 id="2-2-使用nvm安装Node-js和npm"><a href="#2-2-使用nvm安装Node-js和npm" class="headerlink" title="2.2 使用nvm安装Node.js和npm"></a>2.2 使用nvm安装Node.js和npm</h2><p>注：如果之前已经用其他方法安装过node.js，无需担心，nvm 会直接覆盖安装。<br>步骤如下：<br>2.1 在终端输入 <code>nvm ls-remote</code> ，列出都有哪些可用版本<br>2.2 从中选择一个安装，例如输入 <code>nvm install v18.15.0</code><br>2.3 使用安装好的版本，例如输入 <code>nvm use v18.15.0</code></p>
-<h1 id="3-Hexo安装"><a href="#3-Hexo安装" class="headerlink" title="3. Hexo安装"></a>3. Hexo安装</h1><p>在终端输入 <code>npm install -g hexo-cli</code> ，使用npm安装Hexo。刚才2.1中是使用nvm装的npm，此时已经不会报错了。</p>
-<h1 id="4-Hexo初始化"><a href="#4-Hexo初始化" class="headerlink" title="4. Hexo初始化"></a>4. Hexo初始化</h1><p>4.1 在你想放Hexo博客项目的地方，新建一个文件夹（要确保文件夹里面是空的，否则初始化时会报错）。后续就称“Hexo文件夹”。<br>4.2 切换到Hexo文件夹目录：在终端输入cd 空格，然后把新建的文件夹拖入终端，再回车执行。<br>例如，<code>cd /Users/kathy/my-blog</code><br>4.3 cd到目的文件夹后，输入<code>hexo init</code><br>4.4 如果想部署在GitHub，终端输入下方代码：<br><code>npm install hexo-deployer-git --save</code></p>
-<h1 id="5-预览Hexo【本地】"><a href="#5-预览Hexo【本地】" class="headerlink" title="5. 预览Hexo【本地】"></a>5. 预览Hexo【本地】</h1><p>终端输入<code>hexo g -s</code><br>打开你新建的hexo文件夹，找到public文件夹中的index.html文件，用浏览器打开，就可以看到你的本地主页了。</p>
-<h1 id="6-把你的Hexo发布至Github"><a href="#6-把你的Hexo发布至Github" class="headerlink" title="6. 把你的Hexo发布至Github"></a>6. 把你的Hexo发布至Github</h1><h2 id="6-1-配置SSH密钥"><a href="#6-1-配置SSH密钥" class="headerlink" title="6.1 配置SSH密钥"></a>6.1 配置SSH密钥</h2><p>(1) 打开Mac的Finder，上方菜单中，选择“文件” - “前往文件夹”，输入：<code>~/.ssh/id_rsa.pub</code>，看看有没有id_rsa.pub文件。</p>
-<ul>
-<li>如果有，用记事本打开看是否有内容</li>
-<li>如果没有该文件(~&#x2F;.ssh&#x2F;id_rsa.pub)，在终端输入：<br>  <code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code> 这个邮箱随便写，然后一路回车。输密码的那段也直接回车，就会自动生成文件(~&#x2F;.ssh&#x2F;id_rsa.pub)。<br>再次搜索，找到该文件，用记事本打开。<br>(2) 复制id_rsa.pub中的内容，到Github网站（需要你提前登录）-右上角个人- setting - SSH keys，添加密钥。密钥名称随便写，方便你认就可以。<br>(3) 终端输入<code>ssh -T git@github.com</code> 测试</li>
-</ul>
-<h2 id="6-2-设置用户信息-用户名和邮箱"><a href="#6-2-设置用户信息-用户名和邮箱" class="headerlink" title="6.2 设置用户信息(用户名和邮箱)"></a>6.2 设置用户信息(用户名和邮箱)</h2><p>每次git提交时都会使用该用户信息。<br>(1) <code>git config --global user.name&quot;</code> 写用户名<br>例如，<code>~ % git config --global user.name &quot;kathy-kx&quot;</code><br>(2) <code>git config --global user.email&quot;</code> 写你的邮箱<br>例如，<code>~ % git config --global user.email &quot;xxxxxx@qq.com&quot;</code></p>
-<h2 id="6-3-建立Github仓库"><a href="#6-3-建立Github仓库" class="headerlink" title="6.3 建立Github仓库"></a>6.3 建立Github仓库</h2><p>并命名它为：你的Github用户名.github.io。<br>例如，我的Github用户名是kathy-kx，则此处命名为：kathy-kx.github.io</p>
-<h2 id="6-4-修改配置文件。"><a href="#6-4-修改配置文件。" class="headerlink" title="6.4 修改配置文件。"></a>6.4 修改配置文件。</h2><p>在本地hexo文件夹（刚才新建的my-blog文件夹）的_config.yml中，修改以下部分。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">	<span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span>  <span class="comment"># 从你的仓库主页Clone or download复制 注意：改成SSH模式,后缀是.git</span></span><br><span class="line">	<span class="attr">branch:</span> <span class="string">master</span> <span class="comment"># 你的默认仓库分支</span></span><br></pre></td></tr></table></figure>
-<h2 id="6-5-生成静态文件，并部署网站"><a href="#6-5-生成静态文件，并部署网站" class="headerlink" title="6.5 生成静态文件，并部署网站"></a>6.5 生成静态文件，并部署网站</h2><p>cd到hexo文件夹下，执行<code>hexo g -d</code></p>
-<h2 id="6-6-查看博客"><a href="#6-6-查看博客" class="headerlink" title="6.6 查看博客"></a>6.6 查看博客</h2><p>浏览器打开：你的Github用户名.github.io，例如<a target="_blank" rel="noopener" href="http://kathy-kx.github.io/">kathy-kx.github.io</a>，就可以看到网页了。<br>如果不行，尝试清理浏览器缓存，再重新打开。</p>
-<h1 id="7-更换主题"><a href="#7-更换主题" class="headerlink" title="7. 更换主题"></a>7. 更换主题</h1><p>此时的主题是默认的主题，我们可以更换成自己喜欢的主题。<br>(1) 在 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a> 选一个喜欢的，下载下来，放到 hexo的theme文件夹内。<br>(2) 先cd到hexo文件夹下，执行 <code>git clone https://github.com/next-theme/hexo-theme-next themes/next</code> （此处使用的是next主题）<br>(3) 找到hexo文件夹下的_config.yml中theme部分，把名字改成theme文件夹内你下载来的主题名字。<br>例如：<code>theme: next</code><br><img src="/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/1.png" alt="img"><br>(4) 还可以顺便修改一下作者和简介<br>把hexo文件夹下的_config.yml文件中的author换成你的名字，简介description也可以改。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">author:</span></span><br><span class="line"><span class="attr">description:</span> </span><br></pre></td></tr></table></figure>
-<p>(5) 执行<code>hexo clean</code>（清理Hexo缓存）、<code>hexo s --debug</code>（测试模式启动Hexo服务器，可以d先在本地检查）和<code>hexo g -d</code>（生成静态文件后部署），现在再次访问你的博客，主题就已经更改好了。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

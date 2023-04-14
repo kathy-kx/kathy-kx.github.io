@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-K.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-K.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-K.png">
+  <link rel="mask-icon" href="/images/logo-K.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景在终端输入npm install -g hexo-cli尝试安装 Hexo 的过程中，出现了EACCES权限错误(eacces permissions errors)。官方文档强烈建议不要使用 root、sudo 等方法覆盖权限，我刚好没看到，用了sudo npm install -g hexo-cli，后续又会出现无权限的问题。 这个错误是因为，你没有足够的权限在&#x2F;usr&amp;#x2F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建Hexo博客过程中出现EACCES权限错误的解决方法">
+<meta property="og:url" content="http://example.com/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="背景在终端输入npm install -g hexo-cli尝试安装 Hexo 的过程中，出现了EACCES权限错误(eacces permissions errors)。官方文档强烈建议不要使用 root、sudo 等方法覆盖权限，我刚好没看到，用了sudo npm install -g hexo-cli，后续又会出现无权限的问题。 这个错误是因为，你没有足够的权限在&#x2F;usr&amp;#x2F">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-14T10:39:31.000Z">
+<meta property="article:modified_time" content="2023-04-14T12:19:08.268Z">
+<meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="bug">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/","path":"2023/04/14/搭建Hexo博客过程中出现EACCES权限错误的解决方法/","title":"搭建Hexo博客过程中出现EACCES权限错误的解决方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>搭建Hexo博客过程中出现EACCES权限错误的解决方法 | Kathy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kathy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E4%BD%BF%E7%94%A8node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm%EF%BC%8C%E5%AE%89%E8%A3%85Node-js%E5%92%8Cnpm"><span class="nav-number">2.</span> <span class="nav-text">方法1：使用node版本管理工具nvm，安装Node.js和npm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85nvm"><span class="nav-number">2.1.</span> <span class="nav-text">1. 下载和安装nvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8nvm%E5%AE%89%E8%A3%85Node-js%E5%92%8Cnpm"><span class="nav-number">2.2.</span> <span class="nav-text">2. 使用nvm安装Node.js和npm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BD%BF%E7%94%A8sudo%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">方法2：使用sudo命令安装（不推荐）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%953%EF%BC%9A%E6%89%8B%E5%8A%A8%E6%9B%B4%E6%94%B9npm%E7%9A%84%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84%EF%BC%8C%E5%B0%86%E5%85%B6%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E6%8B%A5%E6%9C%89%E5%86%99%E6%9D%83%E9%99%90%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="nav-number">4.</span> <span class="nav-text">方法3：手动更改npm的全局安装路径，将其设置为当前用户拥有写权限的目录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kathy-kx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kathy-kx" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kathy-kx" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kxzhu93@163.com" title="E-Mail → mailto:kxzhu93@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="搭建Hexo博客过程中出现EACCES权限错误的解决方法 | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建Hexo博客过程中出现EACCES权限错误的解决方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-14 18:39:31 / 修改时间：20:19:08" itemprop="dateCreated datePublished" datetime="2023-04-14T18:39:31+08:00">2023-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/bug-fix/" itemprop="url" rel="index"><span itemprop="name">bug fix</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在终端输入<code>npm install -g hexo-cli</code>尝试安装 Hexo 的过程中，出现了EACCES权限错误(eacces permissions errors)。<br>官方文档强烈建议<strong>不要</strong>使用 root、sudo 等方法覆盖权限，我刚好没看到，用了<code>sudo npm install -g hexo-cli</code>，后续又会出现无权限的问题。</p>
+<p>这个错误是因为，你没有足够的权限在&#x2F;usr&#x2F;local&#x2F;lib&#x2F;node_modules目录下创建新的目录。可以通过下面的方法解决这个问题：</p>
+<h1 id="方法1：使用node版本管理工具nvm，安装Node-js和npm"><a href="#方法1：使用node版本管理工具nvm，安装Node-js和npm" class="headerlink" title="方法1：使用node版本管理工具nvm，安装Node.js和npm"></a>方法1：使用node版本管理工具nvm，安装Node.js和npm</h1><p>注：不推荐使用Node installer，因为它会把npm安装到具有本地权限的目录中，在全局运行npm时可能会导致EACCES权限错误。我们直接使用nvm安装即可。</p>
+<h2 id="1-下载和安装nvm"><a href="#1-下载和安装nvm" class="headerlink" title="1. 下载和安装nvm"></a>1. 下载和安装nvm</h2><p>1.1 在终端执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>也可以在github获取最新版本地址：<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm#installing-and-updating">https://github.com/nvm-sh/nvm#installing-and-updating</a></p>
+<p>1.2 验证是否安装成功：<br>在终端输入<code>command -v nvm</code>，如果输出 <code>nvm</code> 则说明安装成功。</p>
+<h2 id="2-使用nvm安装Node-js和npm"><a href="#2-使用nvm安装Node-js和npm" class="headerlink" title="2. 使用nvm安装Node.js和npm"></a>2. 使用nvm安装Node.js和npm</h2><p>如果之前已经用其他方法安装过node.js，无需担心，nvm 会直接覆盖安装。<br>2.1 在终端输入<code>nvm ls-remote</code>，列出都有哪些可用版本<br>2.2 从中选择一个安装，例如 <code>nvm install v18.15.0</code><br>2.3 使用安装好的版本，例如 <code>nvm use v18.15.0</code><br>接下来就可以使用npm安装Hexo。在终端输入 <code>npm install -g hexo-cli</code>即可。</p>
+<p>参考的原文档：<br><a target="_blank" rel="noopener" href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally/">https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally/</a></p>
+<h1 id="方法2：使用sudo命令安装（不推荐）"><a href="#方法2：使用sudo命令安装（不推荐）" class="headerlink" title="方法2：使用sudo命令安装（不推荐）"></a>方法2：使用sudo命令安装（不推荐）</h1><p>hexo官方文档建议不要使用此方法，就不写了</p>
+<h1 id="方法3：手动更改npm的全局安装路径，将其设置为当前用户拥有写权限的目录"><a href="#方法3：手动更改npm的全局安装路径，将其设置为当前用户拥有写权限的目录" class="headerlink" title="方法3：手动更改npm的全局安装路径，将其设置为当前用户拥有写权限的目录"></a>方法3：手动更改npm的全局安装路径，将其设置为当前用户拥有写权限的目录</h1><ol>
+<li>首先，在你的主目录下，创建一个全新的目录：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> ~/.npm-global</span><br></pre></td></tr></table></figure>
+然后，在 **<code>~/.npmrc</code>**文件中配置新的路径（如果文件不存在，请创建一个）：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;prefix=~/.npm-global&quot;</span> &gt;&gt; ~/.npmrc</span><br></pre></td></tr></table></figure>
+最后，将新的路径添加到你的系统环境变量中。在你的 **<code>~/.bashrc</code><strong>、</strong><code>~/.zshrc</code>**或其他 shell 配置文件中添加以下内容：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+保存文件后，重新加载配置文件或者重启终端：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+或者<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+现在，你可以尝试重新安装 hexo-cli，不再需要使用 <strong><code>sudo</code></strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/bug/" rel="tag"># bug</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="prev" title="MacOS下基于Github的Hexo博客搭建">
+                  <i class="fa fa-chevron-left"></i> MacOS下基于Github的Hexo博客搭建
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kathy-kx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

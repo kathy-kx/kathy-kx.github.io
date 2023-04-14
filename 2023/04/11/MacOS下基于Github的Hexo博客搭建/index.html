@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/1.png">
 <meta property="article:published_time" content="2023-04-11T14:26:27.000Z">
-<meta property="article:modified_time" content="2023-04-14T10:24:03.307Z">
+<meta property="article:modified_time" content="2023-04-14T10:29:37.822Z">
 <meta property="article:author" content="Kathy-kx">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="macOS">
@@ -128,17 +128,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-14 18:24:03" itemprop="dateModified" datetime="2023-04-14T18:24:03+08:00">2023-04-14</time>
+      <time title="修改时间：2023-04-14 18:29:37" itemprop="dateModified" datetime="2023-04-14T18:29:37+08:00">2023-04-14</time>
     </span>
 
   
@@ -232,6 +232,7 @@
 <p>或者</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash</span><br></pre></td></tr></table></figure>
 <p>此处链接可以直接复制，这是v0.39.3版本，你也可以在github获取最新版本地址：<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm#installing-and-updating">https://github.com/nvm-sh/nvm#installing-and-updating</a><br>2.1.2 验证是否安装成功：<br>在终端输入<code>command -v nvm</code>，如果输出 <code>nvm</code> 则说明安装成功。</p>
+<span id="more"></span>
 <h2 id="2-2-使用nvm安装Node-js和npm"><a href="#2-2-使用nvm安装Node-js和npm" class="headerlink" title="2.2 使用nvm安装Node.js和npm"></a>2.2 使用nvm安装Node.js和npm</h2><p>注：如果之前已经用其他方法安装过node.js，无需担心，nvm 会直接覆盖安装。<br>步骤如下：<br>2.1 在终端输入 <code>nvm ls-remote</code> ，列出都有哪些可用版本<br>2.2 从中选择一个安装，例如输入 <code>nvm install v18.15.0</code><br>2.3 使用安装好的版本，例如输入 <code>nvm use v18.15.0</code></p>
 <h1 id="3-Hexo安装"><a href="#3-Hexo安装" class="headerlink" title="3. Hexo安装"></a>3. Hexo安装</h1><p>在终端输入 <code>npm install -g hexo-cli</code> ，使用npm安装Hexo。刚才2.1中是使用nvm装的npm，此时已经不会报错了。</p>
 <h1 id="4-Hexo初始化"><a href="#4-Hexo初始化" class="headerlink" title="4. Hexo初始化"></a>4. Hexo初始化</h1><p>4.1 在你想放Hexo博客项目的地方，新建一个文件夹（要确保文件夹里面是空的，否则初始化时会报错）。后续就称“Hexo文件夹”。<br>4.2 切换到Hexo文件夹目录：在终端输入cd 空格，然后把新建的文件夹拖入终端，再回车执行。<br>例如，<code>cd /Users/kathy/my-blog</code><br>4.3 cd到目的文件夹后，输入<code>hexo init</code><br>4.4 如果想部署在GitHub，终端输入下方代码：<br><code>npm install hexo-deployer-git --save</code></p>
@@ -239,7 +240,7 @@
 <h1 id="6-把你的Hexo发布至Github"><a href="#6-把你的Hexo发布至Github" class="headerlink" title="6. 把你的Hexo发布至Github"></a>6. 把你的Hexo发布至Github</h1><h2 id="6-1-配置SSH密钥"><a href="#6-1-配置SSH密钥" class="headerlink" title="6.1 配置SSH密钥"></a>6.1 配置SSH密钥</h2><p>(1) 打开Mac的Finder，上方菜单中，选择“文件” - “前往文件夹”，输入：<code>~/.ssh/id_rsa.pub</code>，看看有没有id_rsa.pub文件。</p>
 <ul>
 <li>如果有，用记事本打开看是否有内容</li>
-<li>如果没有该文件(~&#x2F;.ssh&#x2F;id_rsa.pub)，在终端输入：<br>  <code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code> 这个邮箱随便写，然后一路回车。输密码的那段也直接回车，就会自动生成文件(~&#x2F;.ssh&#x2F;id_rsa.pub)。<br>再次搜索，找到该文件，用记事本打开。<br>(2) 复制id_rsa.pub中的内容，到Github网站（需要你提前登录）-右上角个人- setting - SSH keys，添加密钥。密钥名称随便写，方便你认就可以。<br>(3) 终端输入<code>ssh -T git@github.com</code> 测试</li>
+<li>如果没有该文件(~&#x2F;.ssh&#x2F;id_rsa.pub)，在终端输入：<code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code> 这个邮箱随便写，然后一路回车。输密码的那段也直接回车，就会自动生成文件(~&#x2F;.ssh&#x2F;id_rsa.pub)。<br>再次搜索，找到该文件，用记事本打开。<br>(2) 复制id_rsa.pub中的内容，到Github网站（需要你提前登录）-右上角个人- setting - SSH keys，添加密钥。密钥名称随便写，方便你认就可以。<br>(3) 终端输入<code>ssh -T git@github.com</code> 测试</li>
 </ul>
 <h2 id="6-2-设置用户信息-用户名和邮箱"><a href="#6-2-设置用户信息-用户名和邮箱" class="headerlink" title="6.2 设置用户信息(用户名和邮箱)"></a>6.2 设置用户信息(用户名和邮箱)</h2><p>每次git提交时都会使用该用户信息。<br>(1) <code>git config --global user.name&quot;</code> 写用户名<br>例如，<code>~ % git config --global user.name &quot;kathy-kx&quot;</code><br>(2) <code>git config --global user.email&quot;</code> 写你的邮箱<br>例如，<code>~ % git config --global user.email &quot;xxxxxx@qq.com&quot;</code></p>
 <h2 id="6-3-建立Github仓库"><a href="#6-3-建立Github仓库" class="headerlink" title="6.3 建立Github仓库"></a>6.3 建立Github仓库</h2><p>并命名它为：你的Github用户名.github.io。<br>例如，我的Github用户名是kathy-kx，则此处命名为：kathy-kx.github.io</p>
@@ -272,6 +273,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2023/04/14/%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0EACCES%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="next" title="搭建Hexo博客过程中出现EACCES权限错误的解决方法">
+                  搭建Hexo博客过程中出现EACCES权限错误的解决方法 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
