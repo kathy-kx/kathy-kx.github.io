@@ -19,23 +19,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Kathy&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="使用arm64 m1&#x2F;m2芯片的mac电脑搭建Hexo博客，在跟着官方文档搭建的过程中，会遇到一些问题，研究重试了好久，现重新将步骤整理如下。 首先可以参考官方文档 ，也可以直接根据本博客的步骤，很详细，适用于初学者。 1. Git安装mac电脑可以直接打开App Store搜索“Xcode”安装，Xcode自带Git。 2. 使用node版本管理工具nvm，安装Node.js和npm(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MacOS下基于Github的Hexo博客搭建">
+<meta property="og:url" content="http://example.com/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="使用arm64 m1&#x2F;m2芯片的mac电脑搭建Hexo博客，在跟着官方文档搭建的过程中，会遇到一些问题，研究重试了好久，现重新将步骤整理如下。 首先可以参考官方文档 ，也可以直接根据本博客的步骤，很详细，适用于初学者。 1. Git安装mac电脑可以直接打开App Store搜索“Xcode”安装，Xcode自带Git。 2. 使用node版本管理工具nvm，安装Node.js和npm(">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/1.png">
+<meta property="article:published_time" content="2023-04-11T14:26:27.000Z">
+<meta property="article:modified_time" content="2023-04-14T10:24:03.307Z">
 <meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="macOS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/1.png">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/","path":"2023/04/11/MacOS下基于Github的Hexo博客搭建/","title":"MacOS下基于Github的Hexo博客搭建"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Kathy's Blog</title>
+<title>MacOS下基于Github的Hexo博客搭建 | Kathy's Blog</title>
   
 
 
@@ -68,7 +76,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Kathy's Blog</h1>
+      <p class="site-title">Kathy's Blog</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -94,7 +102,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -107,6 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Git%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">1. Git安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm%EF%BC%8C%E5%AE%89%E8%A3%85Node-js%E5%92%8Cnpm"><span class="nav-number">2.</span> <span class="nav-text">2. 使用node版本管理工具nvm，安装Node.js和npm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85nvm"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 下载和安装nvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8nvm%E5%AE%89%E8%A3%85Node-js%E5%92%8Cnpm"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 使用nvm安装Node.js和npm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Hexo%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">3. Hexo安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Hexo%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">4. Hexo初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E9%A2%84%E8%A7%88Hexo%E3%80%90%E6%9C%AC%E5%9C%B0%E3%80%91"><span class="nav-number">5.</span> <span class="nav-text">5. 预览Hexo【本地】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%8A%8A%E4%BD%A0%E7%9A%84Hexo%E5%8F%91%E5%B8%83%E8%87%B3Github"><span class="nav-number">6.</span> <span class="nav-text">6. 把你的Hexo发布至Github</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E9%85%8D%E7%BD%AESSH%E5%AF%86%E9%92%A5"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 配置SSH密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF-%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E9%82%AE%E7%AE%B1"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 设置用户信息(用户名和邮箱)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E5%BB%BA%E7%AB%8BGithub%E4%BB%93%E5%BA%93"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 建立Github仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%82"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 修改配置文件。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%EF%BC%8C%E5%B9%B6%E9%83%A8%E7%BD%B2%E7%BD%91%E7%AB%99"><span class="nav-number">6.5.</span> <span class="nav-text">6.5 生成静态文件，并部署网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2"><span class="nav-number">6.6.</span> <span class="nav-text">6.6 查看博客</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">7. 更换主题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -153,16 +162,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -176,13 +186,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="name" content="MacOS下基于Github的Hexo博客搭建 | Kathy's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/11/MacOS%E4%B8%8B%E5%9F%BA%E4%BA%8EGithub%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">MacOS下基于Github的Hexo博客搭建</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          MacOS下基于Github的Hexo博客搭建
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -212,7 +222,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>使用arm64 m1&#x2F;m2芯片的mac电脑搭建Hexo博客，在跟着官方文档搭建的过程中，会遇到一些问题，研究重试了好久，现重新将步骤整理如下。</p>
+        <p>使用arm64 m1&#x2F;m2芯片的mac电脑搭建Hexo博客，在跟着官方文档搭建的过程中，会遇到一些问题，研究重试了好久，现重新将步骤整理如下。</p>
 <p>首先可以参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官方文档</a> ，也可以直接根据本博客的步骤，很详细，适用于初学者。</p>
 <h1 id="1-Git安装"><a href="#1-Git安装" class="headerlink" title="1. Git安装"></a>1. Git安装</h1><p>mac电脑可以直接打开App Store搜索“Xcode”安装，Xcode自带Git。</p>
 <h1 id="2-使用node版本管理工具nvm，安装Node-js和npm"><a href="#2-使用node版本管理工具nvm，安装Node-js和npm" class="headerlink" title="2. 使用node版本管理工具nvm，安装Node.js和npm"></a>2. 使用node版本管理工具nvm，安装Node.js和npm</h1><p>(注：不推荐使用Node installer，因为它会把npm安装到具有本地权限的目录中，在全局运行npm时可能会导致<code>EACCES</code>权限错误。<br>如果不慎出现EACCES权限错误，参考此文章：<a target="_blank" rel="noopener" href="https://www.notion.so/Hexo-EACCES-1192e9bf10a349a8887a6c5287b798f2">安装 Hexo 的过程中出现 <code>EACCES</code>权限错误的解决方法</a> )</p>
@@ -241,7 +251,6 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">author:</span></span><br><span class="line"><span class="attr">description:</span> </span><br></pre></td></tr></table></figure>
 <p>(5) 执行<code>hexo clean</code>（清理Hexo缓存）、<code>hexo s --debug</code>（测试模式启动Hexo服务器，可以d先在本地检查）和<code>hexo g -d</code>（生成静态文件后部署），现在再次访问你的博客，主题就已经更改好了。</p>
 
-      
     </div>
 
     
@@ -249,194 +258,26 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/macOS/" rel="tag"># macOS</a>
+          </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/22/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/22/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">markdown常用语法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-03-22 14:23:31" itemprop="dateCreated datePublished" datetime="2023-03-22T14:23:31+08:00">2023-03-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-11 22:54:07" itemprop="dateModified" datetime="2023-04-11T22:54:07+08:00">2023-04-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这篇文章整理了markdown(.md)文件几乎所有常用的写法。</p>
-<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p>创建标题，使用“# ”。在文字前方加一个井号、一个空格，就可以创建一级标题。<br><code># 一级标题</code><br><code>## 二级标题</code><br><code>### 三级标题</code><br><code>#### 四级标题</code></p>
-<h1 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h1><h2 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h2><p>在要加粗部分的两侧，各添加两个星号。<br>输入：<br><code>这是要**加粗**的文本</code><br>效果为：<br>这是要<strong>加粗</strong>的文本</p>
-<h2 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h2><p>在斜体的文本前后，各添加一个星号。<br>输入：<br><code>这是要*斜体*的文本</code><br>效果为：<br>这是要<em>斜体</em>的文本</p>
-<h2 id="加粗-斜体"><a href="#加粗-斜体" class="headerlink" title="加粗+斜体"></a>加粗+斜体</h2><p>同时用粗体和斜体突出显示文本，在文本的前后，各添加三个星号。<br>输入：<br><code>这是要***加粗+斜体***的文本</code><br>效果为：<br>这是要<em><strong>加粗+斜体</strong></em>的文本</p>
-<h1 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h1><p>要删除单词，在单词前后使用两个波浪号<code>~~</code>。<br>输入：<br><code>ABCDEFG~~DEFG~~HIJK</code><br>效果为：<br>ABCDEFG<del>DEFG</del>HIJK</p>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>要创建块引用，在需要引用的段落前添加一个 <code>&gt;</code> 符号。如果引用包含多个段落，其前方都需要加<code>&gt;</code>。<br>输入：<br><code>&gt;这是被引用的文本</code><br><code>&gt;这是被引用的文本</code></p>
-<p>效果为：</p>
-<blockquote>
-<p>这是被引用的文本<br>这是被引用的文本</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/22/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/22/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" rel="prev" title="markdown常用语法">
+                  <i class="fa fa-chevron-left"></i> markdown常用语法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/21/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-03-21 16:49:00" itemprop="dateCreated datePublished" datetime="2023-03-21T16:49:00+08:00">2023-03-21</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
