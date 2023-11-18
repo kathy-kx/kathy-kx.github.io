@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-K.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-K.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-K.png">
+  <link rel="mask-icon" href="/images/logo-K.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这是一个使用Springboot+SSM的实战练习项目，实现了一个外卖系统的前后台功能。 本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 下图是项目效果展示，左侧是移动端的效果，右侧是管理后台的效果。  1. 软件开发整体介绍1.1 软件开发流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="瑞吉外卖01-介绍+环境搭建+后台登录和退出">
+<meta property="og:url" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/index.html">
+<meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="这是一个使用Springboot+SSM的实战练习项目，实现了一个外卖系统的前后台功能。 本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 下图是项目效果展示，左侧是移动端的效果，右侧是管理后台的效果。  1. 软件开发整体介绍1.1 软件开发流程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/1.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/2.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/3.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/4.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/5.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/6.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/7.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/8.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/9.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/10.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/11.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/12.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/13.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/14.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/15.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/16.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/17.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/18.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/19.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/20.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/21.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/22.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/23.jpeg">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/24.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/25.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/26.png">
+<meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/27.png">
+<meta property="article:published_time" content="2023-05-13T14:46:45.000Z">
+<meta property="article:modified_time" content="2023-11-18T15:02:19.916Z">
+<meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="项目笔记">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Spring MVC">
+<meta property="article:tag" content="MyBatis Plus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/1.png">
+
+
+<link rel="canonical" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/","path":"2023/05/13/瑞吉外卖01-介绍+环境搭建+后台登录和退出/","title":"瑞吉外卖01-介绍+环境搭建+后台登录和退出"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>瑞吉外卖01-介绍+环境搭建+后台登录和退出 | Kathy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kathy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">1. 软件开发整体介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 软件开发流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E8%A7%92%E8%89%B2%E5%88%86%E5%B7%A5"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 角色分工</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 软件环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%A4%96%E5%8D%96%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">2. 外卖项目介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 项目介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E4%BA%A7%E5%93%81%E5%8E%9F%E5%9E%8B%E5%B1%95%E7%A4%BA"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 产品原型展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 技术选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E5%8A%9F%E8%83%BD%E6%9E%B6%E6%9E%84"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 功能架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E8%A7%92%E8%89%B2"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 角色</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">3. 开发环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 数据库环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%AF%B9%E5%BA%94%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 创建项目对应的数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-%E5%AF%BC%E5%85%A5%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 导入表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 数据表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 maven项目搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E5%88%9B%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 创建maven项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E6%A3%80%E6%9F%A5%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%BC%96%E7%A0%81%E3%80%81maven%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE%E3%80%81jdk%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 检查项目的编码、maven仓库配置、jdk配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-pom%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 pom文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6application-yml"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.4 配置文件application.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-5-%E7%BC%96%E5%86%99Springboot%E5%90%AF%E5%8A%A8%E7%B1%BB"><span class="nav-number">3.2.5.</span> <span class="nav-text">3.2.5 编写Springboot启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-6-%E5%AF%BC%E5%85%A5%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%B9%B6%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84"><span class="nav-number">3.2.6.</span> <span class="nav-text">3.2.6 导入前端页面并设置静态资源映射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">4. 后台登录功能开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">4.1.1 请求过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">4.1.2 数据模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 代码开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%88%86%E6%9E%90"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 前端页面分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2 实体类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-%E5%88%9B%E5%BB%BAController%E3%80%81Service%E3%80%81Mapper"><span class="nav-number">4.2.3.</span> <span class="nav-text">4.2.3 创建Controller、Service、Mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-%E5%AF%BC%E5%85%A5%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E7%B1%BBR"><span class="nav-number">4.2.4.</span> <span class="nav-text">4.2.4 导入返回结果类R</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-5-%E5%9C%A8Controller%E4%B8%AD%E7%BC%96%E5%86%99%E7%99%BB%E5%BD%95%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.5.</span> <span class="nav-text">4.2.5 在Controller中编写登录方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 功能测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%90%8E%E5%8F%B0%E9%80%80%E5%87%BA%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91"><span class="nav-number">5.</span> <span class="nav-text">5. 后台退出功能开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 代码开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 功能测试</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kathy-kx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kathy-kx" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kathy-kx" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kxzhu93@163.com" title="E-Mail → mailto:kxzhu93@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="瑞吉外卖01-介绍+环境搭建+后台登录和退出 | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          瑞吉外卖01-介绍+环境搭建+后台登录和退出
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 22:46:45" itemprop="dateCreated datePublished" datetime="2023-05-13T22:46:45+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-18 23:02:19" itemprop="dateModified" datetime="2023-11-18T23:02:19+08:00">2023-11-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>这是一个使用Springboot+SSM的实战练习项目，实现了一个外卖系统的前后台功能。</p>
+<p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。</p>
+<p>下图是项目效果展示，左侧是移动端的效果，右侧是管理后台的效果。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/1.png" alt="1"></p>
+<h1 id="1-软件开发整体介绍"><a href="#1-软件开发整体介绍" class="headerlink" title="1. 软件开发整体介绍"></a>1. 软件开发整体介绍</h1><h2 id="1-1-软件开发流程"><a href="#1-1-软件开发流程" class="headerlink" title="1.1 软件开发流程"></a>1.1 软件开发流程</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/2.png" alt="2"></p>
+<h2 id="1-2-角色分工"><a href="#1-2-角色分工" class="headerlink" title="1.2 角色分工"></a>1.2 角色分工</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/3.png" alt="3"></p>
+<h2 id="1-3-软件环境"><a href="#1-3-软件环境" class="headerlink" title="1.3 软件环境"></a>1.3 软件环境</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/4.png" alt="4"></p>
+<h1 id="2-外卖项目介绍"><a href="#2-外卖项目介绍" class="headerlink" title="2. 外卖项目介绍"></a>2. 外卖项目介绍</h1><h2 id="2-1-项目介绍"><a href="#2-1-项目介绍" class="headerlink" title="2.1 项目介绍"></a>2.1 项目介绍</h2><p>本外卖项目是专门为餐饮企业(餐厅、饭店）定制的一款软件产品，包括系统管理后台和移动端应用两部分。其中系统管理后台主要提供给餐饮企业内部员工使用，可以对餐厅的菜品、套餐、订单等进行管理维护。移动端应用主要提供给消费者使用，可以在线浏览菜品、添加购物车、下单等。</p>
+<p>本项目共分为3期进行开发：</p>
+<p>第一期主要实现基本需求，其中移动端应用通过H5实现，用户可以通过手机浏览器访问。</p>
+<p>第二期主要针对移动端应用进行改进，使用微信小程序实现，用户使用起来更加方便。</p>
+<p>第三期主要针对系统进行优化升级，提高系统的访问性能。</p>
+<span id="more"></span>
+
+<h2 id="2-2-产品原型展示"><a href="#2-2-产品原型展示" class="headerlink" title="2.2 产品原型展示"></a>2.2 产品原型展示</h2><p>产品原型，就是一款产品成型之前的一个简单的框架，就是将页面的排版布局展现出来，使产品的初步构思有一个可视化的展示。通过原型展示，可以更加直观的了解项目的需求和提供的功能。</p>
+<p>一般来说，产品原型由产品经理在“需求分析”阶段制作。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/5.png" alt="5-产品原型"></p>
+<p>例如：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/6.png" alt="6-产品原型具体"></p>
+<p>注意事项：产品原型主要用于展示项目的功能，并不是最终的页面效果。</p>
+<h2 id="2-3-技术选型"><a href="#2-3-技术选型" class="headerlink" title="2.3 技术选型"></a>2.3 技术选型</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/7.png" alt="7-技术选型"></p>
+<h2 id="2-4-功能架构"><a href="#2-4-功能架构" class="headerlink" title="2.4 功能架构"></a>2.4 功能架构</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/8.png" alt="8-功能架构"></p>
+<h2 id="2-5-角色"><a href="#2-5-角色" class="headerlink" title="2.5 角色"></a>2.5 角色</h2><p>后台系统管理员：登录后台管理系统，拥有后台系统中的所有操作权限。</p>
+<p>后台系统普通员工：登录后台管理系统，对菜品、套餐、订单等进行管理。</p>
+<p>C端用户：登录移动端应用，可以浏览菜品、添加购物车、设置地址、在线下单等。</p>
+<h1 id="3-开发环境搭建"><a href="#3-开发环境搭建" class="headerlink" title="3. 开发环境搭建"></a>3. 开发环境搭建</h1><h2 id="3-1-数据库环境搭建"><a href="#3-1-数据库环境搭建" class="headerlink" title="3.1 数据库环境搭建"></a>3.1 数据库环境搭建</h2><h3 id="3-1-1-创建项目对应的数据库"><a href="#3-1-1-创建项目对应的数据库" class="headerlink" title="3.1.1 创建项目对应的数据库"></a>3.1.1 创建项目对应的数据库</h3><p>图形界面或者命令行方式任选一个</p>
+<p>方法一：使用图形界面创建数据库（navicat等）</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/9.png" alt="9"></p>
+<p>方法二：使用命令行创建数据库</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/10.png" alt="10"></p>
+<p>创建后在图形界面内刷新一下，就可以看到新创建的数据库了。</p>
+<h3 id="3-1-2-导入表结构"><a href="#3-1-2-导入表结构" class="headerlink" title="3.1.2 导入表结构"></a>3.1.2 导入表结构</h3><p>在资料&#x2F;数据模型&#x2F;db_reggie.sql有脚本文件。</p>
+<p>在图形界面中，选中数据库点右键，选择“运行SQL文件”，文件选择资料中提供的db_reggie.sql文件，点击开始。刷新后可以看到所有的表。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/11.png" alt="11"></p>
+<h3 id="3-1-3-数据表"><a href="#3-1-3-数据表" class="headerlink" title="3.1.3 数据表"></a>3.1.3 数据表</h3><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/12.png" alt="12"></p>
+<h2 id="3-2-maven项目搭建"><a href="#3-2-maven项目搭建" class="headerlink" title="3.2 maven项目搭建"></a>3.2 maven项目搭建</h2><h3 id="3-2-1-创建maven项目"><a href="#3-2-1-创建maven项目" class="headerlink" title="3.2.1 创建maven项目"></a>3.2.1 创建maven项目</h3><p>在IDEA中点击new，选择project，选择maven项目。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/13.png" alt="13"></p>
+<h3 id="3-2-2-检查项目的编码、maven仓库配置、jdk配置"><a href="#3-2-2-检查项目的编码、maven仓库配置、jdk配置" class="headerlink" title="3.2.2 检查项目的编码、maven仓库配置、jdk配置"></a>3.2.2 检查项目的编码、maven仓库配置、jdk配置</h3><p>创建完项目后，注意检查项目的编码、maven仓库配置、jdk配置等。</p>
+<p>项目编码：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/14.png" alt="14"></p>
+<p>maven仓库配置：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/15.png" alt="15"></p>
+<p>jdk配置：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/16.png" alt="16"></p>
+<h3 id="3-2-3-pom文件"><a href="#3-2-3-pom文件" class="headerlink" title="3.2.3 pom文件"></a>3.2.3 pom文件</h3><p>pom文件中添加依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--继承父工程--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.kxzhu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>reggie<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> </span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--mybatis-plus--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--lombok--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--fastjson：对象转json的--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.76<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--通用语言包--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-lang<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">      <span class="comment">&lt;!--mysql驱动--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--数据源--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.23<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                      <span class="tag">&lt;<span class="name">exclude</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                      <span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-4-配置文件application-yml"><a href="#3-2-4-配置文件application-yml" class="headerlink" title="3.2.4 配置文件application.yml"></a>3.2.4 配置文件application.yml</h3><p>将资料&#x2F;项目文件中提供的application.yml复制到项目的src&#x2F;main&#x2F;resources下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span> <span class="comment"># 启动时tomcat的端口号</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">reggie</span> <span class="comment"># 填写应用的名称，非必需项。如果不配置，默认使用工程名</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">druid:</span></span><br><span class="line">      <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/reggie?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">root</span> <span class="comment"># 填写自己的密码</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span> <span class="comment"># 开启后，表名address_book可以映射为实体类名AddressBook；字段名user_name可以映射为属性名userName</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span>    <span class="comment"># 主键的生成策略</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-5-编写Springboot启动类"><a href="#3-2-5-编写Springboot启动类" class="headerlink" title="3.2.5 编写Springboot启动类"></a>3.2.5 编写Springboot启动类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span>  <span class="comment">//加上这个注解后，可以在主程序中使用log.xxxx方法，便于打印日志</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReggieApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class, args);</span><br><span class="line">        log.info(<span class="string">&quot;项目启动成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注解@Slf4j是lombok自带的。加在类上之后，类中的方法可以调用log.info()方法。</p>
+<h3 id="3-2-6-导入前端页面并设置静态资源映射"><a href="#3-2-6-导入前端页面并设置静态资源映射" class="headerlink" title="3.2.6 导入前端页面并设置静态资源映射"></a>3.2.6 <strong>导入前端页面并设置静态资源映射</strong></h3><p><strong>导入项目前端页面</strong></p>
+<p>将资料&#x2F;前端资源中的backend复制，粘贴到项目的src&#x2F;main&#x2F;resources。</p>
+<p>注意：资料&#x2F;前端资源&#x2F;front部分代码不全，在后期需要手动修改。为了简便，此处可以复制资料中day05的front资源。</p>
+<p><strong>设置静态资源映射</strong></p>
+<p>原因：</p>
+<p>此时存在一个问题，springboot默认情况下只能访问以下静态资源路径：</p>
+<ul>
+<li>classpath:&#x2F;static&#x2F;</li>
+<li>classpath:&#x2F;templates&#x2F;</li>
+<li>classpath:&#x2F;META-INF&#x2F;resources&#x2F;</li>
+<li>classpath:&#x2F;resources&#x2F;</li>
+</ul>
+<p>此处的类路径“classpath”相当于src&#x2F;main&#x2F;resources目录。现在我们想将静态资源放在resources下的backend和front目录，并能访问，需要设置MVC框架静态资源映射。</p>
+<p>方法：</p>
+<p>在与spring boot启动类(Springboot2Application)的同级文件下，创建config包，并创建配置类WebMvcConfig，继承WebMvcConfigurationSupport类，并重写addResourceHandlers(ResourceHandlerRegistry registry)方法，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Configuration</span> <span class="comment">// 这是一个配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebMvcConfig</span> <span class="keyword">extends</span> <span class="title class_">WebMvcConfigurationSupport</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置静态资源映射</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> &#123;</span><br><span class="line">        <span class="comment">//前端发来的请求是什么样的(http://ip:port/backend/xxxx)--&gt;映射到什么地方(类路径resources下的backend下的xxx)</span></span><br><span class="line">        registry.addResourceHandler(<span class="string">&quot;/backend/**&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/backend/&quot;</span>);</span><br><span class="line">        registry.addResourceHandler(<span class="string">&quot;/front/**&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/front/&quot;</span>);</span><br><span class="line">        log.info(<span class="string">&quot;开始进行静态资源映射&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拓展知识：</p>
+<p>&#x2F;**  当前目录及子目录下的所有文件</p>
+<p>&#x2F;*    当前目录下的所有文件</p>
+<h1 id="4-后台登录功能开发"><a href="#4-后台登录功能开发" class="headerlink" title="4. 后台登录功能开发"></a>4. 后台登录功能开发</h1><h2 id="4-1-需求分析"><a href="#4-1-需求分析" class="headerlink" title="4.1 需求分析"></a>4.1 需求分析</h2><p>由于已经将静态资源放到resources下，且已经设置了静态资源映射，因此可以访问resources下的静态资源。此时可以直接在浏览器访问登录页面 <a target="_blank" rel="noopener" href="http://localhost:8080/backend/page/login/login.html">http://localhost:8080/backend/page/login/login.html</a> 。并可以打开浏览器调试工具（按F12；或者在浏览器点右键，选择“检查”），切换到“Network”。如下图：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/17.png" alt="17-浏览器调试"></p>
+<h3 id="4-1-1-请求过程"><a href="#4-1-1-请求过程" class="headerlink" title="4.1.1 请求过程"></a>4.1.1 请求过程</h3><p>在登录页面 <a target="_blank" rel="noopener" href="http://localhost:8080/backend/page/login/login.html">http://localhost:8080/backend/page/login/login.html</a> 点击“登录”按钮，可以看到向<a target="_blank" rel="noopener" href="http://localhost:8080/employee/login">http://localhost:8080/employee/login</a> 发送了POST请求，并将username和password以json字符串的形式提交到服务端。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/18.png" alt="18-登录请求"></p>
+<p>服务端需要写相关的方法处理该POST请求。</p>
+<h3 id="4-1-2-数据模型"><a href="#4-1-2-数据模型" class="headerlink" title="4.1.2 数据模型"></a>4.1.2 数据模型</h3><p>由于此时是员工登录，所以相关的数据表是employee表。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/19.png" alt="19-employee表"></p>
+<h2 id="4-2-代码开发"><a href="#4-2-代码开发" class="headerlink" title="4.2 代码开发"></a>4.2 代码开发</h2><h3 id="4-2-1-前端页面分析"><a href="#4-2-1-前端页面分析" class="headerlink" title="4.2.1 前端页面分析"></a>4.2.1 前端页面分析</h3><p>我们首先需要先大致读懂html文件，可以分析出，服务端处理数据后，需要给前端什么样的响应信息。</p>
+<p>在resources&#x2F;backend&#x2F;page&#x2F;login&#x2F;login.html中，关键代码是methods方法。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/20.png" alt="20"></p>
+<p>点击”登录按钮”时，执行methods中的<code>handleLogin</code>方法。其中先校验用户名和密码是否为空。</p>
+<p>如果登录通过，loading改为true，页面显示”登录中”。并调用<code>loginApi()</code>，向&#x2F;employee&#x2F;login发送post请求，并且带上loginForm数据，即json形式的username和password。请求发出后，服务端接收、处理并返回相应结果，<code>res</code>就是controller响应回来的结果。响应回来的code为1，则表示成功，跳转到首页。</p>
+<p>否则（登录失败）loading为false，页面显示”登录”。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/21.png" alt="21"></p>
+<p>注：从前端代码可以看出，服务端处理完，给页面响应回来的数据应该含有code, data, msg。且<code>localStorage.setItem(&#39;userInfo&#39;,JSON.stringify(res.data))</code>这句说明，需要将’userInfo’作为键，将响应回来的data转为json字符串，作为值，保存在浏览器中。因此，data应该包含登录成功的员工信息。</p>
+<h3 id="4-2-2-实体类"><a href="#4-2-2-实体类" class="headerlink" title="4.2.2 实体类"></a>4.2.2 实体类</h3><p>创建实体类Employee，和employee表进行映射：</p>
+<p>创建entity包，将资料提供的实体类Employee类复制粘贴到entity包中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Employee</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String phone;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String sex;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String idNumber;    <span class="comment">//身份证号。在employee表中对应的是id_number。</span></span><br><span class="line">    <span class="comment">// 只要在application.yml中开启驼峰命名(map-underscore-to-camel-case: true)，mybatis-plus就可以自动映射 </span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer status;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT)</span><span class="comment">//插入的时候，填充字段的值。在“公共字段自动填充”部分使用此注解，此处可以先忽略</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span><span class="comment">//插入和更新时填充字段的值</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line">    <span class="keyword">private</span> Long createUser;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line">    <span class="keyword">private</span> Long updateUser;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-3-创建Controller、Service、Mapper"><a href="#4-2-3-创建Controller、Service、Mapper" class="headerlink" title="4.2.3 创建Controller、Service、Mapper"></a>4.2.3 创建Controller、Service、Mapper</h3><p><strong>EmployeeMapper：</strong></p>
+<p>在mapper包下，创建EmployeeMapper接口。并记得加上@Mapper注解。</p>
+<p>因为这里使用mybatis-plus，所以可以直接继承其提供的BaseMapper类，较方便。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmployeeMapper</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;Employee&gt; &#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：<code>BaseMapper</code>是mybatis plus提供的，可以继承其增删改查方法。BaseMapper需要提供一个泛型，是实体类。</p>
+<hr>
+<p><strong>EmployeeService：</strong></p>
+<p>在service包下，创建EmployeeService接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmployeeService</span> <span class="keyword">extends</span> <span class="title class_">IService</span>&lt;Employee&gt; &#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：<code>IService</code>是mybatis-plus提供的，需要提供一个泛型，是实体类。</p>
+<p><strong>EmployeeServiceImpl：</strong></p>
+<p>在service&#x2F;impl包下，创建EmployeeServiceImpl类。并记得加上@Service注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmployeeServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;EmployeeMapper, Employee&gt; <span class="keyword">implements</span> <span class="title class_">EmployeeService</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>EmployeeController：</strong></p>
+<p>在controller包下，创建EmployeeController类。加上@RestController、@RequestMapping(“&#x2F;employee”)、@Slf4j注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span>  <span class="comment">// 用于输出日志</span></span><br><span class="line"><span class="meta">@RestController</span> <span class="comment">// @ResponseBody + @Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/employee&quot;)</span> <span class="comment">// 请求地址/employee/** 由本类处理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmployeeController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmployeeService employeeService; <span class="comment">//注入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-4-导入返回结果类R"><a href="#4-2-4-导入返回结果类R" class="headerlink" title="4.2.4 导入返回结果类R"></a>4.2.4 导入返回结果类R</h3><p>R是一个通用结果类，服务端响应的所有结果最终都会包装成此种类型，返回给前端页面。</p>
+<p>具体地，服务端controller响应客户端页面发来的请求，controller处理完之后给页面返回结果，把结果封装到此R类对象中。</p>
+<p>将资料&#x2F;服务端返回结果类中的R.java粘贴到common包中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">R</span>&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer code; <span class="comment">//编码：1成功，0和其它数字为失败</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String msg; <span class="comment">//错误信息</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> T data; <span class="comment">//数据</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Map</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>(); <span class="comment">//动态数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态方法。例如，登录成功，返回时可以调用R.success(employee)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; R&lt;T&gt; <span class="title function_">success</span><span class="params">(T object)</span> &#123;</span><br><span class="line">        R&lt;T&gt; r = <span class="keyword">new</span> <span class="title class_">R</span>&lt;T&gt;();</span><br><span class="line">        r.data = object;</span><br><span class="line">        r.code = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态方法。例如，登录失败，返回时可以调用R.error(msg)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; R&lt;T&gt; <span class="title function_">error</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        <span class="type">R</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">R</span>();</span><br><span class="line">        r.msg = msg;</span><br><span class="line">        r.code = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//操作map对象动态数据</span></span><br><span class="line">    <span class="keyword">public</span> R&lt;T&gt; <span class="title function_">add</span><span class="params">(String key, Object value)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.map.put(key, value);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-5-在Controller中编写登录方法"><a href="#4-2-5-在Controller中编写登录方法" class="headerlink" title="4.2.5 在Controller中编写登录方法"></a>4.2.5 在Controller中编写登录方法</h3><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/22.png" alt="22"></p>
+<p>处理逻辑如下：</p>
+<ol>
+<li>将页面提交的密码password进行md5加密处理</li>
+<li>根据页面提交的用户名username查询数据库</li>
+<li>如果没有查询到则返回登录失败结果</li>
+<li>密码比对，如果不一致则返回登录失败结果</li>
+<li>查看员工状态，如果为已禁用状态，则返回员工已禁用结果</li>
+<li>登录成功，将员工id存入Session并返回登录成功结果</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span>  <span class="comment">//输出日志</span></span><br><span class="line"><span class="meta">@RestController</span> <span class="comment">//@ResponseBody + @Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/employee&quot;)</span> <span class="comment">// 请求地址/employee/** 由本类处理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmployeeController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmployeeService employeeService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 员工登录功能</span></span><br><span class="line"><span class="comment">		 * 处理请求：/employee/login，method=post</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> employee 登录时，浏览器发送post请求给服务器。其中带着json形式的员工登录信息，即&#123;&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;123456&quot;&#125;，可以封装到Employee对象中。</span></span><br><span class="line"><span class="comment">     *                 服务器可通过在形参使用<span class="doctag">@RequestBody</span>，获取json格式的请求参数。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request 便于获取session，将employee对象的id存一份到session，表示登录成功</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/login&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> R&lt;Employee&gt; <span class="title function_">login</span><span class="params">(<span class="meta">@RequestBody</span> Employee employee, HttpServletRequest request)</span>&#123;</span><br><span class="line">        <span class="comment">//根据登录逻辑图，按步骤实现：</span></span><br><span class="line">        <span class="comment">//1、将页面提交的密码进行md5加密处理</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> employee.getPassword();</span><br><span class="line">        password = DigestUtils.md5DigestAsHex(password.getBytes());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、根据页面提交的用户名username来查询数据库</span></span><br><span class="line">				<span class="comment">//包装查询对象</span></span><br><span class="line">        LambdaQueryWrapper&lt;Employee&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">				<span class="comment">//添加查询条件</span></span><br><span class="line">        queryWrapper.eq(Employee::getUsername, employee.getUsername()); <span class="comment">// 这一句判断在数据库中遍历出的用户名,是否和前端页面用户输入的用户名(封装在employee中)相同，相同的话即代表数据库中有这个值，反之则无</span></span><br><span class="line">        <span class="type">Employee</span> <span class="variable">emp</span> <span class="operator">=</span> employeeService.getOne(queryWrapper);<span class="comment">//从数据库查出唯一的数据（表中username字段是UNIQUE的，所以用getOne就可以）</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、如果没有查询到,则返回失败结果</span></span><br><span class="line">        <span class="keyword">if</span>(emp == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> R.error(<span class="string">&quot;登录失败&quot;</span>); <span class="comment">// 不要提示&quot;用户名不存在&quot;，否则有用户名遍历的漏洞风险</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4、比对密码，将从前端页面获取的密码md5加密后 与 数据库查出来的密码(也是加密的)进行比对，如果不一致则返回提示信息</span></span><br><span class="line">        <span class="keyword">if</span>(! emp.getPassword().equals(password))&#123;</span><br><span class="line">            <span class="keyword">return</span> R.error(<span class="string">&quot;登录失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5、查看员工状态，如果已禁用状态，则返回员工已禁用结果</span></span><br><span class="line">        <span class="keyword">if</span>(emp.getStatus() == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> R.error(<span class="string">&quot;账号已禁用&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//6、登录成功，将用户id存入Session并返回成功结果</span></span><br><span class="line">        <span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line">        session.setAttribute(<span class="string">&quot;employee&quot;</span>, emp.getId());<span class="comment">//将查出来的emp对象的id 存一份到session，表示该用户登录成功，便于后续获取登录用户</span></span><br><span class="line">        <span class="keyword">return</span> R.success(emp);</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p><strong>拓展：</strong></p>
+<p>第2步中的LambdaQueryWrapper是mybatis-plus的一个工具类。如果你已经学过mybatis-plus，可以忽略这一段。如果没学过，可以看这段介绍简单了解用法。</p>
+<p>LambdaQueryWrapper常见功能：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/23.jpeg" alt="23"></p>
+<p>LambdaQueryWrapper最基础的使用方式是这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询条件构造器</span></span><br><span class="line">QueryWrapper&lt;BannerItem&gt; wrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">wrapper.eq(<span class="string">&quot;banner_id&quot;</span>, id);</span><br><span class="line"><span class="comment">// 查询操作</span></span><br><span class="line">List&lt;BannerItem&gt; bannerItems = bannerItemMapper.selectList(wrapper);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 包装查询对象</span></span><br><span class="line">LambdaQueryWrapper&lt;Employee&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line"><span class="comment">// 添加查询条件</span></span><br><span class="line">queryWrapper.eq(Employee::getUsername, employee.getUsername()); </span><br><span class="line"><span class="comment">// 查询操作</span></span><br><span class="line"><span class="type">Employee</span> <span class="variable">emp</span> <span class="operator">=</span> employeeService.getOne(queryWrapper);</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>queryWrapper.eq(Employee::getUsername, employee.getUsername());</code> 这一句用来判断：在数据库中遍历出的用户名，是否和前端页面用户输入的用户名(封装在employee中)相同。相同的话，代表数据库中有这个值，反之则无这个值。</p>
+<p>对应的sql语句：select * from employee where username &#x3D; ?</p>
+<h2 id="4-3-功能测试"><a href="#4-3-功能测试" class="headerlink" title="4.3 功能测试"></a>4.3 功能测试</h2><p>启动服务，进行登录功能的测试。</p>
+<p>报错：timeout of 10000ms exceeded</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/24.png" alt="24"></p>
+<p>前端页面设置了超时时间，10秒不响应就会抛异常。测试阶段可以将backend&#x2F;js&#x2F;request.js中的超时时间改大，改为1000000</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/25.png" alt="25"></p>
+<h1 id="5-后台退出功能开发"><a href="#5-后台退出功能开发" class="headerlink" title="5. 后台退出功能开发"></a>5. 后台退出功能开发</h1><h2 id="5-1-需求分析"><a href="#5-1-需求分析" class="headerlink" title="5.1 需求分析"></a>5.1 需求分析</h2><p>员工登录成功后，页面跳转到后台系统首页面(backend&#x2F;index.html)，此时会显示当前登录用户的姓名。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/26.png" alt="26"></p>
+<p>如果员工需要退出系统，点击右侧的退出按钮。打开浏览器调试工具，可以看到向<a target="_blank" rel="noopener" href="http://localhost:8080/employee/logout">http://localhost:8080/employee/logout</a> 发送了POST请求，此处需要服务端处理。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/27.png" alt="27-退出登录请求"></p>
+<p>退出系统后页面跳转回登录页面。</p>
+<h2 id="5-2-代码开发"><a href="#5-2-代码开发" class="headerlink" title="5.2 代码开发"></a>5.2 代码开发</h2><p>服务端controller需要写相关的类处理该POST请求(&#x2F;employee&#x2F;logout)。具体的处理逻辑：</p>
+<ol>
+<li>清理Session中的用户id</li>
+<li>返回结果</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 退出登录</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/logout&quot;)</span></span><br><span class="line"><span class="keyword">public</span> R&lt;String&gt; <span class="title function_">logout</span><span class="params">(HttpServletRequest request)</span>&#123; <span class="comment">// 因为需要操作session，所以参数写request</span></span><br><span class="line">    <span class="comment">// 清理session中保存的当前登录员工的id</span></span><br><span class="line">    <span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line">    session.removeAttribute(<span class="string">&quot;employee&quot;</span>); <span class="comment">//登录时，放进session &quot;employee&quot;，保存登录成功的员工id。此时需要清理。</span></span><br><span class="line">    <span class="comment">// 返回结果</span></span><br><span class="line">		<span class="keyword">return</span> R.success(<span class="string">&quot;退出成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于此处不需要返回详细数据，返回类型R<String>即可。</p>
+<h2 id="5-3-功能测试"><a href="#5-3-功能测试" class="headerlink" title="5.3 功能测试"></a>5.3 功能测试</h2><p>启动服务，测试功能即可。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" rel="tag"># 项目笔记</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/Spring-MVC/" rel="tag"># Spring MVC</a>
+              <a href="/tags/MyBatis-Plus/" rel="tag"># MyBatis Plus</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/16/%E5%9C%A8hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E6%B3%95/" rel="prev" title="在hexo博客中插入图片的方法">
+                  <i class="fa fa-chevron-left"></i> 在hexo博客中插入图片的方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kathy-kx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -130,7 +130,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -155,6 +155,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/" class="post-title-link" itemprop="url">瑞吉外卖01-介绍+环境搭建+后台登录和退出</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 22:46:45" itemprop="dateCreated datePublished" datetime="2023-05-13T22:46:45+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-18 23:02:19" itemprop="dateModified" datetime="2023-11-18T23:02:19+08:00">2023-11-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这是一个使用Springboot+SSM的实战练习项目，实现了一个外卖系统的前后台功能。</p>
+<p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。</p>
+<p>下图是项目效果展示，左侧是移动端的效果，右侧是管理后台的效果。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/1.png" alt="1"></p>
+<h1 id="1-软件开发整体介绍"><a href="#1-软件开发整体介绍" class="headerlink" title="1. 软件开发整体介绍"></a>1. 软件开发整体介绍</h1><h2 id="1-1-软件开发流程"><a href="#1-1-软件开发流程" class="headerlink" title="1.1 软件开发流程"></a>1.1 软件开发流程</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/2.png" alt="2"></p>
+<h2 id="1-2-角色分工"><a href="#1-2-角色分工" class="headerlink" title="1.2 角色分工"></a>1.2 角色分工</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/3.png" alt="3"></p>
+<h2 id="1-3-软件环境"><a href="#1-3-软件环境" class="headerlink" title="1.3 软件环境"></a>1.3 软件环境</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/4.png" alt="4"></p>
+<h1 id="2-外卖项目介绍"><a href="#2-外卖项目介绍" class="headerlink" title="2. 外卖项目介绍"></a>2. 外卖项目介绍</h1><h2 id="2-1-项目介绍"><a href="#2-1-项目介绍" class="headerlink" title="2.1 项目介绍"></a>2.1 项目介绍</h2><p>本外卖项目是专门为餐饮企业(餐厅、饭店）定制的一款软件产品，包括系统管理后台和移动端应用两部分。其中系统管理后台主要提供给餐饮企业内部员工使用，可以对餐厅的菜品、套餐、订单等进行管理维护。移动端应用主要提供给消费者使用，可以在线浏览菜品、添加购物车、下单等。</p>
+<p>本项目共分为3期进行开发：</p>
+<p>第一期主要实现基本需求，其中移动端应用通过H5实现，用户可以通过手机浏览器访问。</p>
+<p>第二期主要针对移动端应用进行改进，使用微信小程序实现，用户使用起来更加方便。</p>
+<p>第三期主要针对系统进行优化升级，提高系统的访问性能。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -278,7 +372,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-16 09:53:23" itemprop="dateModified" datetime="2023-04-16T09:53:23+08:00">2023-04-16</time>
+      <time title="修改时间：2023-04-16 22:40:12" itemprop="dateModified" datetime="2023-04-16T22:40:12+08:00">2023-04-16</time>
     </span>
 
   
@@ -292,7 +386,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="发布文章到Hexo博客上"><a href="#发布文章到Hexo博客上" class="headerlink" title="发布文章到Hexo博客上"></a>发布文章到Hexo博客上</h1><h2 id="1-将文章添加到hexo文件夹下的source-x2F-posts目录"><a href="#1-将文章添加到hexo文件夹下的source-x2F-posts目录" class="headerlink" title="1. 将文章添加到hexo文件夹下的source&#x2F;_posts目录"></a>1. 将文章添加到hexo文件夹下的source&#x2F;_posts目录</h2><p>有两种方法：<br>方法一:<br>较为简单。直接把编辑好的.md格式的文件，复制到hexo文件夹下的source&#x2F;_posts文件夹。</p>
-<p>方法二:<br>便于结构化的管理图片等资源。使用<code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章，此时会自动创建一个文件夹和.md文件。<br>例如，执行<code>hexo new &quot;如何发布文章到hexo博客上(含插入图片的方法)&quot;</code>，如下：<br><img src="/2023/04/14/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0%E5%88%B0hexo%E5%8D%9A%E5%AE%A2%E4%B8%8A-%E5%90%AB%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E6%B3%95/1.jpg" alt="创建新文章"><br>会在source&#x2F;_post文件夹下生成一个”如何发布文章到hexo博客上(含插入图片的方法).md”文件。如下：<br><img src="/2023/04/14/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0%E5%88%B0hexo%E5%8D%9A%E5%AE%A2%E4%B8%8A-%E5%90%AB%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E6%B3%95/2.png" alt="生成md文件和同名文件夹"><br>可以看到，同时还生成了一个同名的资源文件夹。<br>我们可以将所有与该文章有关的资源（包括图片）放在这个关联文件夹中，再通过相对路径来引用它们。<br>例如，将“1.jpeg”这个图片资源放在该文件夹中，并在.md文件中像这样引用图片：<code>![图片](1.jpeg)</code>，这个方法在资源较多时方便管理。<br>有关插入图片的具体方法和可能遇到的问题，可以参考这篇博客文章：[在hexo博客中插入图片的方法及问题总结]</p>
+<p>方法二:<br>便于结构化的管理图片等资源。使用<code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章，此时会自动创建一个文件夹和.md文件。<br>例如，执行<code>hexo new &quot;如何发布文章到hexo博客上(含插入图片的方法)&quot;</code>，如下：<br><img src="/2023/04/14/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0%E5%88%B0hexo%E5%8D%9A%E5%AE%A2%E4%B8%8A-%E5%90%AB%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E6%B3%95/1.jpg" alt="创建新文章"><br>会在source&#x2F;_post文件夹下生成一个”如何发布文章到hexo博客上(含插入图片的方法).md”文件。如下：<br><img src="/2023/04/14/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0%E5%88%B0hexo%E5%8D%9A%E5%AE%A2%E4%B8%8A-%E5%90%AB%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E6%B3%95/2.png" alt="生成md文件和同名文件夹"><br>可以看到，同时还生成了一个同名的资源文件夹。<br>我们可以将所有与该文章有关的资源（包括图片）放在这个关联文件夹中，再通过相对路径来引用它们。<br>例如，将“1.jpeg”这个图片资源放在该文件夹中，并在.md文件中像这样引用图片：<code>![图片](1.jpeg)</code>，这个方法在资源较多时方便管理。<br>有关插入图片的具体方法和可能遇到的问题，可以参考这篇博客文章：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/2023/04/16/%E5%9C%A8hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E6%B3%95/">在hexo博客中插入图片的方法及问题总结</a></p>
 <h2 id="2-编辑文章标题、分类、标签"><a href="#2-编辑文章标题、分类、标签" class="headerlink" title="2. 编辑文章标题、分类、标签"></a>2. 编辑文章标题、分类、标签</h2>
           <!--noindex-->
             <div class="post-button">
@@ -453,7 +547,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-14 20:22:53" itemprop="dateModified" datetime="2023-04-14T20:22:53+08:00">2023-04-14</time>
+      <time title="修改时间：2023-04-16 16:51:52" itemprop="dateModified" datetime="2023-04-16T16:51:52+08:00">2023-04-16</time>
     </span>
 
   
