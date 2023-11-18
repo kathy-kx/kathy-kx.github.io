@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-K.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-K.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-K.png">
+  <link rel="mask-icon" href="/images/logo-K.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 1. 完善登录功能1.1 问题分析前面我们已经完成了后台系统的员工登录功能开发，但是还存在一个问题：用户如果不登录，直接访问系统首页面，照样可以正常访问。 这种设计并不合理，我们希望看到的效果应该是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="瑞吉外卖02-员工管理">
+<meta property="og:url" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 1. 完善登录功能1.1 问题分析前面我们已经完成了后台系统的员工登录功能开发，但是还存在一个问题：用户如果不登录，直接访问系统首页面，照样可以正常访问。 这种设计并不合理，我们希望看到的效果应该是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/1.png">
+<meta property="og:image" content="http://example.com/2.png">
+<meta property="og:image" content="http://example.com/3.png">
+<meta property="og:image" content="http://example.com/4.png">
+<meta property="og:image" content="http://example.com/5.png">
+<meta property="og:image" content="http://example.com/6.png">
+<meta property="og:image" content="http://example.com/7.png">
+<meta property="og:image" content="http://example.com/8.png">
+<meta property="og:image" content="http://example.com/9.png">
+<meta property="og:image" content="http://example.com/10.png">
+<meta property="og:image" content="http://example.com/11.png">
+<meta property="og:image" content="http://example.com/12.png">
+<meta property="og:image" content="http://example.com/13.png">
+<meta property="og:image" content="http://example.com/14.png">
+<meta property="og:image" content="http://example.com/15.png">
+<meta property="og:image" content="http://example.com/16.png">
+<meta property="og:image" content="http://example.com/17.png">
+<meta property="article:published_time" content="2023-05-13T15:07:12.000Z">
+<meta property="article:modified_time" content="2023-11-18T15:17:52.293Z">
+<meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="项目笔记">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Spring MVC">
+<meta property="article:tag" content="MyBatis Plus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/1.png">
+
+
+<link rel="canonical" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/","path":"2023/05/13/瑞吉外卖02-员工管理/","title":"瑞吉外卖02-员工管理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>瑞吉外卖02-员工管理 | Kathy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kathy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%8C%E5%96%84%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">1. 完善登录功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 具体实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%96%B0%E5%A2%9E%E5%91%98%E5%B7%A5%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">2. 新增员工功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 代码开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 程序执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2 程序开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-%E5%AE%8C%E5%96%84%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">2.3.3.</span> <span class="nav-text">2.3.3 完善全局异常处理器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.</span> <span class="nav-text">3. 员工信息分页查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 代码开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 程序执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E9%85%8D%E7%BD%AEmybatis-plus%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 配置mybatis-plus分页插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 员工信息分页查询程序开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 功能测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%90%AF%E7%94%A8-x2F-%E7%A6%81%E7%94%A8%E5%91%98%E5%B7%A5%E8%B4%A6%E5%8F%B7"><span class="nav-number">4.</span> <span class="nav-text">4. 启用&#x2F;禁用员工账号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 代码开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 程序执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2 程序开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 功能测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E4%BB%A3%E7%A0%81%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 代码修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-number">4.4.1.</span> <span class="nav-text">4.4.1 问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.4.2.</span> <span class="nav-text">4.4.2 解决方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%BC%96%E8%BE%91%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">5. 编辑员工信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 代码开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 功能测试</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kathy-kx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kathy-kx" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kathy-kx" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kxzhu93@163.com" title="E-Mail → mailto:kxzhu93@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="瑞吉外卖02-员工管理 | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          瑞吉外卖02-员工管理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 23:07:12" itemprop="dateCreated datePublished" datetime="2023-05-13T23:07:12+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-18 23:17:52" itemprop="dateModified" datetime="2023-11-18T23:17:52+08:00">2023-11-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。</p>
+<h1 id="1-完善登录功能"><a href="#1-完善登录功能" class="headerlink" title="1. 完善登录功能"></a>1. <strong><strong>完善登录功能</strong></strong></h1><h2 id="1-1-问题分析"><a href="#1-1-问题分析" class="headerlink" title="1.1 问题分析"></a>1.1 <strong><strong>问题分析</strong></strong></h2><p>前面我们已经完成了后台系统的员工登录功能开发，但是还存在一个问题：用户如果不登录，直接访问系统首页面，照样可以正常访问。</p>
+<p>这种设计并不合理，我们希望看到的效果应该是，<strong>只有登录后才能访问后台管理页面</strong>，<strong>如果没有登录，则跳转到登录页面。</strong></p>
+<p>那么，具体应该怎么实现呢？</p>
+<p>答案就是使用<strong>过滤器或者拦截器</strong>，在过滤器或者拦截器中判断用户是否已经完成登录，如果没有登录则跳转到登录页面。</p>
+<h2 id="1-2-代码实现"><a href="#1-2-代码实现" class="headerlink" title="1.2 代码实现"></a>1.2 <strong><strong>代码实现</strong></strong></h2><h3 id="1-2-1-实现思路"><a href="#1-2-1-实现思路" class="headerlink" title="1.2.1 实现思路"></a>1.2.1 实现思路</h3><ol>
+<li>创建自定义过滤器LoginCheckFilter</li>
+<li>在启动类上加入注解@ServletComponentScan</li>
+<li>完善过滤器的处理逻辑</li>
+</ol>
+<h3 id="1-2-2-具体实现"><a href="#1-2-2-具体实现" class="headerlink" title="1.2.2 具体实现"></a>1.2.2 具体实现</h3><p>1、创建filter包，在其中创建LoginCheckFilter类，实现Filter接口，并重写doFilter()方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 登录检查过滤器（也可以用拦截器interceptor实现，此项目中用过滤器实现）</span></span><br><span class="line"><span class="comment"> * 检查用户是否已经完成登录</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebFilter(filterName = &quot;LoginCheckFilter&quot;,urlPatterns = &quot;/*&quot;)</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginCheckFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        HttpServletRequest request=(HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response=(HttpServletResponse) servletResponse;</span><br><span class="line">        log.info(<span class="string">&quot;拦截到请求：&#123;&#125;&quot;</span>,request.getRequestURI());</span><br><span class="line">        filterChain.doFilter(request,response); <span class="comment">// 放行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ol>
+<li>@WebFilter替代web.xml配置过滤器。filterName指定过滤器名称（随意）；urlPatterns指定拦截的请求。<code>urlPatterns = &quot;/*&quot;</code>表示工程路径下所有请求路径都拦截。</li>
+<li>继承Filter时不要导错包，import javax.servlet.*</li>
+</ol>
+<p>2、在启动类上加入注解@ServletComponentScan</p>
+<p>加上这个注解后，才会扫描@WebFilter注解，使得过滤器生效。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReggieApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class,args);</span><br><span class="line">        log.info(<span class="string">&quot;项目启动成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>3、完善过滤器的处理逻辑</p>
+<p>处理逻辑如下：</p>
+<ol>
+<li>获取本次请求的URI</li>
+<li>判断本次请求是否需要处理</li>
+<li>如果不需要处理，则直接放行</li>
+<li>判断登录状态，如果已登录，则直接放行</li>
+<li>如果未登录，则返回未登录结果</li>
+</ol>
+<p><img src="/1.png" alt="1"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> LoginCheckFilter</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> 登录检查过滤器（也可以用拦截器interceptor实现，此项目中用过滤器实现）</span></span><br><span class="line"><span class="comment"> * 检查用户是否已经完成登录</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@WebFilter(filterName = &quot;loginCheckFilter&quot;, urlPatterns = &quot;/*&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginCheckFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//路径匹配器，支持通配符</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">AntPathMatcher</span> <span class="variable">PATH_MATCHER</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AntPathMatcher</span>();<span class="comment">//专门用于路径比较</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="type">HttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> (HttpServletRequest) servletRequest;</span><br><span class="line">        <span class="type">HttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> (HttpServletResponse) servletResponse;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1、获取本次请求的URI</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">requestURI</span> <span class="operator">=</span> request.getRequestURI();</span><br><span class="line">        log.info(<span class="string">&quot;拦截到请求：&#123;&#125;&quot;</span>, requestURI);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、判断本次请求是否需要处理</span></span><br><span class="line">        <span class="comment">//不需要处理的请求路径：</span></span><br><span class="line">        String[] urls = <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;</span><br><span class="line">                <span class="string">&quot;/employee/login&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/employee/logout&quot;</span>,</span><br><span class="line">                <span class="string">&quot;/backend/**&quot;</span>,  </span><br><span class="line">                <span class="string">&quot;/front/**&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">check</span> <span class="operator">=</span> check(urls, requestURI);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、如果不需要处理，则直接放行</span></span><br><span class="line">        <span class="keyword">if</span>(check)&#123;</span><br><span class="line">            log.info(<span class="string">&quot;本次请求&#123;&#125;无需处理&quot;</span>, requestURI); <span class="comment">// &#123;&#125;是占位符，由后面的参数填充</span></span><br><span class="line">            chain.doFilter(request, response);  <span class="comment">// 放行</span></span><br><span class="line">            <span class="keyword">return</span>; <span class="comment">// 放行之后，后面代码不需要执行了，直接return结束</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4-1、判断登录状态，如果已登录，则直接放行</span></span><br><span class="line">				<span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line">        <span class="keyword">if</span>(session.getAttribute(<span class="string">&quot;employee&quot;</span>) != <span class="literal">null</span>)&#123;  <span class="comment">//判断后台员工登录状态</span></span><br><span class="line">            <span class="comment">//已登录</span></span><br><span class="line">            log.info(<span class="string">&quot;用户已登录，用户id为：&#123;&#125;&quot;</span>, session.getAttribute(<span class="string">&quot;employee&quot;</span>)); <span class="comment">//session中，&quot;employee&quot;记录的是登录用户的id</span></span><br><span class="line">            chain.doFilter(request, response);  <span class="comment">//放行</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5、如果未登录，向浏览器响应数据，返回未登录结果</span></span><br><span class="line">        log.info(<span class="string">&quot;用户未登录&quot;</span>);</span><br><span class="line">        response.getWriter().write(JSON.toJSONString(R.error(<span class="string">&quot;NOTLOGIN&quot;</span>)));</span><br><span class="line">        <span class="comment">/* 通过输出流，向浏览器响应数据，给R.error传回msg ——&quot;NOTLOGIN&quot;。</span></span><br><span class="line"><span class="comment">        在request.js页面的前端响应拦截器处，会拦截服务器给的响应。如果code==0，且msg显示NOTLOGIN，说明用户未登录，则会跳转到登录页面</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">//不放行，结束方法</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检查本次请求是否需要放行</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> urls</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> requestURI</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">check</span><span class="params">(String[] urls, String requestURI)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(String url : urls)&#123;</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">match</span> <span class="operator">=</span> PATH_MATCHER.match(url, requestURI);</span><br><span class="line">            <span class="keyword">if</span>(match)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//匹配上了</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//匹配不上</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-新增员工功能"><a href="#2-新增员工功能" class="headerlink" title="2. 新增员工功能"></a>2. <strong><strong>新增员工功能</strong></strong></h1><h2 id="2-1-需求分析"><a href="#2-1-需求分析" class="headerlink" title="2.1 需求分析"></a>2.1 <strong><strong>需求分析</strong></strong></h2><p>后台系统中可以管理员工信息，通过新增员工来添加后台系统用户。</p>
+<p>点击[添加员工]按钮，跳转到新增页面，如下：</p>
+<p><img src="/2.png" alt="2"></p>
+<h2 id="2-2-数据模型"><a href="#2-2-数据模型" class="headerlink" title="2.2 数据模型"></a>2.2 <strong><strong>数据模型</strong></strong></h2><p>新增员工，其实就是将我们新增页面录入的员工数据插入到employee表。需要注意，employee表中对username字段加入了唯一约束，因为username是员工的登录账号，必须是唯一的。</p>
+<p><img src="/3.png" alt="3"></p>
+<h2 id="2-3-代码开发"><a href="#2-3-代码开发" class="headerlink" title="2.3 代码开发"></a>2.3 <strong><strong>代码开发</strong></strong></h2><h3 id="2-3-1-程序执行过程"><a href="#2-3-1-程序执行过程" class="headerlink" title="2.3.1 程序执行过程"></a>2.3.1 程序执行过程</h3><p>在开发代码之前，需要梳理一下整个程序的执行过程：</p>
+<p>1、页面发送ajax请求，将新增员工页面中输入的数据以json的形式提交到服务端</p>
+<p>在“添加员工”页面填写信息后，点击“保存”按钮，会发请求，可以通过浏览器调试工具（按F12；或者在浏览器点右键，选择“检查”，切换到“Network”）查看。请求如下：</p>
+<p><img src="/4.png" alt="4"></p>
+<p>2、服务端Controller接收页面提交的数据，并调用Service将数据进行保存</p>
+<p>3、Service调用Mapper操作数据库，保存数据到employee表</p>
+<h3 id="2-3-2-程序开发"><a href="#2-3-2-程序开发" class="headerlink" title="2.3.2 程序开发"></a>2.3.2 程序开发</h3><p>首先，我们需要编写controller方法，处理&#x2F;employee请求，method&#x3D;POST。controller方法需要接收页面提交的数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 添加员工</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> employee 待被添加的员工</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping</span></span><br><span class="line"><span class="keyword">public</span> R&lt;String&gt; <span class="title function_">save</span><span class="params">(HttpServletRequest request, <span class="meta">@RequestBody</span> Employee employee)</span>&#123;</span><br><span class="line">    log.info(<span class="string">&quot;新增员工，员工信息：&#123;&#125;&quot;</span>,employee.toString());</span><br><span class="line">    <span class="comment">//设置初始密码(需要md5加密处理)</span></span><br><span class="line">    employee.setPassword(DigestUtils.md5DigestAsHex(<span class="string">&quot;123456&quot;</span>.getBytes()));</span><br><span class="line"></span><br><span class="line">    employee.setCreateTime(LocalDateTime.now());</span><br><span class="line">    employee.setUpdateTime(LocalDateTime.now());</span><br><span class="line"></span><br><span class="line">		<span class="comment">//status在入库时默认值1，此处不用设置</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//没使用mybatisplus的&quot;自动填充公共字段&quot;功能之前，自己设置创建/更新人</span></span><br><span class="line">    <span class="type">Long</span> <span class="variable">empId</span> <span class="operator">=</span> (Long) request.getSession().getAttribute(<span class="string">&quot;employee&quot;</span>);</span><br><span class="line"></span><br><span class="line">    employee.setCreateUser(empId);</span><br><span class="line">    employee.setUpdateUser(empId);</span><br><span class="line"></span><br><span class="line">    employeeService.save(employee);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> R.success(<span class="string">&quot;新增员工成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>返回类型是R<String>是因为，保存员工时，前端只需要code这个数据，不需要data，所以用一个简单的String即可。</p>
+<h3 id="2-3-3-完善全局异常处理器"><a href="#2-3-3-完善全局异常处理器" class="headerlink" title="2.3.3 完善全局异常处理器"></a>2.3.3 完善全局异常处理器</h3><p>前面的程序还存在一个问题，就是当我们在新增员工时输入的账号已经存在，由于employee表中对username字段加入了唯一约束，此时程序会抛出异常:</p>
+<p><img src="/5.png" alt="5"></p>
+<p>此时需要我们的程序进行异常捕获，通常有两种处理方式:</p>
+<p>1、在Controller方法中加入try-catch进行异常捕获</p>
+<p><img src="/6.png" alt="6"></p>
+<p>2、使用异常处理器进行全局异常捕获</p>
+<p>我们使用第2种方法。在common包下创建GlobalExceptionHandler类。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> GlobalExceptionHandler</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> 全局异常处理类，捕获处理各种可能出现的异常。把处理异常的方法封装到此类中，简化代码</span></span><br><span class="line"><span class="comment"> * 通过aop，拦截到save等控制器方法，在此处理</span></span><br><span class="line"><span class="comment"> * 并返回错误信息给前端</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ControllerAdvice(annotations = &#123;RestController.class, Controller.class&#125;)</span><span class="comment">// 指定拦截哪些controller</span></span><br><span class="line"><span class="comment">// 加了@RestController注解或@Controller注解的方法，会被该拦截器拦截下来处理</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalExceptionHandler</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 异常处理方法</span></span><br><span class="line"><span class="comment">     * 一旦标注了<span class="doctag">@RestController</span>注解或<span class="doctag">@Controller</span>注解的控制器方法，抛SQLIntegrityConstraintViolationException异常，</span></span><br><span class="line"><span class="comment">     * 就会被这个exceptionHandler()方法拦截到，在这里处理</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(SQLIntegrityConstraintViolationException.class)</span> <span class="comment">//处理哪个异常的方法</span></span><br><span class="line">    <span class="keyword">public</span> R&lt;String&gt; <span class="title function_">exceptionHandler</span><span class="params">(SQLIntegrityConstraintViolationException ex)</span>&#123;</span><br><span class="line">        log.error(ex.getMessage());<span class="comment">//异常信息：SQLIntegrityConstraintViolationException：Duplicate entry &#x27;zhangsan&#x27; for key &#x27;employee.idx_username&#x27;</span></span><br><span class="line">        <span class="keyword">if</span>(ex.getMessage().contains(<span class="string">&quot;Duplicate entry&quot;</span>))&#123;    <span class="comment">//说明违反了数据表的UNIQUE约束</span></span><br><span class="line">            String[] split = ex.getMessage().split(<span class="string">&quot; &quot;</span>);<span class="comment">//将错误信息按空格划分开，数组内索引=2的元素是username信息</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> split[<span class="number">2</span>] + <span class="string">&quot;已存在&quot;</span>; <span class="comment">//xxx（username）已存在</span></span><br><span class="line">            <span class="keyword">return</span> R.error(msg);<span class="comment">//给前端页面返回</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> R.error(<span class="string">&quot;未知错误&quot;</span>);<span class="comment">//给前端页面返回</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<p>1、根据产品原型明确业务需求</p>
+<p>2、重点分析数据的流转过程和数据格式</p>
+<p>3、通过debug断点调试跟踪程序执行过程</p>
+<h1 id="3-员工信息分页查询"><a href="#3-员工信息分页查询" class="headerlink" title="3. 员工信息分页查询"></a>3. <strong><strong>员工信息分页查询</strong></strong></h1><h2 id="3-1-需求分析"><a href="#3-1-需求分析" class="headerlink" title="3.1 需求分析"></a>3.1 <strong><strong>需求分析</strong></strong></h2><p>系统中的员工很多的时候，如果在一个页面中全部展示出来会显得比较乱，不便于查看，所以一般的系统中都会以分页的方式来展示列表数据。</p>
+<p><img src="/7.png" alt="7"></p>
+<h2 id="3-2-代码开发"><a href="#3-2-代码开发" class="headerlink" title="3.2 代码开发"></a>3.2 <strong><strong>代码开发</strong></strong></h2><h3 id="3-2-1-程序执行过程"><a href="#3-2-1-程序执行过程" class="headerlink" title="3.2.1 程序执行过程"></a>3.2.1 程序执行过程</h3><p>在开发代码之前，需要梳理一下整个程序的执行过程：</p>
+<ul>
+<li>页面发送ajax请求，将分页查询参数(page.pageSize、name)提交到服务端</li>
+<li>服务端Controller接收页面提交的数据并调用Service查询数据</li>
+<li>Service调用Mapper操作数据库，查询分页数据</li>
+<li>Controller将查询到的分页数据响应给页面</li>
+<li>页面接收到分页数据并通过ElementUI的Table组件展示到页面上</li>
+</ul>
+<h3 id="3-2-2-配置mybatis-plus分页插件"><a href="#3-2-2-配置mybatis-plus分页插件" class="headerlink" title="3.2.2 配置mybatis-plus分页插件"></a>3.2.2 配置mybatis-plus分页插件</h3><p>在config包下创建MybatisPlusConfig类，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisPlusConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//配置MybatisPlus的分页插件：</span></span><br><span class="line">    <span class="meta">@Bean</span> <span class="comment">//让spring管理它</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123; <span class="comment">//配置MybatisPlusInterceptor类型的bean</span></span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">mybatisPlusInterceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>());<span class="comment">//加入拦截器。PaginationInnerInterceptor用于分页</span></span><br><span class="line">        <span class="keyword">return</span> mybatisPlusInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-3-员工信息分页查询程序开发"><a href="#3-2-3-员工信息分页查询程序开发" class="headerlink" title="3.2.3 员工信息分页查询程序开发"></a>3.2.3 员工信息分页查询程序开发</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 员工信息的分页查询</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> page 第几页</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pageSize 多少条</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> name 查询员工姓名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/page&quot;)</span></span><br><span class="line"><span class="keyword">public</span> R&lt;Page&gt; <span class="title function_">page</span><span class="params">(<span class="type">int</span> page, <span class="type">int</span> pageSize, String name)</span>&#123;</span><br><span class="line">    log.info(<span class="string">&quot;page = &#123;&#125;, pageSize = &#123;&#125;, name = &#123;&#125;&quot;</span>, page, pageSize, name); </span><br><span class="line"></span><br><span class="line">    <span class="comment">//构造分页构造器</span></span><br><span class="line">    <span class="type">Page</span> <span class="variable">pageInfo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Page</span>(page, pageSize);</span><br><span class="line">    <span class="comment">//构造条件构造器：如果name传过来，还需要过滤条件（where name= ?）</span></span><br><span class="line">    LambdaQueryWrapper&lt;Employee&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">//添加过滤条件：只要name不为空，就在Employee表中，根据name字段查询，要查的值是传来的参数name</span></span><br><span class="line">    queryWrapper.like(StringUtils.isNotEmpty(name), Employee::getName, name);<span class="comment">//like方法的参数：执行条件，字段，值。相当于：LIKE &#x27;%值%&#x27;</span></span><br><span class="line">    <span class="comment">//添加排序条件：按照Employee表里的更新时间 倒序排列，即最近更新的排在前面(orderBy)</span></span><br><span class="line">    queryWrapper.orderByDesc(Employee::getUpdateTime);</span><br><span class="line">    <span class="comment">//执行查询</span></span><br><span class="line">    employeeService.page(pageInfo, queryWrapper); <span class="comment">//处理好会封装到Page类型的pageInfo中，pageInfo中含有数据列表records、总记录数total等信息</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> R.success(pageInfo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>1、返回类型：R的泛型不能是Employee。因为页面需要服务端传回records、total等数据以显示分页页面（见list.html），这里需要使用Page类型。</p>
+<p>2、参数：请求中带着参数(<a target="_blank" rel="noopener" href="http://localhost:8080/employee/page?page=1&pageSize=10)%E5%8F%91%E8%BF%87%E6%9D%A5%EF%BC%8C%E5%A3%B0%E6%98%8E%E5%92%8C%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%90%8C%E5%90%8D%E7%9A%84%E5%BD%A2%E5%8F%82%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E3%80%82%E8%B7%B3%E9%A1%B5%E7%A0%81%E6%97%B6%EF%BC%8C%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%B8%A6%E7%9D%80page%E5%92%8CpageSize%EF%BC%9B%E5%9C%A8%E6%90%9C%E7%B4%A2%E6%A1%86%E6%90%9C%E7%B4%A2%E5%91%98%E5%B7%A5%E5%A7%93%E5%90%8D%E6%97%B6%EF%BC%8C%E8%BF%98%E5%8F%A6%E5%A4%96%E5%B8%A6%E7%9D%80name%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E3%80%82">http://localhost:8080/employee/page?page=1&amp;pageSize=10)发过来，声明和请求参数同名的形参，可以接收请求参数。跳页码时，请求参数带着page和pageSize；在搜索框搜索员工姓名时，还另外带着name请求参数。</a></p>
+<p>3、<code>return R.success(pageInfo);</code> 把pageInfo信息传回前端，list.html中的getMemberList()方法可以拿到Page对象里的records、total等信息</p>
+<h2 id="3-3-功能测试"><a href="#3-3-功能测试" class="headerlink" title="3.3 功能测试"></a>3.3 功能测试</h2><p><img src="/8.png" alt="8"></p>
+<h1 id="4-启用-x2F-禁用员工账号"><a href="#4-启用-x2F-禁用员工账号" class="headerlink" title="4. 启用&#x2F;禁用员工账号"></a>4. <strong><strong>启用&#x2F;禁用员工账号</strong></strong></h1><h2 id="4-1-需求分析"><a href="#4-1-需求分析" class="headerlink" title="4.1 需求分析"></a>4.1 <strong><strong>需求分析</strong></strong></h2><p>管理员admin登录系统后，可以在员工管理列表页面，对某个员工账号进行启用、禁用操作。</p>
+<p>如果某个员工账号状态为正常，则按钮显示为 “禁用“，如果员工账号状态为已禁用，则按钮显示为 “启用”。</p>
+<p>注意只有管理员可以看到“禁用”&#x2F;“启用”按钮（如下图），普通用户看不到，只能看到“编辑”按钮。</p>
+<p><img src="/9.png" alt="9"></p>
+<p>页面中是怎么做到只有管理员admin能够看到启用、禁用按钮的？</p>
+<p><img src="/10.png" alt="10"></p>
+<h2 id="4-2-代码开发"><a href="#4-2-代码开发" class="headerlink" title="4.2 代码开发"></a>4.2 <strong><strong>代码开发</strong></strong></h2><h3 id="4-2-1-程序执行过程"><a href="#4-2-1-程序执行过程" class="headerlink" title="4.2.1 程序执行过程"></a>4.2.1 程序执行过程</h3><p>在开发代码之前，需要梳理一下整个程序的执行过程:</p>
+<p>1、点击“禁用”&#x2F;“启用”按钮后，页面发送ajax请求，将参数(id、 status)提交到服务端</p>
+<p>2、服务端Controller接收页面提交的数据，并调用Service更新数据</p>
+<p>3、Service调用Mapper操作数据库</p>
+<p><strong>页面发出的ajax请求：</strong></p>
+<p><img src="/11.png" alt="11"></p>
+<p><strong>页面中的ajax请求是如何发送的？</strong></p>
+<p>点击”禁用”&#x2F;“启用”按钮后，会执行<code>statusHandle()</code>，并传入row参数，即这一条（行）数据封装的json对象。</p>
+<p>如果页面中“确认调整该账号的状态?”的对话框点了“确定”，就执行then后面的回调函数，执行<code>enableOrDisableEmployee()</code>方法，<strong>向&#x2F;employee发送put请求，带上参数：id 和 status</strong>（以json格式传给服务器）。其中，id是在<code>this.id = row.id</code>处获取到的this.id。status是通过<code>&#39;status&#39;: !this.status ? 1 : 0</code>一句算出来的，要调整成跟原来status相反。即，如果当前status为0，传给服务器的status为1；如果当前status为1，传给服务器的status为0。</p>
+<p><img src="/12.png" alt="12"></p>
+<p>请求发出后，需要controller编写方法处理该请求。</p>
+<h3 id="4-2-2-程序开发"><a href="#4-2-2-程序开发" class="headerlink" title="4.2.2 程序开发"></a>4.2.2 程序开发</h3><p>“禁用”&#x2F;“启用”实际上是更新操作，修改employee表的status字段。</p>
+<p>我们现在写一个通用的修改方法，根据id修改员工信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据id修改员工信息</span></span><br><span class="line"><span class="comment"> * 从修改员工页面，修改信息后，点击&quot;确定&quot;，向http://localhost:8080/employee发送put请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> employee</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PutMapping(&quot;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> R&lt;String&gt; <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> Employee employee, HttpServletRequest request)</span>&#123;</span><br><span class="line">    log.info(employee.toString());<span class="comment">// Employee(id=1625874579766513700, username=null, name=null, password=null, phone=null, sex=null, idNumber=null, status=0, createTime=null, updateTime=null, createUser=null, updateUser=null)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//没使用mybatisplus的&quot;自动填充公共字段&quot;功能之前，自己设置创建/更新人/时间。（后续会讲&quot;自动填充公共字段&quot;）</span></span><br><span class="line">    employee.setUpdateTime(LocalDateTime.now());</span><br><span class="line"></span><br><span class="line">    <span class="type">Long</span> <span class="variable">empId</span> <span class="operator">=</span> (Long) request.getSession().getAttribute(<span class="string">&quot;employee&quot;</span>);</span><br><span class="line">    employee.setUpdateUser(empId);</span><br><span class="line"></span><br><span class="line">    employeeService.updateById(employee);</span><br><span class="line">    <span class="keyword">return</span> R.success(<span class="string">&quot;修改成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>返回类型：前端只需要简单的code，不需要其他数据，所以返回R<String>类型的就可以。</p>
+<p>参数：由于前端传来的是json形式的参数（id和status），需加上@RequestBody注解，获取请求参数。</p>
+<h2 id="4-3-功能测试"><a href="#4-3-功能测试" class="headerlink" title="4.3 功能测试"></a>4.3 功能测试</h2><p>测试中页面没有报错，但是查看数据库发现并没有修改成功。</p>
+<p>观察控制台的SQL语句，SQL执行后更新的数据行数为0。表示没有匹配到记录，没有更新成功。</p>
+<p><img src="/13.png" alt="13"></p>
+<p>仔细观察id的值（Long型，19位长度，以200结尾），和数据表中对应记录的id值（以226结尾）并不一致。</p>
+<p><img src="/14.png" alt="14"></p>
+<p>在页面调试工具处看，在分页查询数据时，查到数据后给页面响应的id是正常的，以226结尾；但是点“禁用”按钮后，页面发送的id就有问题了，以200结尾。</p>
+<p><img src="/15.png" alt="15"></p>
+<p><img src="/16.png" alt="16"></p>
+<h2 id="4-4-代码修复"><a href="#4-4-代码修复" class="headerlink" title="4.4 代码修复"></a>4.4 <strong><strong>代码修复</strong></strong></h2><h3 id="4-4-1-问题分析"><a href="#4-4-1-问题分析" class="headerlink" title="4.4.1 问题分析"></a>4.4.1 问题分析</h3><p>通过观察控制台输出的SQL，发现页面传递过来的员工id的值和数据库中的id值不一致，这是怎么回事呢？</p>
+<p>分页查询时，服务端响应给页面的数据中id的值为19位数字，类型为long。</p>
+<p>页面中js处理long型数字只能精确到前16位，所以最终通过ajax请求提交给服务端的时候id就改变了，变为以200结尾。即，js对long型数据处理时<strong>丢失精度</strong>，导致提交的id和数据库中的id不一致。</p>
+<h3 id="4-4-2-解决方案"><a href="#4-4-2-解决方案" class="headerlink" title="4.4.2 解决方案"></a>4.4.2 解决方案</h3><p>我们可以在服务端给页面响应json数据时进行处理，将long型数据统一转为String字符串。</p>
+<p><strong>具体实现步骤：</strong></p>
+<p>1、提供对象转换器JacksonObjectMapper，基于Jackson进行Java对象到json数据的转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 对象映射器:基于jackson，将Java对象转为json，或者将json转为Java对象</span></span><br><span class="line"><span class="comment"> * 将JSON解析为Java对象的过程称为 [从JSON反序列化Java对象]</span></span><br><span class="line"><span class="comment"> * 从Java对象生成JSON的过程称为 [序列化Java对象到JSON]</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 继承的ObjectMapper是导入的jackson包中的。可以将java对象转成json数据，也可以把json数据转成java对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JacksonObjectMapper</span> <span class="keyword">extends</span> <span class="title class_">ObjectMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEFAULT_DATE_FORMAT</span> <span class="operator">=</span> <span class="string">&quot;yyyy-MM-dd&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEFAULT_DATE_TIME_FORMAT</span> <span class="operator">=</span> <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEFAULT_TIME_FORMAT</span> <span class="operator">=</span> <span class="string">&quot;HH:mm:ss&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">JacksonObjectMapper</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="comment">//收到未知属性时不报异常</span></span><br><span class="line">        <span class="built_in">this</span>.configure(FAIL_ON_UNKNOWN_PROPERTIES, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//反序列化时，属性不存在的兼容处理</span></span><br><span class="line">        <span class="built_in">this</span>.getDeserializationConfig().withoutFeatures(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);</span><br><span class="line"></span><br><span class="line">        <span class="type">SimpleModule</span> <span class="variable">simpleModule</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleModule</span>()</span><br><span class="line">                .addDeserializer(LocalDateTime.class, <span class="keyword">new</span> <span class="title class_">LocalDateTimeDeserializer</span>(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)))</span><br><span class="line">                .addDeserializer(LocalDate.class, <span class="keyword">new</span> <span class="title class_">LocalDateDeserializer</span>(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)))</span><br><span class="line">                .addDeserializer(LocalTime.class, <span class="keyword">new</span> <span class="title class_">LocalTimeDeserializer</span>(DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT)))</span><br><span class="line"></span><br><span class="line">                .addSerializer(BigInteger.class, ToStringSerializer.instance)</span><br><span class="line">                .addSerializer(Long.class, ToStringSerializer.instance) <span class="comment">//序列化器：将Long转换成String</span></span><br><span class="line">                .addSerializer(LocalDateTime.class, <span class="keyword">new</span> <span class="title class_">LocalDateTimeSerializer</span>(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)))<span class="comment">//格式化LocalDateTime型数据</span></span><br><span class="line">                .addSerializer(LocalDate.class, <span class="keyword">new</span> <span class="title class_">LocalDateSerializer</span>(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)))</span><br><span class="line">                .addSerializer(LocalTime.class, <span class="keyword">new</span> <span class="title class_">LocalTimeSerializer</span>(DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT)));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注册功能模块 例如，可以添加自定义序列化器和反序列化器</span></span><br><span class="line">        <span class="built_in">this</span>.registerModule(simpleModule);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、在WebMvcConfig配置类中扩展Spring mvc的消息转换器，在此消息转换器中，使用提供的对象转换器进行Java对象到json数据的转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 扩展自己的消息转换器</span></span><br><span class="line"><span class="comment"> * 以便于将Long型的id转为String型，不丢失精度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> converters the list of configured converters to extend</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">extendMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> &#123;<span class="comment">//mvc框架默认有几个转换器，放在converters中</span></span><br><span class="line">    log.info(<span class="string">&quot;扩展消息转换器...&quot;</span>);</span><br><span class="line">    <span class="comment">//创建消息转换器对象。将controller方法的返回结果R对象，转成json，再通过输出流响应给页面</span></span><br><span class="line">    <span class="type">MappingJackson2HttpMessageConverter</span> <span class="variable">messageConverter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MappingJackson2HttpMessageConverter</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置对象转换器，底层使用jackson，将java对象转为json</span></span><br><span class="line">    messageConverter.setObjectMapper(<span class="keyword">new</span> <span class="title class_">JacksonObjectMapper</span>());<span class="comment">//JacksonObjectMapper是粘贴过来的对象映射器</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//将上面的消息转化器对象 追加到mvc框架的转换器集合中</span></span><br><span class="line">    converters.add(<span class="number">0</span>, messageConverter); <span class="comment">//把自定义的转换器追加到converters中，并放在最前面优先用，否则可能会先用别的转换器</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-编辑员工信息"><a href="#5-编辑员工信息" class="headerlink" title="5. 编辑员工信息"></a>5. <strong><strong>编辑员工信息</strong></strong></h1><h2 id="5-1-需求分析"><a href="#5-1-需求分析" class="headerlink" title="5.1 需求分析"></a>5.1 需求分析</h2><p>在员工管理列表页面点击编辑按钮，跳转到编辑页面，在编辑页面回显员工信息并进行修改，最后点击保存按钮完成编辑操作。</p>
+<p><img src="/17.png" alt="17"></p>
+<h2 id="5-2-代码开发"><a href="#5-2-代码开发" class="headerlink" title="5.2 代码开发"></a>5.2 代码开发</h2><p>在开发代码之前需要梳理一下操作过程和对应的程序的执行流程:</p>
+<p>1、点击“编辑”按钮时，页面跳转到add.html，并在url中携带参数[员工id]</p>
+<p>2、在add.html页面获取url中的参数[员工id]</p>
+<p>3、发送ajax请求，请求服务端，同时提交员工id参数</p>
+<p>4、服务端接收请求，根据员工id查询员工信息，将员工信息以json形式响应给页面（页面回显）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据id查询员工</span></span><br><span class="line"><span class="comment"> * 为了在修改时，可以回显信息</span></span><br><span class="line"><span class="comment"> * 修改时，浏览器向服务器发送请求：http://localhost:8080/employee/1626479515129643009</span></span><br><span class="line"><span class="comment"> * 处理之后，需要传回code、data、msg等数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> R&lt;Employee&gt; <span class="title function_">getById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>&#123;</span><br><span class="line">    log.info(<span class="string">&quot;根据id查询员工&quot;</span>);</span><br><span class="line">    <span class="type">Employee</span> <span class="variable">employee</span> <span class="operator">=</span> employeeService.getById(id);</span><br><span class="line">    <span class="keyword">if</span>(employee != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> R.success(employee);<span class="comment">//把查出的employee转成json发回前端</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.error(<span class="string">&quot;没有查询到该员工&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5、页面接收服务端响应的json数据，通过VUE的数据绑定进行员工信息回显</p>
+<p>6、点击“保存”按钮，发送ajax请求，将页面中的员工信息以json方式提交给服务端</p>
+<p>7、服务端接收员工信息，并进行处理，完成后给页面响应</p>
+<p>8、页面接收到服务端响应信息后进行相应处理</p>
+<p>注意：add.html页面为公共页面，新增员工和编辑员工都是在此页面操作。所以点“保存后”，修改员工信息的操作由之前的update()方法可以完成，不需要重写。</p>
+<h2 id="5-3-功能测试"><a href="#5-3-功能测试" class="headerlink" title="5.3 功能测试"></a>5.3 功能测试</h2><p>启动服务，测试功能即可。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" rel="tag"># 项目笔记</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/Spring-MVC/" rel="tag"># Spring MVC</a>
+              <a href="/tags/MyBatis-Plus/" rel="tag"># MyBatis Plus</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/" rel="prev" title="瑞吉外卖01-介绍+环境搭建+后台登录和退出">
+                  <i class="fa fa-chevron-left"></i> 瑞吉外卖01-介绍+环境搭建+后台登录和退出
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kathy-kx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
