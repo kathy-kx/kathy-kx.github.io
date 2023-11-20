@@ -19,13 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 问题：用户数量多，系统访问量大。频繁访问数据库，系统性能下降，用户体验差。解决方法：使用缓存。用户点链接后，服务端先看缓存中有没有相应数据。如果有数据，不用再查数据库。 1. 使用git管理代码在g">
+<meta property="og:type" content="article">
 <meta property="og:title" content="瑞吉外卖优化01-缓存优化">
 <meta property="og:url" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 问题：用户数量多，系统访问量大。频繁访问数据库，系统性能下降，用户体验差。解决方法：使用缓存。用户点链接后，服务端先看缓存中有没有相应数据。如果有数据，不用再查数据库。 1. 使用git管理代码在g">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/1.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/2.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/3.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/4.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/5.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/6.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/7.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/CachePut%E6%B3%A8%E8%A7%A3%E6%96%B0%E5%A2%9E%E7%BC%93%E5%AD%98-save%E6%97%B6.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/CachEvict%E6%B3%A8%E8%A7%A3%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98-delete%E6%97%B6.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/CachEvict%E6%B3%A8%E8%A7%A3%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98-update%E6%97%B6.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/Cacheable%E6%B3%A8%E8%A7%A3%E6%9F%A5%E7%9C%8B%E7%BC%93%E5%AD%98-get%E6%9F%A5%E8%AF%A2%E6%97%B6.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/8.png">
+<meta property="og:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/9.png">
 <meta property="article:published_time" content="2023-11-18T15:31:35.000Z">
-<meta property="article:modified_time" content="2023-11-18T15:34:14.462Z">
+<meta property="article:modified_time" content="2023-11-20T14:16:18.192Z">
 <meta property="article:author" content="Kathy-kx">
 <meta property="article:tag" content="项目笔记">
 <meta property="article:tag" content="java">
@@ -33,7 +48,11 @@
 <meta property="article:tag" content="Spring">
 <meta property="article:tag" content="Spring MVC">
 <meta property="article:tag" content="MyBatis Plus">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Spring Cache">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/1.png">
 
 
 <link rel="canonical" href="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/">
@@ -102,7 +121,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -115,6 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8git%E7%AE%A1%E7%90%86%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">1. 使用git管理代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81%E6%8E%A8%E9%80%81%E5%88%B0%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 将本地代码推送到仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%88%86%E6%94%AF%EF%BC%8C%E6%8A%8A%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E4%BC%98%E5%8C%96%E9%83%BD%E6%94%BE%E5%9C%A8%E6%96%B0%E7%9A%84%E5%88%86%E6%94%AF%E4%B8%8A"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 创建新的分支，把缓存相关优化都放在新的分支上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">2. 环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-maven%E5%9D%90%E6%A0%87"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 maven坐标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 配置类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BC%93%E5%AD%98%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">3. 缓存短信验证码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%BB%A3%E7%A0%81%E6%94%B9%E9%80%A0"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 代码改造</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E8%8F%9C%E5%93%81%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">4. 缓存菜品数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E4%BB%A3%E7%A0%81%E6%94%B9%E9%80%A0"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 代码改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%8F%90%E4%BA%A4%E4%BB%93%E5%BA%93"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 提交仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Spring-Cache"><span class="nav-number">5.</span> <span class="nav-text">5. Spring Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-Spring-Cache-%E4%BB%8B%E7%BB%8D"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Spring Cache 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-Spring-Cache-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 Spring Cache 常用注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-Spring-Cache-%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F-%E4%BD%BF%E7%94%A8map"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 Spring Cache 使用方式-使用map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-Spring-Cache-%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F-%E4%BD%BF%E7%94%A8Redis%E4%BD%9C%E4%B8%BA%E7%BC%93%E5%AD%98%E4%BA%A7%E5%93%81"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 Spring Cache 使用方式-使用Redis作为缓存产品</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%BC%93%E5%AD%98%E5%A5%97%E9%A4%90%E6%95%B0%E6%8D%AE"><span class="nav-number">6.</span> <span class="nav-text">6. 缓存套餐数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E4%BB%A3%E7%A0%81%E6%94%B9%E9%80%A0"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 代码改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%8F%90%E4%BA%A4%E4%BB%93%E5%BA%93"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 提交仓库</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -138,7 +158,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -201,9 +221,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-11-18 23:31:35 / 修改时间：23:34:14" itemprop="dateCreated datePublished" datetime="2023-11-18T23:31:35+08:00">2023-11-18</time>
+      <time title="创建时间：2023-11-18 23:31:35" itemprop="dateCreated datePublished" datetime="2023-11-18T23:31:35+08:00">2023-11-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-20 22:16:18" itemprop="dateModified" datetime="2023-11-20T22:16:18+08:00">2023-11-20</time>
     </span>
 
   
@@ -216,7 +242,154 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。</p>
+<p>问题：用户数量多，系统访问量大。频繁访问数据库，系统性能下降，用户体验差。解决方法：使用缓存。用户点链接后，服务端先看缓存中有没有相应数据。如果有数据，不用再查数据库。</p>
+<h2 id="1-使用git管理代码"><a href="#1-使用git管理代码" class="headerlink" title="1. 使用git管理代码"></a>1. 使用git管理代码</h2><p>在gitee上新建仓库，名称和当前项目名相同，权限为私有仓库。</p>
+<h3 id="1-1-将本地代码推送到仓库"><a href="#1-1-将本地代码推送到仓库" class="headerlink" title="1.1 将本地代码推送到仓库"></a>1.1 将本地代码推送到仓库</h3><ul>
+<li><p>复制远程仓库链接。</p>
+</li>
+<li><p>打开IDEA，在菜单选中VCS，选择Import into version control，选择create git repository，选中项目。</p>
+</li>
+<li><p>.gitignore文件中，排除一些文件（除了IDEA自动生成的，还添加了以下的）</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.git</span><br><span class="line">logs</span><br><span class="line">rebel.xml</span><br><span class="line">target/</span><br><span class="line">!.mvn/wrapper/maven-wrapper.jar</span><br><span class="line">log.path_IS_UNDEFINED</span><br><span class="line">.DS_Store</span><br><span class="line">offline_user.md</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右键项目，点击Git，点击Add。</p>
+</li>
+<li><p>点击IDEA上方工具的Commit，可以加入注释“加入redis，缓存验证码和菜品”，点击Commit and Push</p>
+</li>
+<li><p>push时，点击Define remote，将刚才复制的远程仓库链接粘到url中，配置远程仓库。</p>
+</li>
+</ul>
+<h3 id="1-2-创建新的分支，把缓存相关优化都放在新的分支上"><a href="#1-2-创建新的分支，把缓存相关优化都放在新的分支上" class="headerlink" title="1.2 创建新的分支，把缓存相关优化都放在新的分支上"></a>1.2 创建新的分支，把缓存相关优化都放在新的分支上</h3><p>点击IDEA右下角的分支，新建分支命名为v1.0。</p>
+<p>将v1.0分支也推送到远程仓库，当前代码没有改，直接点工具中的Push即可。</p>
+<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2. 环境搭建"></a>2. 环境搭建</h2><h3 id="2-1-maven坐标"><a href="#2-1-maven坐标" class="headerlink" title="2.1 maven坐标"></a>2.1 maven坐标</h3><p>在项目的pom. xml文件中，导入spring data redis的maven坐标：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--导入Redis依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-配置文件"><a href="#2-2-配置文件" class="headerlink" title="2.2 配置文件"></a>2.2 配置文件</h3><p>在项目的application.yml中加入redis相关配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">	<span class="attr">redis:</span></span><br><span class="line">	    <span class="attr">host:</span> <span class="string">localhost</span> <span class="comment"># 本地ip或者虚拟机IP。此处使用了本地的</span></span><br><span class="line">	    <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">	    <span class="attr">password:</span></span><br><span class="line">	    <span class="attr">database:</span> <span class="number">0</span> <span class="comment"># 默认使用0号数据库</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-配置类"><a href="#2-3-配置类" class="headerlink" title="2.3 配置类"></a>2.3 配置类</h3><span id="more"></span>
+<p>在config包下创建RedisConfig配置类，复制即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> <span class="keyword">extends</span> <span class="title class_">CachingConfigurerSupport</span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Object, Object&gt; <span class="title function_">redisTemplate</span> <span class="params">(RedisConnectionFactory connectionFactory)</span> &#123;</span><br><span class="line">        RedisTemplate&lt;Object, Object&gt; redisTemplate = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//默认的Key产列化器为：JdkSerializationRedisSerializer</span></span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line"></span><br><span class="line">        redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上操作完成后，可以Add、Commit、push到远程仓库，附上Commit Message：“Redis环境配置”。</p>
+<h2 id="3-缓存短信验证码"><a href="#3-缓存短信验证码" class="headerlink" title="3. 缓存短信验证码"></a>3. 缓存短信验证码</h2><h3 id="3-1-实现思路"><a href="#3-1-实现思路" class="headerlink" title="3.1 实现思路"></a>3.1 实现思路</h3><p>前面我们已经实现了移动端手机验证码登录，随机生成的验证码我们是保存在HttpSession中的（有效期30分钟）。</p>
+<p>现在需要改造为：<strong>将验证码缓存在Redis中（有效期设置为5分钟）</strong>，具体的<strong>实现思路</strong>如下：</p>
+<ol>
+<li>在服务端UserController中注入RedisTemplate对象，用于操作Redis</li>
+<li>在服务端UserController的sendMsg方法中，将随机生成的验证码缓存到Redis中，并设置有效期为5分钟</li>
+<li>在服务端UserController的login方法中，从Redis中获取缓存的验证码，如果登录成功则删除Redis中的验证码</li>
+</ol>
+<h3 id="3-2-代码改造"><a href="#3-2-代码改造" class="headerlink" title="3.2 代码改造"></a>3.2 代码改造</h3><p>1、在服务端UserController中注入RedisTemplate对象，用于操作Redis</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
+
+<p>2、在服务端UserController的sendMsg方法中，将随机生成的验证码缓存到Redis中，并设置有效期为5分钟</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// session.setAttribute(phone, code);</span></span><br><span class="line">redisTemplate.opsForValue().set(phone, code, <span class="number">5</span>, TimeUnit.MINUTES);</span><br></pre></td></tr></table></figure>
+
+<p>3、在服务端UserController的login方法中，从Redis中获取缓存的验证码，如果登录成功则删除Redis中的验证码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 之前：从session中获取 刚才sendMsg()时session中保存的 该手机号对应的验证码</span></span><br><span class="line"><span class="comment">// Object codeInSession = session.getAttribute(phone);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓存优化：从Redis中获取缓存的验证码</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">codeInSession</span> <span class="operator">=</span> redisTemplate.opsForValue().get(phone);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果登录成功则删除Redis中的验证码</span></span><br><span class="line">redisTemplate.delete(phone);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-缓存菜品数据"><a href="#4-缓存菜品数据" class="headerlink" title="4. 缓存菜品数据"></a>4. 缓存菜品数据</h2><h3 id="4-1-实现思路"><a href="#4-1-实现思路" class="headerlink" title="4.1 实现思路"></a>4.1 <strong>实现思路</strong></h3><p>前面我们已经实现了移动端菜品查看功能，对应的服务端方法为DishController的list方法，此方法会根据前端提交的查询条件（categoryId和status）进行数据库查询操作。在高并发的情况下，频繁查询数据库会导致系统性能下降，服务端响应时间增长。现在需要对此方法进行缓存优化，提高系统的性能。</p>
+<p>具体的实现思路如下:</p>
+<p>1、改造DishController的list方法，先从Redis中获取菜品数据。如果有，则直接返回，无需查询数据库；如果没有，则查询数据库，并将查询到的菜品数据放入Redis。</p>
+<p>2、改造DishController的save和update方法，加入清理缓存的逻辑。后台系统新增菜品或更新菜品信息后，清理缓存，用户点击这个分类后，能看到更新后的菜品。</p>
+<p>3、（补充功能）由于我们前面自己补充了启售&#x2F;停售功能和删除菜品功能，所以此处也需要改造DishController的switchStatus和delete方法。在商家后台启售&#x2F;停售或者删除菜品后，也要清理缓存。</p>
+<p>注意事项：在使用缓存过程中，要注意保证数据库中的数据和缓存中的数据一致，如果数据库中的数据发生变化，需要及时清理缓存数据。</p>
+<h3 id="4-2-代码改造"><a href="#4-2-代码改造" class="headerlink" title="4.2 代码改造"></a>4.2 代码改造</h3><p>1、改造DishController的list方法，先从Redis中获取菜品数据。需要按照分类，分别缓存。</p>
+<p>如果有，则直接返回，无需查询数据库；</p>
+<p>如果没有，则查询数据库，并将查询到的菜品数据放入Redis。</p>
+<p>先在DishController中注入RedisTemplate对象，用于操作Redis：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
+
+<p>list方法中添加：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">List&lt;DishDto&gt; dishDtoList = <span class="literal">null</span>; <span class="comment">// 希望从redis缓存获取到的是List&lt;DishDto&gt;类型的菜品数据</span></span><br><span class="line"><span class="comment">// 动态地构造key                </span></span><br><span class="line"><span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dish.getCategoryId() + <span class="string">&quot;_&quot;</span> + dish.getStatus(); <span class="comment">// key为dish_1397844263642378242_1 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 先从Redis中获取菜品缓存数据</span></span><br><span class="line">dishDtoList = (List&lt;DishDto&gt;) redisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果存在，则直接返回，无需查询数据库</span></span><br><span class="line"><span class="keyword">if</span> (dishDtoList == <span class="literal">null</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> R.success(dishDtoList); <span class="comment">// 直接将从redis中拿到的菜品数据返回给前端</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果不存在，执行后续代码，查询数据库</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 后续代码...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果Redis中不存在菜品缓存数据dishDtoList，还需要将查询到的菜品数据缓存到Redis，缓存60分钟</span></span><br><span class="line">redisTemplate.opsForValue().set(key, dishDtoList, <span class="number">60</span>, TimeUnit.MINUTES);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、改造DishController的save和update方法。后台系统新增菜品或更新菜品信息后，清理缓存，用户点击这个分类后，能看到更新后的菜品。</p>
+<p>在DishController的save和update方法都添加：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法一：清理所有菜品缓存数据</span></span><br><span class="line"><span class="comment">//Set keys = redisTemplate.keys(&quot;dish_*&quot;);</span></span><br><span class="line"><span class="comment">//redisTemplate.delete(keys);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二：清理某个分类下的菜品缓存数据</span></span><br><span class="line"><span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dishDto.getCategoryId() + <span class="string">&quot;_&quot;</span> + dishDto.getStatus();</span><br><span class="line">redisTemplate.delete(key);</span><br></pre></td></tr></table></figure>
+
+<p>3、由于我们前面自己补充了启售&#x2F;停售功能和删除菜品功能，所以此处也需要改造DishController的switchStatus和delete方法。在商家后台启售&#x2F;停售或者删除菜品后，也要清理缓存。</p>
+<p>DishController的switchStatus方法添加清理缓存的功能，该方法完整代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 修改启售/停售状态，支持批量修改和单独修改</span></span><br><span class="line"><span class="comment"> * 处理请求/dish/status/1?ids=1413384757047271425,1413385247889891330</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> status</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ids 多个dish_id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/status/&#123;status&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> R&lt;String&gt; <span class="title function_">switchStatus</span><span class="params">(<span class="meta">@PathVariable</span> <span class="type">int</span> status, String[] ids)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(String id : ids)&#123;</span><br><span class="line">        <span class="type">Dish</span> <span class="variable">dish</span> <span class="operator">=</span> dishService.getById(id);<span class="comment">//通过遍历到的这个当前id，获取dish表中的一条记录（一个dish对象）</span></span><br><span class="line">        dish.setStatus(status);<span class="comment">//将该记录的status改为url路径参数中的status</span></span><br><span class="line">        dishService.updateById(dish);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//清理所有菜品缓存数据</span></span><br><span class="line">        <span class="type">Set</span> <span class="variable">keys</span> <span class="operator">=</span> redisTemplate.keys(<span class="string">&quot;dish_*&quot;</span>);</span><br><span class="line">        redisTemplate.delete(keys);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> R.success(<span class="string">&quot;状态修改成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>DishController的delete方法添加清理缓存的功能，该方法完整代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 删除菜品</span></span><br><span class="line"><span class="comment"> * 请求/dish?ids=1630924768242917378</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ids</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@DeleteMapping</span></span><br><span class="line"><span class="keyword">public</span> R&lt;String&gt; <span class="title function_">delete</span><span class="params">(String[] ids)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (String id : ids)&#123;</span><br><span class="line">        dishService.removeById(id);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//清理所有菜品缓存数据</span></span><br><span class="line">        <span class="type">Set</span> <span class="variable">keys</span> <span class="operator">=</span> redisTemplate.keys(<span class="string">&quot;dish_*&quot;</span>);</span><br><span class="line">        redisTemplate.delete(keys);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> R.success(<span class="string">&quot;菜品删除成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-提交仓库"><a href="#4-3-提交仓库" class="headerlink" title="4.3 提交仓库"></a>4.3 提交仓库</h3><p>最后，将代码提交到Git本地仓库并推送到远程仓库。</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/1.png" alt="图片"></p>
+<p>并且经过测试没有问题之后，可以将v1.0分支合并至主分支。</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/2.png" alt="图片"></p>
+<p>再切回v1.0分支，继续完成其他代码。</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/3.png" alt="图片"></p>
+<h2 id="5-Spring-Cache"><a href="#5-Spring-Cache" class="headerlink" title="5. Spring Cache"></a>5. Spring Cache</h2><h3 id="5-1-Spring-Cache-介绍"><a href="#5-1-Spring-Cache-介绍" class="headerlink" title="5.1 Spring Cache 介绍"></a>5.1 Spring Cache 介绍</h3><p>Spring Cache是一个框架，实现了基于注解的缓存功能，只需要简单地加一个注解，就能实现缓存功能。</p>
+<p>Spring Cache提供了一层抽象，底层可以切换不同的cache实现。具体就是通过<strong>CacheManager</strong>接口来统一不同的缓存技术。</p>
+<p>CacheManager是Spring提供的各种缓存技术抽象接口。</p>
+<p>针对不同的缓存技术需要实现不同的CacheManager：</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/4.png" alt="图片"></p>
+<h3 id="5-2-Spring-Cache-常用注解"><a href="#5-2-Spring-Cache-常用注解" class="headerlink" title="5.2 Spring Cache 常用注解"></a>5.2 Spring Cache 常用注解</h3><p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/5.png" alt="图片"></p>
+<p>在spring boot项目中，使用缓存技术只需在项目中导入相关缓存技术的依赖包，并在启动类上使用@EnableCaching开启缓存支持即可。</p>
+<p>例如，使用Redis作为缓存技术，只需要导入Spring data Redis的maven坐标即可。</p>
+<h3 id="5-3-Spring-Cache-使用方式-使用map"><a href="#5-3-Spring-Cache-使用方式-使用map" class="headerlink" title="5.3 Spring Cache 使用方式-使用map"></a>5.3 <strong>Spring Cache 使用方式-使用map</strong></h3><p>下面是使用map为例演示这几个注解的使用：</p>
+<p>1、准备工作：</p>
+<ul>
+<li>启动类上加@EnableCaching开启缓存注解功能：</li>
+</ul>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/6.png" alt="图片"></p>
+<ul>
+<li>使用前还需要在Controller类中注入CacheManager对象：</li>
+</ul>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/7.png" alt="图片"></p>
+<p>2、@CachePut将方法的返回值放到缓存中：</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/CachePut%E6%B3%A8%E8%A7%A3%E6%96%B0%E5%A2%9E%E7%BC%93%E5%AD%98-save%E6%97%B6.png" alt="图片"></p>
+<p>3、@CacheEvict将一条或名条数据从缓存中删除：</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/CachEvict%E6%B3%A8%E8%A7%A3%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98-delete%E6%97%B6.png" alt="图片"></p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/CachEvict%E6%B3%A8%E8%A7%A3%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98-update%E6%97%B6.png" alt="图片"></p>
+<p>4、@Cacheable在方法执行前Spring先查看缓存中是否有数据，如果有数据，则（不经过方法）直接返回缓存中的数据；若没有数据，再调用方法并将方法返回值放到缓存中。：</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/Cacheable%E6%B3%A8%E8%A7%A3%E6%9F%A5%E7%9C%8B%E7%BC%93%E5%AD%98-get%E6%9F%A5%E8%AF%A2%E6%97%B6.png" alt="图片"></p>
+<h3 id="5-4-Spring-Cache-使用方式-使用Redis作为缓存产品"><a href="#5-4-Spring-Cache-使用方式-使用Redis作为缓存产品" class="headerlink" title="5.4 Spring Cache 使用方式-使用Redis作为缓存产品"></a>5.4 <strong>Spring Cache 使用方式-使用Redis作为缓存产品</strong></h3><p>在Spring Boot项目中使用Spring Cache的操作步骤(使用redis缓存技术);</p>
+<p>1、导入maven坐标</p>
+<p>spring-boot-starter-data-redis和spring-boot-starter-cache：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、配置application.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">cache:</span></span><br><span class="line">        <span class="attr">redis:</span></span><br><span class="line">            <span class="attr">time-to-live:</span> <span class="number">1800000</span>  <span class="comment"># 设置缓存有效期，非必需，如果没设置就是永久有效</span></span><br></pre></td></tr></table></figure>
+
+<p>3、在启动类上加@EnableCaching注解，开启缓存注解功能</p>
+<p>4、在Controller的方法上加@Cacheable、@CacheEvict等注解，进行缓存操作（同5.3中注解的使用方法）</p>
+<h2 id="6-缓存套餐数据"><a href="#6-缓存套餐数据" class="headerlink" title="6. 缓存套餐数据"></a>6. 缓存套餐数据</h2><h3 id="6-1-实现思路"><a href="#6-1-实现思路" class="headerlink" title="6.1 实现思路"></a>6.1 <strong>实现思路</strong></h3><p>前面我们已经实现了移动端套餐查看功能，对应的服务端方法为SetmealController的list方法。此方法会根据前端提交的查询条件，进行数据库查询操作。</p>
+<p>在高并发的情况下，频繁查询数据库会导致系统性能下降，服务端响应时间增长。现在需要对此方法进行缓存优化，提高系统的性能。</p>
+<p>具体的实现思路如下:</p>
+<p>1、导入Spring Cache和Redis相关maven坐标</p>
+<p>2、在application.yml中配置缓存数据的过期时间</p>
+<p>3、在启动类上加入@EnableCaching注解，开启缓存注解功能</p>
+<p>4、在SetmealController的list方法上加@Cacheable注解。</p>
+<p>@Cacheable注解可以实现：在方法执行前Spring先查看缓存中是否有数据，如果有数据，则（不经过方法）直接返回缓存中的数据；若没有数据，再调用方法并将方法返回值放到缓存中。</p>
+<p>5、在SetmealController的save和delete方法上加@CacheEvict注解</p>
+<p>@CacheEvict注解可以实现：将一条或名条数据从缓存中删除。</p>
+<h3 id="6-2-代码改造"><a href="#6-2-代码改造" class="headerlink" title="6.2 代码改造"></a>6.2 <strong>代码改造</strong></h3><p>1、在pom.xml文件中导入maven坐标:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、在application.yml中配置缓存数据过期时间:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">cache:</span></span><br><span class="line">        <span class="attr">redis:</span></span><br><span class="line">            <span class="attr">time-to-live:</span> <span class="number">1800000</span>  <span class="comment"># 设置缓存有效期，非必需，如果没设置就是永久有效</span></span><br></pre></td></tr></table></figure>
+
+<p>3、在启动类上添加@EnableCaching注解，开启缓存注解功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ServletComponentScan</span>   <span class="comment">//  加上这个注解后，才会扫描@WebFilter注解，使得过滤器生效</span></span><br><span class="line"><span class="meta">@Slf4j</span>  <span class="comment">//加上这个注解后，可以在主程序中使用log.xxxx方法，便于打印日志</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableTransactionManagement</span> <span class="comment">//和@Transactional一起，开启事务</span></span><br><span class="line"><span class="meta">@EnableCaching</span> <span class="comment">//开启缓存注解功能</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TimingFoodDeliveryApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(TimingFoodDeliveryApplication.class, args);</span><br><span class="line">        log.info(<span class="string">&quot;项目启动成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、在SetmealController的list方法上加@Cacheable注解，向redis中添加缓存：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Cacheable(value = &quot;setmealCache&quot;, key = &quot;#setmeal.categoryId + &#x27;_&#x27; + #setmeal.status&quot;)</span> <span class="comment">//根据查询条件，拼接出key</span></span><br></pre></td></tr></table></figure>
+
+<p>5、在SetmealController的save、delete、update、switchStatus等方法上加@CacheEvict注解，清除缓存：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(value = &quot;setmealCache&quot;, allEntries = true)</span></span><br></pre></td></tr></table></figure>
+
+<p>allEntries &#x3D; true，则会删除value(setmealCache)对应的所有缓存数据。</p>
+<p>注意：要让R实现Serializable接口（序列化），注解才能生效。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">R</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">	<span class="comment">// R中原本的代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-提交仓库"><a href="#6-3-提交仓库" class="headerlink" title="6.3 提交仓库"></a>6.3 提交仓库</h3><p>提交：将代码提交到Git本地仓库并推送到远程仓库。</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/8.png" alt="图片"></p>
+<p>合并：经过测试没有问题之后，可以先切换(checkout)回master分支，再将v1.0分支合并至主分支。</p>
+<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9601-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96/9.png" alt="图片"></p>
+
     </div>
 
     
@@ -231,6 +404,9 @@
               <a href="/tags/Spring/" rel="tag"># Spring</a>
               <a href="/tags/Spring-MVC/" rel="tag"># Spring MVC</a>
               <a href="/tags/MyBatis-Plus/" rel="tag"># MyBatis Plus</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/Spring-Cache/" rel="tag"># Spring Cache</a>
           </div>
 
         
