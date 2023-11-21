@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 1. 套餐管理业务开发1.1 新增套餐1.1.1 需求分析套餐就是菜品的集合。 后台系统中可以管理套餐信息，通过”新增套餐”功能来添加一个新的套餐，在添加套餐时，需要选择当前套餐所属的套餐分类和包含">
+    <meta name="description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。本项目全部笔记见：外卖项目笔记合集 1. 套餐管理业务开发1.1 新增套餐1.1.1 需求分析套餐就是菜品的集合。 后台系统中可以管理套餐信息，通过”新增套餐”功能来添加一个新的套餐，在添加套餐时，需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="瑞吉外卖05-套餐管理">
 <meta property="og:url" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="Kathy&#39;s Blog">
-<meta property="og:description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。 1. 套餐管理业务开发1.1 新增套餐1.1.1 需求分析套餐就是菜品的集合。 后台系统中可以管理套餐信息，通过”新增套餐”功能来添加一个新的套餐，在添加套餐时，需要选择当前套餐所属的套餐分类和包含">
+<meta property="og:description" content="本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了课程笔记、相关知识点以及可能遇到的问题解决方案，并且增加了课程中未实现的功能，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。本项目全部笔记见：外卖项目笔记合集 1. 套餐管理业务开发1.1 新增套餐1.1.1 需求分析套餐就是菜品的集合。 后台系统中可以管理套餐信息，通过”新增套餐”功能来添加一个新的套餐，在添加套餐时，需">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/1.png">
 <meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/2.png">
@@ -52,7 +52,7 @@
 <meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/24.png">
 <meta property="og:image" content="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/25.png">
 <meta property="article:published_time" content="2023-05-13T15:27:01.000Z">
-<meta property="article:modified_time" content="2023-11-21T02:46:03.871Z">
+<meta property="article:modified_time" content="2023-11-21T02:59:29.171Z">
 <meta property="article:author" content="Kathy-kx">
 <meta property="article:tag" content="项目笔记">
 <meta property="article:tag" content="java">
@@ -242,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 10:46:03" itemprop="dateModified" datetime="2023-11-21T10:46:03+08:00">2023-11-21</time>
+      <time title="修改时间：2023-11-21 10:59:29" itemprop="dateModified" datetime="2023-11-21T10:59:29+08:00">2023-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。</p>
+        <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
 <h1 id="1-套餐管理业务开发"><a href="#1-套餐管理业务开发" class="headerlink" title="1. 套餐管理业务开发"></a>1. <strong><strong>套餐管理业务开发</strong></strong></h1><h2 id="1-1-新增套餐"><a href="#1-1-新增套餐" class="headerlink" title="1.1 新增套餐"></a>1.1 <strong><strong>新增套餐</strong></strong></h2><h3 id="1-1-1-需求分析"><a href="#1-1-1-需求分析" class="headerlink" title="1.1.1 需求分析"></a>1.1.1 需求分析</h3><p>套餐就是菜品的集合。</p>
 <p>后台系统中可以管理套餐信息，通过”新增套餐”功能来添加一个新的套餐，在添加套餐时，需要选择当前套餐所属的套餐分类和包含的菜品，并且需要上传套餐对应的图片，在移动端会按照套餐分类来展示对应的套餐。</p>
 <p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/1.png" alt="图片"></p>
