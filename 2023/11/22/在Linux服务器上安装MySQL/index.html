@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-K.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-K.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-K.png">
+  <link rel="mask-icon" href="/images/logo-K.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="首先检测当前系统中是否安装MySQL数据库。rpm -qa 查询当前系统中安装的所有软件。qa意思是query allrpm -qa | grep mysql 查询当前系统中安装的名称带mysql的软件rpm -qa | grep mariadb 查询当前系统中安装的名称带mariadb的软件 RPM (Red-Hat Package Manager)RPM软件包管理器，是红帽Linux用于管理和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Linux服务器上安装MySQL">
+<meta property="og:url" content="http://example.com/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/index.html">
+<meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="首先检测当前系统中是否安装MySQL数据库。rpm -qa 查询当前系统中安装的所有软件。qa意思是query allrpm -qa | grep mysql 查询当前系统中安装的名称带mysql的软件rpm -qa | grep mariadb 查询当前系统中安装的名称带mariadb的软件 RPM (Red-Hat Package Manager)RPM软件包管理器，是红帽Linux用于管理和">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-22T03:07:31.000Z">
+<meta property="article:modified_time" content="2023-11-22T03:38:28.172Z">
+<meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/","path":"2023/11/22/在Linux服务器上安装MySQL/","title":"在Linux服务器上安装MySQL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>在Linux服务器上安装MySQL | Kathy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kathy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEMySQL%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">安装和配置MySQL的步骤</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kathy-kx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kathy-kx" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kathy-kx" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kxzhu93@163.com" title="E-Mail → mailto:kxzhu93@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在Linux服务器上安装MySQL | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在Linux服务器上安装MySQL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-22 11:07:31 / 修改时间：11:38:28" itemprop="dateCreated datePublished" datetime="2023-11-22T11:07:31+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/solutions/" itemprop="url" rel="index"><span itemprop="name">solutions</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>首先检测当前系统中是否安装MySQL数据库。<br>rpm -qa 查询当前系统中安装的所有软件。qa意思是query all<br><code>rpm -qa | grep mysql</code> 查询当前系统中安装的名称带mysql的软件<br><code>rpm -qa | grep mariadb</code> 查询当前系统中安装的名称带mariadb的软件</p>
+<p>RPM (Red-Hat Package Manager)RPM软件包管理器，是红帽Linux用于管理和安装软件的工具。<br>注：如果安装过了mariadb，需要先卸载。否则mysql会安装失败。<br>卸载软件命令：<code>rpm -e --nodeps 软件名称</code>。例如<code>rpm -e --nodeps mariadb-libs-xxxxxxx</code></p>
+<h1 id="安装和配置MySQL的步骤"><a href="#安装和配置MySQL的步骤" class="headerlink" title="安装和配置MySQL的步骤"></a>安装和配置MySQL的步骤</h1><ol>
+<li><p>下载mysql8.0.31 arm64版本（适用于macOS m2芯片）。mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz<br>下载地址：<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+</li>
+<li><p>将下载好的mySQL安装包上传到linux并解压</p>
+</li>
+</ol>
+<ul>
+<li><p>在本地终端，用sftp传输该安装包<br><code>put /Users/kathy/Downloads/linux-software/mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz /root/</code></p>
+</li>
+<li><p>在虚拟机终端，解压安装包到&#x2F;usr&#x2F;local&#x2F;mysql(先用mkdir mysql创建好)<br><code>tar -zxvf mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz -C /usr/local/mysql</code></p>
+</li>
+<li><p>在虚拟机终端，在&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;下，创建包data和log</p>
+</li>
+</ul>
+<ol start="3">
+<li>修改环境变量：<br><code>cd ~</code></li>
+</ol>
+<p><code>vim .bash_profile</code></p>
+<p>其中添加：PATH&#x3D;$PATH:$HOME&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;bin</p>
+<p>修改完后<code>source .bash_profile</code></p>
+<p><code>which mysql</code> - 会显示&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;bin&#x2F;mysql</p>
+<ol start="4">
+<li>创建mysql用户和用户组<span id="more"></span>
+<code>groupadd mysql</code></li>
+</ol>
+<p><code>useradd -r -g mysql -s /bin/false mysql</code></p>
+<p><code>chown -R mysql:mysql /usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/</code></p>
+<p><code>sudo mkdir /var/lib/mysql</code></p>
+<p><code>sudo chown -R mysql:mysql /var/lib/mysql</code></p>
+<ol start="5">
+<li>配置参数文件</li>
+</ol>
+<p><code>vim /etc/my.cnf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8mb4</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">port=3306</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">basedir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64</span><br><span class="line">character-set-server=utf8mb4</span><br><span class="line">default-storage-engine=INNODB</span><br><span class="line">innodb_buffer_pool_size=200M</span><br><span class="line">max_allowed_packet=16M</span><br><span class="line">explicit_defaults_for_timestamp=1</span><br><span class="line"></span><br><span class="line">log-output=FILE</span><br><span class="line">general_log=0</span><br><span class="line">general_log_file=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/log/general.err</span><br><span class="line">slow_query_log=ON</span><br><span class="line">slow_query_log_file=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/log/query.err</span><br><span class="line">long_query_time=10</span><br><span class="line">log-error=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/log/error.err</span><br><span class="line">default-authentication-plugin=mysql_native_password</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>启动MySQL的mysqld服务，并使用指定的参数进行初始化</li>
+</ol>
+<p>执行命令：<code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64 --datadir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/data</code></p>
+<p>具体含义：</p>
+<ul>
+<li><code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysqld</code>-启动MySQL的mysqld服务</li>
+<li><code>-initialize</code> - 初始化MySQL数据目录</li>
+<li><code>-user=mysql</code> - 使用mysql用户运行mysqld服务</li>
+<li><code>-basedir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64</code> - 指定MySQL的安装根目录</li>
+<li><code>-datadir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/data</code> - 指定MySQL数据目录</li>
+</ul>
+<p>还会生成随机密码，可以进入log日志目录查看密码：<br><code>cd /usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/log</code> log是刚才创建的日志目录<br><code>cat error.err</code></p>
+<p>可以看到临时root密码，记录下来：<br>A temporary password is generated for root@localhost: **********</p>
+<ol start="7">
+<li>添加mysqld到systemd管理<br><code>vim /usr/lib/systemd/system/mysqld.service</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=MySQL Server</span><br><span class="line">Documentation=man:mysqld(8)</span><br><span class="line">Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">After=network.target</span><br><span class="line">After=syslog.target</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=mysql</span><br><span class="line">Group=mysql</span><br><span class="line">ExecStart=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line">LimitNPROC=65536</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>将mysqld将入systemd管理，开机自启动mysqld</li>
+</ol>
+<p><code>systemctl daemon-reload</code> 重新加载systemd管理的所有配置文件，使之生效</p>
+<p><code>systemctl start mysqld</code> 启动MySQL服务（服务名就叫mysqld）。</p>
+<p><code>systemctl enable mysqld</code> 设置为开机自启动。</p>
+<p>执行后，显示Created symlink &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;multi-user.target.wants&#x2F;mysqld.service → &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;mysqld.service.</p>
+<ol start="9">
+<li>查看 MySQL 服务状态<br><code>systemctl status mysqld</code> 查看 MySQL 服务状态的命令（正常运行），可以查看 MySQL 服务是否正在运行，服务的进程 ID，以及最近一次服务状态的变化时间等信息。如果 MySQL 服务未能正常启动，该命令也可以提供错误信息，帮助诊断问题。</li>
+</ol>
+<p>查看已经启动的服务（非必需）<code>netstat -tunlp</code></p>
+<ol start="10">
+<li>登陆 MySQL 数据库：</li>
+</ol>
+<p><code>mysql -u root -p</code>后，此时我这里出现错误：<br>mysql: error while loading shared libraries: libncurses.so.5: cannot open shared object file: No such file or directory<br>意思是mysql需要libtinfo.so.5这个库文件，但是找不到。</p>
+<p>解决方法：<code>ln -s /usr/lib64/libtinfo.so.6 /usr/lib64/libtinfo.so.5</code></p>
+<ol start="11">
+<li>修改密码</li>
+</ol>
+<p>切换到 MySQL 数据库，并使用以下命令修改 root 用户的密码：（注意要有分号，符号全是小写）</p>
+<p><code>use mysql;</code></p>
+<ul>
+<li>开启访问权限（非必需）</li>
+</ul>
+<p>CREATE USER ‘root‘@’%’ IDENTIFIED BY ‘PASSWORD’; （%是匹配所有的ip地址）</p>
+<p>GRANT ALL PRIVILEGES ON <code>*.*</code> TO ‘root‘@’%’ WITH GRANT OPTION;</p>
+<p>flush privileges;</p>
+<ul>
+<li>修改密码</li>
+</ul>
+<p>alter user root@”localhost” identified with mysql_native_password by ‘新密码’;</p>
+<p>修改密码后，使用以下命令刷新 MySQL 权限：flush privileges;</p>
+<ol start="12">
+<li><p>退出 MySQL 数据库<br>mysql&gt; <code>exit</code>，并使用以下命令重启 MySQL 服务：<code>systemctl restart mysqld</code></p>
+</li>
+<li><p>从外部连接：<br>打开navicat，新建连接（Connection - mySQL），连接名任意，主机或IP地址填虚拟机端的IP地址192.168.50.158，用户名root，密码*****。</p>
+</li>
+</ol>
+<p>将虚拟机端端口3306开放，<code>firewall-cmd --zone=public --add-port=3306/tcp --permanent</code>以及<code>firewall-cmd --reload</code>。</p>
+<p>双击新建的连接，即可连接上。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/" rel="prev" title="在Linux服务器上部署项目">
+                  <i class="fa fa-chevron-left"></i> 在Linux服务器上部署项目
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/" rel="next" title="Linux系统中配置和启动Redis服务">
+                  Linux系统中配置和启动Redis服务 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kathy-kx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

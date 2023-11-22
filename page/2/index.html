@@ -119,18 +119,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -155,6 +155,638 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/" class="post-title-link" itemprop="url">瑞吉外卖06-用户端+管理后台订单</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 23:28:45" itemprop="dateCreated datePublished" datetime="2023-05-13T23:28:45+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-21 10:59:39" itemprop="dateModified" datetime="2023-11-21T10:59:39+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
+<h1 id="1-个人页面功能开发"><a href="#1-个人页面功能开发" class="headerlink" title="1. 个人页面功能开发"></a>1. 个人页面功能<strong><strong>开发</strong></strong></h1><h2 id="1-1-地址管理"><a href="#1-1-地址管理" class="headerlink" title="1.1 地址管理"></a>1.1 地址管理</h2><h3 id="1-1-1-需求分析"><a href="#1-1-1-需求分析" class="headerlink" title="1.1.1 需求分析"></a>1.1.1 需求分析</h3><p>地址簿，指的是移动端消费者用户的地址信息，用户登录成功后可以维护自己的地址信息。同一个用户可以有多个地址信息，但是只能有一个默认地址。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/1.png" alt="图片"></p>
+<h3 id="1-1-2-数据模型"><a href="#1-1-2-数据模型" class="headerlink" title="1.1.2 数据模型"></a>1.1.2 <strong>数据模型</strong></h3><p>用户的地址信息会存储在address_book表，即地址簿表中。具体表结构如下：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/2.png" alt="图片"></p>
+<h3 id="1-1-3-准备工作"><a href="#1-1-3-准备工作" class="headerlink" title="1.1.3 准备工作"></a>1.1.3 准备工作</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">瑞吉外卖05-套餐管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 23:27:01" itemprop="dateCreated datePublished" datetime="2023-05-13T23:27:01+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-21 10:59:29" itemprop="dateModified" datetime="2023-11-21T10:59:29+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
+<h1 id="1-套餐管理业务开发"><a href="#1-套餐管理业务开发" class="headerlink" title="1. 套餐管理业务开发"></a>1. <strong><strong>套餐管理业务开发</strong></strong></h1><h2 id="1-1-新增套餐"><a href="#1-1-新增套餐" class="headerlink" title="1.1 新增套餐"></a>1.1 <strong><strong>新增套餐</strong></strong></h2><h3 id="1-1-1-需求分析"><a href="#1-1-1-需求分析" class="headerlink" title="1.1.1 需求分析"></a>1.1.1 需求分析</h3><p>套餐就是菜品的集合。</p>
+<p>后台系统中可以管理套餐信息，通过”新增套餐”功能来添加一个新的套餐，在添加套餐时，需要选择当前套餐所属的套餐分类和包含的菜品，并且需要上传套餐对应的图片，在移动端会按照套餐分类来展示对应的套餐。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/1.png" alt="图片"></p>
+<h3 id="1-1-2-数据模型"><a href="#1-1-2-数据模型" class="headerlink" title="1.1.2 数据模型"></a>1.1.2 <strong>数据模型</strong></h3><p>新增套餐，其实就是将新增页面录入的套餐信息插入到setmeal表，还需要向setmeal_dish表插入套餐和菜品关联数据。所以在新增套餐时，涉及到两个表：</p>
+<p>1、setmeal表（套餐表）</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/2.png" alt="图片"></p>
+<p>2、setmeal_dish表（套餐-菜品关系表）</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/3.png" alt="图片"></p>
+<h3 id="1-1-3-准备工作"><a href="#1-1-3-准备工作" class="headerlink" title="1.1.3 准备工作"></a>1.1.3 <strong>准备工作</strong></h3><p>在开发业务功能前，先将需要用到的类和接口基本结构创建好：</p>
+<p>1、实体类SetmealDish（从课程资料中导入，Setmeal实体类前面已经导入过了）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SetmealDish</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//套餐id-和setmeal表关联</span></span><br><span class="line">    <span class="keyword">private</span> Long setmealId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//菜品id-和dish表关联</span></span><br><span class="line">    <span class="keyword">private</span> Long dishId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//菜品名称-和dish表关联（冗余字段 可以没有 可以根据dish_id从dish表里现场查，也可以存在setmeal_dish表里）</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SetmealDto</span> <span class="keyword">extends</span> <span class="title class_">Setmeal</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;SetmealDish&gt; setmealDishes;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String categoryName;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">//菜品原价</span></span><br><span class="line">    <span class="keyword">private</span> BigDecimal price;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//份数</span></span><br><span class="line">    <span class="keyword">private</span> Integer copies;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//排序</span></span><br><span class="line">    <span class="keyword">private</span> Integer sort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line">    <span class="keyword">private</span> Long createUser;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line">    <span class="keyword">private</span> Long updateUser;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//是否删除</span></span><br><span class="line">    <span class="keyword">private</span> Integer isDeleted;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">瑞吉外卖04-菜品管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 23:26:14" itemprop="dateCreated datePublished" datetime="2023-05-13T23:26:14+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-21 10:59:20" itemprop="dateModified" datetime="2023-11-21T10:59:20+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
+<h1 id="1-菜品管理业务开发"><a href="#1-菜品管理业务开发" class="headerlink" title="1. 菜品管理业务开发"></a>1. <strong><strong>菜品管理业务开发</strong></strong></h1><h2 id="1-1-文件上传下载"><a href="#1-1-文件上传下载" class="headerlink" title="1.1 文件上传下载"></a>1.1 <strong><strong>文件上传下载</strong></strong></h2><h3 id="1-1-1-文件上传介绍"><a href="#1-1-1-文件上传介绍" class="headerlink" title="1.1.1 文件上传介绍"></a>1.1.1 <strong><strong>文件上传介绍</strong></strong></h3><p>文件上传，也称为upload，是指将本地图片、视频、音频等文件上传到服务器上，可以供其他用户浏览或下载的过程。文件上传在项目中应用非常广泛，我们经常发微博、发微信朋友圈都用到了文件上传功能。</p>
+<p>文件上传时，需要使用form表单上传文件，且对页面的form表单有如下要求：</p>
+<ul>
+<li>method&#x3D;”post”　method为post</li>
+<li>enctype&#x3D;”multipart&#x2F;form-data”　form表单的enctype属性值为”multipart&#x2F;form-data”</li>
+<li>type&#x3D;”file”　form标签中使用input type&#x3D;”file”添加上传的文件</li>
+</ul>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/1.png" alt="1"></p>
+<p>目前一些前端组件库也提供了相应的上传组件，但是底层原理还是基于form表单的文件上传。例如ElementUI中提供的upload上传组件：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/2.png" alt="2"></p>
+<p>服务端要接收客户端页面上传的文件，通常都会使用Apache的两个组件:</p>
+<ul>
+<li>commons-fileupload</li>
+<li>commons-io</li>
+</ul>
+<p>Spring框架在spring-web包中对“文件上传”进行了封装，大大简化了服务端代码。</p>
+<p>我们只需要在Controller的方法中，声明一个MultipartFile类型的参数，即可接收上传的文件。</p>
+<p>步骤为：</p>
+<p>1、新建一个控制器类CommonController，专门负责文件上传和下载</p>
+<p>2、在upload()方法的形参位置，声明MultipartFile类型的参数，对象名与「html页面传来的form表单中的name」一致，也就是和浏览器请求体form-data处的name值一致。</p>
+<p>具体实现在1.1.3中。</p>
+<h3 id="1-1-2-文件下载介绍"><a href="#1-1-2-文件下载介绍" class="headerlink" title="1.1.2 文件下载介绍"></a>1.1.2 <strong>文件下载介绍</strong></h3><p>文件下载，也称为download，是指将文件从服务器传输到本地计算机的过程。通过浏览器进行文件下载，通常有两种表现形式:</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/" class="post-title-link" itemprop="url">瑞吉外卖03-管理分类</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 23:24:40" itemprop="dateCreated datePublished" datetime="2023-05-13T23:24:40+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-21 10:59:12" itemprop="dateModified" datetime="2023-11-21T10:59:12+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
+<h1 id="1-分类管理业务开发"><a href="#1-分类管理业务开发" class="headerlink" title="1. 分类管理业务开发"></a>1. <strong><strong>分类管理业务开发</strong></strong></h1><h2 id="1-1-公共字段自动填充"><a href="#1-1-公共字段自动填充" class="headerlink" title="1.1 公共字段自动填充"></a>1.1 <strong><strong>公共字段自动填充</strong></strong></h2><h3 id="1-1-1-问题分析"><a href="#1-1-1-问题分析" class="headerlink" title="1.1.1 问题分析"></a>1.1.1 <strong><strong>问题分析</strong></strong></h3><p>前面我们已经完成了后台系统的员工管理功能开发，在新增员工时需要设置创建时间、创建人、修改时间、修改人等字段，在编辑员工时需要设置修改时间和修改人等字段。这些字段属于公共字段，也就是很多表中都有这些字段，如下：</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/1.png" alt="1"></p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/2.png" alt="2"></p>
+<p>能不能对于这些公共字段在某个地方统一处理，来简化开发呢？答案就是使用Mybatis Plus提供的<strong>公共字段自动填充</strong>功能。</p>
+<h3 id="1-1-2-代码实现"><a href="#1-1-2-代码实现" class="headerlink" title="1.1.2 代码实现"></a>1.1.2 <strong>代码实现</strong></h3><p>Mybatis Plus公共字段自动填充，也就是在插入或者更新的时候，为指定字段赋予指定的值，使用它的好处就是可以统一对这些字段进行处理，避免了重复代码。</p>
+<p><strong>实现步骤：</strong></p>
+<p>1、在实体类的属性上加入@TableField注解，指定自动填充的策略</p>
+<p>2、按照框架要求编写元数据对象处理器，在此类中统一为公共字段赋值，此类需要实现MetaObjectHandler接口</p>
+<p><strong>具体实现：</strong></p>
+<p>1、在实体类的属性上加入@TableField注解，指定自动填充的策略</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span><span class="comment">//插入的时候，填充字段的值</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line"></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span><span class="comment">//插入和更新时填充字段的值</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line"></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line"><span class="keyword">private</span> Long createUser;</span><br><span class="line"></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line"><span class="keyword">private</span> Long updateUser;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">瑞吉外卖02-员工管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 23:07:12" itemprop="dateCreated datePublished" datetime="2023-05-13T23:07:12+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-21 10:59:03" itemprop="dateModified" datetime="2023-11-21T10:59:03+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
+<h1 id="1-完善登录功能"><a href="#1-完善登录功能" class="headerlink" title="1. 完善登录功能"></a>1. <strong><strong>完善登录功能</strong></strong></h1><h2 id="1-1-问题分析"><a href="#1-1-问题分析" class="headerlink" title="1.1 问题分析"></a>1.1 <strong><strong>问题分析</strong></strong></h2><p>前面我们已经完成了后台系统的员工登录功能开发，但是还存在一个问题：用户如果不登录，直接访问系统首页面，照样可以正常访问。</p>
+<p>这种设计并不合理，我们希望看到的效果应该是，<strong>只有登录后才能访问后台管理页面</strong>，<strong>如果没有登录，则跳转到登录页面。</strong></p>
+<p>那么，具体应该怎么实现呢？</p>
+<p>答案就是使用<strong>过滤器或者拦截器</strong>，在过滤器或者拦截器中判断用户是否已经完成登录，如果没有登录则跳转到登录页面。</p>
+<h2 id="1-2-代码实现"><a href="#1-2-代码实现" class="headerlink" title="1.2 代码实现"></a>1.2 <strong><strong>代码实现</strong></strong></h2><h3 id="1-2-1-实现思路"><a href="#1-2-1-实现思路" class="headerlink" title="1.2.1 实现思路"></a>1.2.1 实现思路</h3><ol>
+<li>创建自定义过滤器LoginCheckFilter</li>
+<li>在启动类上加入注解@ServletComponentScan</li>
+<li>完善过滤器的处理逻辑</li>
+</ol>
+<h3 id="1-2-2-具体实现"><a href="#1-2-2-具体实现" class="headerlink" title="1.2.2 具体实现"></a>1.2.2 具体实现</h3><p>1、创建filter包，在其中创建LoginCheckFilter类，实现Filter接口，并重写doFilter()方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 登录检查过滤器（也可以用拦截器interceptor实现，此项目中用过滤器实现）</span></span><br><span class="line"><span class="comment"> * 检查用户是否已经完成登录</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebFilter(filterName = &quot;LoginCheckFilter&quot;,urlPatterns = &quot;/*&quot;)</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginCheckFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        HttpServletRequest request=(HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response=(HttpServletResponse) servletResponse;</span><br><span class="line">        log.info(<span class="string">&quot;拦截到请求：&#123;&#125;&quot;</span>,request.getRequestURI());</span><br><span class="line">        filterChain.doFilter(request,response); <span class="comment">// 放行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ol>
+<li>@WebFilter替代web.xml配置过滤器。filterName指定过滤器名称（随意）；urlPatterns指定拦截的请求。<code>urlPatterns = &quot;/*&quot;</code>表示工程路径下所有请求路径都拦截。</li>
+<li>继承Filter时不要导错包，import javax.servlet.*</li>
+</ol>
+<p>2、在启动类上加入注解@ServletComponentScan</p>
+<p>加上这个注解后，才会扫描@WebFilter注解，使得过滤器生效。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReggieApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class,args);</span><br><span class="line">        log.info(<span class="string">&quot;项目启动成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/" class="post-title-link" itemprop="url">瑞吉外卖01-介绍+环境搭建+后台登录和退出</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-13 22:46:45" itemprop="dateCreated datePublished" datetime="2023-05-13T22:46:45+08:00">2023-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-21 10:58:43" itemprop="dateModified" datetime="2023-11-21T10:58:43+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这是一个使用Springboot+SSM的实战练习项目，实现了一个外卖系统的前后台功能。</p>
+<p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
+<p>下图是项目效果展示，左侧是移动端的效果，右侧是管理后台的效果。</p>
+<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/1.png" alt="1"></p>
+<h1 id="1-软件开发整体介绍"><a href="#1-软件开发整体介绍" class="headerlink" title="1. 软件开发整体介绍"></a>1. 软件开发整体介绍</h1><h2 id="1-1-软件开发流程"><a href="#1-1-软件开发流程" class="headerlink" title="1.1 软件开发流程"></a>1.1 软件开发流程</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/2.png" alt="2"></p>
+<h2 id="1-2-角色分工"><a href="#1-2-角色分工" class="headerlink" title="1.2 角色分工"></a>1.2 角色分工</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/3.png" alt="3"></p>
+<h2 id="1-3-软件环境"><a href="#1-3-软件环境" class="headerlink" title="1.3 软件环境"></a>1.3 软件环境</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/4.png" alt="4"></p>
+<h1 id="2-外卖项目介绍"><a href="#2-外卖项目介绍" class="headerlink" title="2. 外卖项目介绍"></a>2. 外卖项目介绍</h1><h2 id="2-1-项目介绍"><a href="#2-1-项目介绍" class="headerlink" title="2.1 项目介绍"></a>2.1 项目介绍</h2><p>本外卖项目是专门为餐饮企业(餐厅、饭店）定制的一款软件产品，包括系统管理后台和移动端应用两部分。其中系统管理后台主要提供给餐饮企业内部员工使用，可以对餐厅的菜品、套餐、订单等进行管理维护。移动端应用主要提供给消费者使用，可以在线浏览菜品、添加购物车、下单等。</p>
+<p>本项目共分为3期进行开发：</p>
+<p>第一期主要实现基本需求，其中移动端应用通过H5实现，用户可以通过手机浏览器访问。</p>
+<p>第二期主要针对移动端应用进行改进，使用微信小程序实现，用户使用起来更加方便。</p>
+<p>第三期主要针对系统进行优化升级，提高系统的访问性能。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -540,191 +1172,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/22/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/22/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">markdown常用语法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-03-22 14:23:31" itemprop="dateCreated datePublished" datetime="2023-03-22T14:23:31+08:00">2023-03-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-11 22:54:07" itemprop="dateModified" datetime="2023-04-11T22:54:07+08:00">2023-04-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这篇文章整理了markdown(.md)文件几乎所有常用的写法。</p>
-<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p>创建标题，使用“# ”。在文字前方加一个井号、一个空格，就可以创建一级标题。<br><code># 一级标题</code><br><code>## 二级标题</code><br><code>### 三级标题</code><br><code>#### 四级标题</code></p>
-<h1 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h1><h2 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h2><p>在要加粗部分的两侧，各添加两个星号。<br>输入：<br><code>这是要**加粗**的文本</code><br>效果为：<br>这是要<strong>加粗</strong>的文本</p>
-<h2 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h2><p>在斜体的文本前后，各添加一个星号。<br>输入：<br><code>这是要*斜体*的文本</code><br>效果为：<br>这是要<em>斜体</em>的文本</p>
-<h2 id="加粗-斜体"><a href="#加粗-斜体" class="headerlink" title="加粗+斜体"></a>加粗+斜体</h2><p>同时用粗体和斜体突出显示文本，在文本的前后，各添加三个星号。<br>输入：<br><code>这是要***加粗+斜体***的文本</code><br>效果为：<br>这是要<em><strong>加粗+斜体</strong></em>的文本</p>
-<h1 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h1><p>要删除单词，在单词前后使用两个波浪号<code>~~</code>。<br>输入：<br><code>ABCDEFG~~DEFG~~HIJK</code><br>效果为：<br>ABCDEFG<del>DEFG</del>HIJK</p>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>要创建块引用，在需要引用的段落前添加一个 <code>&gt;</code> 符号。如果引用包含多个段落，其前方都需要加<code>&gt;</code>。<br>输入：<br><code>&gt;这是被引用的文本</code><br><code>&gt;这是被引用的文本</code></p>
-<p>效果为：</p>
-<blockquote>
-<p>这是被引用的文本<br>这是被引用的文本</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/22/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/21/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-03-21 16:49:00" itemprop="dateCreated datePublished" datetime="2023-03-21T16:49:00+08:00">2023-03-21</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-K.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-K.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-K.png">
+  <link rel="mask-icon" href="/images/logo-K.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="常用命令   命令 英文 作用    ls list 查看当前目录下的内容(文件&#x2F;文件夹)   pwd print work directory 查看当前所在目录   cd[目录名] change directory 切换目录   touch [文件名] touch 如果文件不存在，新建文件   mkdir[目录名] make directory 创建目录   rm[文件名] remov">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令">
+<meta property="og:url" content="http://example.com/2023/11/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="常用命令   命令 英文 作用    ls list 查看当前目录下的内容(文件&#x2F;文件夹)   pwd print work directory 查看当前所在目录   cd[目录名] change directory 切换目录   touch [文件名] touch 如果文件不存在，新建文件   mkdir[目录名] make directory 创建目录   rm[文件名] remov">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-21T10:22:19.000Z">
+<meta property="article:modified_time" content="2023-11-22T02:56:49.038Z">
+<meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/11/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/11/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/","path":"2023/11/21/Linux常用命令/","title":"Linux常用命令"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux常用命令 | Kathy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kathy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%9A"><span class="nav-text">使用技巧：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-text">Linux命令格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-ls"><span class="nav-text">文件目录操作命令 ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-cd"><span class="nav-text">文件目录操作命令 cd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-cat"><span class="nav-text">文件目录操作命令 cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-more"><span class="nav-text">文件目录操作命令 more</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-tail"><span class="nav-text">文件目录操作命令 tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-mkdir"><span class="nav-text">文件目录操作命令 mkdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-rmdir"><span class="nav-text">文件目录操作命令 rmdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4-rm"><span class="nav-text">文件目录操作命令 rm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E5%91%BD%E4%BB%A4-cp"><span class="nav-text">拷贝命令 cp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%91%BD%E4%BB%A4-mv"><span class="nav-text">移动命令 mv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4-tar"><span class="nav-text">打包压缩命令 tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4-vi-x2F-vim"><span class="nav-text">文本编辑命令 vi&#x2F;vim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vi%E5%91%BD%E4%BB%A4"><span class="nav-text">vi命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim%E5%91%BD%E4%BB%A4"><span class="nav-text">vim命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4-find"><span class="nav-text">查找命令 find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4-grep"><span class="nav-text">查找命令 grep</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kathy-kx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kathy-kx" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kathy-kx" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kxzhu93@163.com" title="E-Mail → mailto:kxzhu93@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux常用命令 | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux常用命令
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-21 18:22:19" itemprop="dateCreated datePublished" datetime="2023-11-21T18:22:19+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-22 10:56:49" itemprop="dateModified" datetime="2023-11-22T10:56:49+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>英文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ls</td>
+<td>list</td>
+<td>查看当前目录下的内容(文件&#x2F;文件夹)</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>print work directory</td>
+<td>查看当前所在目录</td>
+</tr>
+<tr>
+<td>cd[目录名]</td>
+<td>change directory</td>
+<td>切换目录</td>
+</tr>
+<tr>
+<td>touch [文件名]</td>
+<td>touch</td>
+<td>如果文件不存在，新建文件</td>
+</tr>
+<tr>
+<td>mkdir[目录名]</td>
+<td>make directory</td>
+<td>创建目录</td>
+</tr>
+<tr>
+<td>rm[文件名]</td>
+<td>remove</td>
+<td>删除指定文件</td>
+</tr>
+</tbody></table>
+<h2 id="使用技巧："><a href="#使用技巧：" class="headerlink" title="使用技巧："></a>使用技巧：</h2><ul>
+<li>Tab键自动补全</li>
+<li>连续两次Tab键，给出操作提示</li>
+<li>使用上下箭头快速调出曾经使用过的命令</li>
+<li>使用clear命令或者Ctrl+!快捷键实现清屏<span id="more"></span></li>
+</ul>
+<h2 id="Linux命令格式"><a href="#Linux命令格式" class="headerlink" title="Linux命令格式"></a>Linux命令格式</h2><p><code>command [-options] [parameter]</code></p>
+<p>说明：</p>
+<ul>
+<li>command：命令名</li>
+<li>[-options]：选项，可用来对命令进行控制，也可以省略</li>
+<li>[parameter]：传给命令的参数，可以是零个、一个或者多个</li>
+</ul>
+<p>注意：</p>
+<p>[ ]代表可选</p>
+<p>命令名、选项、参数之间有空格进行分隔</p>
+<p>例如：</p>
+<p><code>ls</code> 就是命令名</p>
+<p><code>ls -l</code> 中ls是命令名，-l是选项，表示呈现目录下文件的形式。一般可省略</p>
+<p><code>cd /root</code> cd是命令名，&#x2F;root是参数</p>
+<p><code>touch 1.txt 2.txt 3.txt</code> touch是命令名，表示新建文件；后面跟了多个参数，中间用空格分隔</p>
+<h2 id="文件目录操作命令-ls"><a href="#文件目录操作命令-ls" class="headerlink" title="文件目录操作命令 ls"></a>文件目录操作命令 ls</h2><p>作用：显示指定目录下的内容</p>
+<p>语法：<code>ls[-a或l或al] dir</code></p>
+<p>说明：</p>
+<ul>
+<li>-a 显示所有文件及目录（.开头的隐藏文件也会列出）。例如<code>ls -a</code></li>
+<li>-l 除文件名称外，同时将文件型态(d表示目录，-表示文件）、权限、拥有者、文件大小等信息详细列出。例如<code>ls -l</code></li>
+<li><code>ls -al</code>表示显示所有文件和目录（含隐藏文件），并详细列出</li>
+<li><code>ls -al /etc</code>中的&#x2F;etc对应dir参数，展示&#x2F;etc这个目录下的内容</li>
+</ul>
+<p>注意：</p>
+<p>由于我们使用ls命令时经常需要加入-选项，所以Linux为<code>ls -l</code>命令提供了一种简写方式，即<code>ll</code></p>
+<h2 id="文件目录操作命令-cd"><a href="#文件目录操作命令-cd" class="headerlink" title="文件目录操作命令 cd"></a>文件目录操作命令 cd</h2><p>作用：用于切换当前工作目录，即进入指定目录</p>
+<p>语法：<code>cd [dirName]</code></p>
+<p>特殊说明：</p>
+<ul>
+<li>~ 表示用户的home目录</li>
+<li>.  表示目前所在的目录</li>
+<li>.. 表示目前目录位置的上级目录</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><code>cd..</code>  切换到当前目录的上级目录</li>
+<li><code>cd~</code>  切换到用户的home目录</li>
+<li><code>cd /usr/local</code> 切换到&#x2F;usr&#x2F;local目录</li>
+</ul>
+<h2 id="文件目录操作命令-cat"><a href="#文件目录操作命令-cat" class="headerlink" title="文件目录操作命令 cat"></a>文件目录操作命令 cat</h2><p>作用：显示文件内容</p>
+<p>语法：<code>cat [-n] fileName</code></p>
+<p>说明：</p>
+<ul>
+<li>-n：由1开始对所有输出的行数编号</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><code>cat /etc/profile</code>  查看&#x2F;etc目录下的profile文件内容</li>
+<li><code>cat -n /etc/profile</code>  查看&#x2F;etc目录下的profile文件内容，并在左侧显示行数编号</li>
+</ul>
+<h2 id="文件目录操作命令-more"><a href="#文件目录操作命令-more" class="headerlink" title="文件目录操作命令 more"></a>文件目录操作命令 more</h2><p>作用：以分页的形式显示文件内容。如果文件内容很长，比cat命令方便</p>
+<p>语法：more fileName</p>
+<p>操作说明：</p>
+<ul>
+<li>回车键   向下滚动一行</li>
+<li>空格键   向下滚动一屏</li>
+<li>b   返回上一屏</li>
+<li>q或者Ctrl+C   退出more</li>
+</ul>
+<p>举例：</p>
+<p><code>more /etc/profile</code> 以分页方式显示&#x2F;etc目录下的profile文件内容</p>
+<h2 id="文件目录操作命令-tail"><a href="#文件目录操作命令-tail" class="headerlink" title="文件目录操作命令 tail"></a>文件目录操作命令 tail</h2><p>作用：查看文件末尾的内容</p>
+<p>语法：<code>tail [-f] fileName</code></p>
+<p>说明：</p>
+<ul>
+<li>-f：动态读取文件末尾内容并显示，通常用于日志文件的内容输出</li>
+</ul>
+<p>举例：</p>
+<p><code>tail /etc/profile</code>  没有在选项中指明行数，默认10行：显示&#x2F;etc目录下的profile文件末尾10行的内容</p>
+<p><code>tail -20 /etc/profile</code>  显示&#x2F;etc目录下的profile文件末尾20行的内容</p>
+<p><code>tail -f/itcast/my.log</code>   动态读取&#x2F;itcast目录下的my.log文件末尾内容并显示</p>
+<p>例如在~目录下新建my.log文件，执行<code>tail -f my.log</code>，会霸屏。此时在另一窗口执行<code>echo ‘1’ &gt;&gt; my.log</code>，向文件里追加信息。原窗口会打印日志，输出新的内容</p>
+<h2 id="文件目录操作命令-mkdir"><a href="#文件目录操作命令-mkdir" class="headerlink" title="文件目录操作命令 mkdir"></a>文件目录操作命令 mkdir</h2><p>作用：创建目录</p>
+<p>语法：<code>mkdir [-p] dirName</code></p>
+<p>说明：</p>
+<ul>
+<li>-p：意思是parent。确保目录名称存在，不存在的就创建一个。通过此选项，可以实现多层目录同时创建（一次性把多层目录都创建）</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><code>mkdir kathy</code> 在当前目录下，建立一个名为kathy的子目录</li>
+<li><code>mkdir -p kathy/test</code> 在工作目录下的kathy目录中建立一个名为test的子目录，若kathy目录不存在，则建立一个</li>
+</ul>
+<h2 id="文件目录操作命令-rmdir"><a href="#文件目录操作命令-rmdir" class="headerlink" title="文件目录操作命令 rmdir"></a>文件目录操作命令 rmdir</h2><p>作用：删除<strong>空</strong>目录</p>
+<p>语法：<code>rmdir [-p] dirName</code></p>
+<p>说明：</p>
+<ul>
+<li>-p：若子目录被删除后 使父目录为空目录的话，则将父目录一并删除</li>
+</ul>
+<p>举例：</p>
+<p><code>rmdir kathy</code> 删除名为kathy的空目录（非空目录必须使用-p删除掉所有的子目录，才能删除成功）</p>
+<p><code>rmdir-p kathy/test</code>  删除kathy目录中名为test的子目录，若test目录删除后kathy目录变为空目录，则也被删除</p>
+<p><code>rmdir kathy*</code>  删除名称以kathy开始的所有空目录。例如kathy01, kathy02都会被删除</p>
+<h2 id="文件目录操作命令-rm"><a href="#文件目录操作命令-rm" class="headerlink" title="文件目录操作命令 rm"></a>文件目录操作命令 rm</h2><p>作用：删除文件或者目录（非空的也可以删）</p>
+<p>语法：rm [-rf] name</p>
+<p>说明：</p>
+<ul>
+<li>-r：将目录及目录中所有文件（目录）逐一删除，即递归删除</li>
+<li>-f：无需确认，直接删除</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><code>rm -r itcast/</code> 删除名为itcast的目录和目录中所有文件，删除前需确认</li>
+<li><code>rm -rf itcast/</code> 无需确认，直接删除名为itcast的目录和目录中所有文件</li>
+<li><code>rm -f hello.txt</code> 无需确认，直接删除hello.txt文件</li>
+</ul>
+<h2 id="拷贝命令-cp"><a href="#拷贝命令-cp" class="headerlink" title="拷贝命令 cp"></a>拷贝命令 cp</h2><p>作用：用于复制文件或目录</p>
+<p>语法：<code>cp [-r] source dest</code></p>
+<p>说明：</p>
+<ul>
+<li>-r：如果复制的是目录 需要使用此选项，此时將复制该目录下所有的子目录和文件。复制文件不需要加。</li>
+</ul>
+<p>举例：</p>
+<p><code>cp hello.txt itcast/</code>  将文件hello.txt复制到itcast目录中</p>
+<p><code>cp hello.txt ./hi.txt</code>  将文件hello.txt复制到当前目录，并改名为hi.txt</p>
+<p><code>cp -r itcast/ ./itheima/</code> 将itcast目录和目录下所有文件复制到itheima目录下</p>
+<p><code>cp -r itcast/* ./itheima/</code> 将itcast目录下所有文件（不含itcast目录本身）复制到itheima目录下</p>
+<h2 id="移动命令-mv"><a href="#移动命令-mv" class="headerlink" title="移动命令 mv"></a>移动命令 mv</h2><p>作用：为文件或目录改名、或将文件&#x2F;目录移动到其它位置</p>
+<p>语法：<code>mv source dest</code></p>
+<p>举例：</p>
+<ul>
+<li><code>mv hello.txt hi.txt</code> 将hello.txt改名为hi.txt</li>
+<li><code>mv hi.txt itheima/</code> 将文件hi.txt移动到itheima目录中</li>
+<li><code>mv hi.txt itheima/hello.txt</code> 将hi.txt移动到itheima目录中，并改名为hello.txt</li>
+<li><code>mv itcast/ itheima/</code> 如果itheima目录不存在，将itcast目录改名为itheima</li>
+<li><code>mv itcast/ itheima/</code> 如果itheima目录存在，将itcast目录移动到itheima目录中</li>
+</ul>
+<h2 id="打包压缩命令-tar"><a href="#打包压缩命令-tar" class="headerlink" title="打包压缩命令 tar"></a>打包压缩命令 tar</h2><p>作用：对文件进行打包、解包、压缩、解压</p>
+<p>安装：<code>yum install -y tar</code> CentOS 没有自带 tar 的压缩解压工具。当用到 tar，如果没有安装就会出现 -bash: tar: Command Not Found ，需要我们自己安装。先安装，才能使用tar命令</p>
+<p>语法： <code>tar [-zcxvf] fileName操作后叫什么 [files操作哪个文件]</code></p>
+<p>包文件后缀为.tar表示: 只是完成了打包，并没有压缩</p>
+<p>包文件后缀为.tar.gz表示: 打包的同时还进行了压缩</p>
+<p>说明：</p>
+<ul>
+<li>-z：z代表的是gzip，通过gzip命令处理文件，gzip可以对文件压缩或者解压</li>
+<li>-c：c代表的是create，即创建新的包文件（打包）</li>
+<li>-x：x代表的是extract，实现从包文件中还原文件（解包）</li>
+<li>-v：v代表的是verbose，显示命令的执行过程</li>
+<li>-f：f代表的是file，用于指定包文件的名称</li>
+<li>参数[file] 可以选择具体打包哪些文件</li>
+</ul>
+<p>例如：</p>
+<p><code>tar -cvf 01.tar 01</code>  对文件夹01打包，打包后叫01.tar </p>
+<p><code>tar -zcvf 01.tar.gz 01</code>  对文件夹01打包并压缩，打包压缩后叫01.tar.gz</p>
+<p><code>tar -xvf 01.tar</code> 将打包后的文件01.tar解压到当前目录，解压后的文件默认叫01</p>
+<p><code>tar -zxvf 01.tar.gz</code> 将打包并压缩后的文件解压到当前目录(常用)，解压后的文件默认叫01</p>
+<p><code>tar -zxvf 01.tar.gz -C /另一目录</code> 将打包并压缩后的文件解压到指定目录</p>
+<h2 id="文本编辑命令-vi-x2F-vim"><a href="#文本编辑命令-vi-x2F-vim" class="headerlink" title="文本编辑命令 vi&#x2F;vim"></a>文本编辑命令 vi&#x2F;vim</h2><h3 id="vi命令"><a href="#vi命令" class="headerlink" title="vi命令"></a>vi命令</h3><p>作用：vi命令是Linux系统提供的一个文本编辑工具，可以对文件内容进行编辑，类似于Windows中的记事本</p>
+<p>语法：<code>vi fileName</code></p>
+<p>说明：</p>
+<p>1、vim是从vi发展来的一个功能更加强大的文本编辑工具，在编辑文件时可以对文本内容进行着色，方便我们对文件进行编辑处理，所以实际工作中vim更加常用。</p>
+<p>2、要使用vim命令，需要我们自己完成安装。可以使用下面的命令来完成安装：<code>yum install vim</code></p>
+<h3 id="vim命令"><a href="#vim命令" class="headerlink" title="vim命令"></a>vim命令</h3><p>作用：对文件内容进行编辑，vim其实就是一个文本编辑器</p>
+<p>语法：<code>vim fileName</code></p>
+<p>说明：</p>
+<ol>
+<li>在使用vim命令编辑文件时，如果指定的文件存在则直接打开此文件。如果指定的文件不存在则新建文件。<code>vim HelloWorld.java</code></li>
+<li>vim在进行文本编辑时共分为三种模式，分别是命令模式 (Command mode），插入模式 (Insert mode) 和底行模式 (Last tine mode）。这三种模式之间可以相互切换。我们在使用vim时一定要注意我们当前所处的是哪种模式。</li>
+</ol>
+<p>vim三种模式的说明：</p>
+<p>1、命令模式</p>
+<ul>
+<li>命令模式下可以查看文件内容、移动光标（上下左右箭头、gg快速移动到开头、G快速移动到末尾)<br>通过vim命令打开文件后，默认进入命令模式</li>
+<li>另外两种模式需要首先回到命令模式，才能进入彼此</li>
+</ul>
+<p>2、插入模式</p>
+<ul>
+<li>插入模式下可以对文件内容进行编辑</li>
+<li>在命令模式下，按下[i, a, o]任意一个，可以进入插入模式。进入插入模式后，下方会出现 【insert】字样</li>
+<li>在插入模式下按下ESC键，回到命令模式</li>
+</ul>
+<p>3、底行模式</p>
+<ul>
+<li>底行模式下，可以通过命令，对文件内容进行查找、显示行号、退出等操作</li>
+<li>在命令模式下按下[ : ,  &#x2F; ]任意一个，可以进入底行模式</li>
+<li>通过&#x2F;方式进入底行模式后，可以对文件内容进行查找。例如&#x2F;name，可以查找该文件内的“name”。(搜索后再通过:q!退出底行模式)</li>
+<li>通过:方式进入底行模式后，可以输入wq（保存并退出）、q！（不保存退出）、set nu（显示行号）</li>
+</ul>
+<h2 id="查找命令-find"><a href="#查找命令-find" class="headerlink" title="查找命令 find"></a>查找命令 find</h2><p>作用：在指定目录下,查找文件</p>
+<p>语法：<code>find dirName -option fileName</code></p>
+<p>举例：</p>
+<ul>
+<li><p><code>find . -name &quot;*.java&quot; </code>在当前目录及其子目录下查找以.java结尾文件(使用通配符*，匹配0个或多个字符)</p>
+<p>  在.（当前目录），-name根据名称找，找以.java结尾文件</p>
+</li>
+<li><p><code>find /itcast -name &quot;*.java&quot; </code> 在&#x2F;itcast目录及其子目录下查找以.java结尾的文件</p>
+</li>
+</ul>
+<h2 id="查找命令-grep"><a href="#查找命令-grep" class="headerlink" title="查找命令 grep"></a>查找命令 grep</h2><p>作用：从指定文件中,查找指定的文本内容</p>
+<p>语法：<code>grep word fileName</code></p>
+<p>word:查找什么文本  fileName：从哪个文件中找</p>
+<p>举例：</p>
+<ul>
+<li>grep Hello HelloWorld.java  查找Helloworld.java文件中出现Hello字符串的位置</li>
+<li>grep hello *. java  查找当前目录中所有 java结尾的文件中包含hello字符串的位置</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/21/IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8git/" rel="prev" title="IDEA中使用git">
+                  <i class="fa fa-chevron-left"></i> IDEA中使用git
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/" rel="next" title="在Linux服务器上部署项目">
+                  在Linux服务器上部署项目 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kathy-kx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

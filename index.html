@@ -119,18 +119,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -155,6 +155,703 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">Linux系统中配置和启动Redis服务</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-22 11:49:39 / 修改时间：11:55:37" itemprop="dateCreated datePublished" datetime="2023-11-22T11:49:39+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h3><p>方法一：执行&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录中的redis-server<br>cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;，即你安装redis的目录下的src文件夹，执行<code>./redis-server</code></p>
+<p>方法二：启动服务并加载配置文件（<em>推荐</em>，可以后台运行redis）<br>cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;，执行 <code>src/redis-server ./redis.conf</code></p>
+<h3 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h3><p>在服务启动界面control+C</p>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><ol>
+<li><p>无密码连接：<br> 新建一个终端窗口，cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录，执行<code>./redis-cli</code><br> 出现127.0.0.1:6379&gt; 说明已经连接上本地6379</p>
+</li>
+<li><p>带密码连接：cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;，<code>src/redis-cli -h localhost -p 6379 -a 你的密码</code></p>
+</li>
+</ol>
+<h3 id="退出连接"><a href="#退出连接" class="headerlink" title="退出连接"></a>退出连接</h3><p>localhost:6379&gt;<code>exit</code></p>
+<h3 id="设置后台运行"><a href="#设置后台运行" class="headerlink" title="设置后台运行"></a>设置后台运行</h3><p>先停止服务，修改&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;redis.conf配置文件。修改过程具体如下：</p>
+<ul>
+<li>cd &#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;</li>
+<li>vim redis.conf</li>
+<li>&#x2F;dae 回车 查找关键词</li>
+<li>i，将daemonize 的no改为yes，配置redis服务启动后在后台运行</li>
+<li>再启动一次，但是需要显式加载哪个配置文件：<ul>
+<li><code>cd /usr/local/redis-5.0.9</code></li>
+<li>执行<code>src/redis-server ./redis.conf</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="希望客户端连接redis服务时需要提供密码"><a href="#希望客户端连接redis服务时需要提供密码" class="headerlink" title="希望客户端连接redis服务时需要提供密码"></a>希望客户端连接redis服务时需要提供密码</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/" class="post-title-link" itemprop="url">在Linux服务器上安装MySQL</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-22 11:07:31 / 修改时间：11:38:28" itemprop="dateCreated datePublished" datetime="2023-11-22T11:07:31+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/solutions/" itemprop="url" rel="index"><span itemprop="name">solutions</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>首先检测当前系统中是否安装MySQL数据库。<br>rpm -qa 查询当前系统中安装的所有软件。qa意思是query all<br><code>rpm -qa | grep mysql</code> 查询当前系统中安装的名称带mysql的软件<br><code>rpm -qa | grep mariadb</code> 查询当前系统中安装的名称带mariadb的软件</p>
+<p>RPM (Red-Hat Package Manager)RPM软件包管理器，是红帽Linux用于管理和安装软件的工具。<br>注：如果安装过了mariadb，需要先卸载。否则mysql会安装失败。<br>卸载软件命令：<code>rpm -e --nodeps 软件名称</code>。例如<code>rpm -e --nodeps mariadb-libs-xxxxxxx</code></p>
+<h1 id="安装和配置MySQL的步骤"><a href="#安装和配置MySQL的步骤" class="headerlink" title="安装和配置MySQL的步骤"></a>安装和配置MySQL的步骤</h1><ol>
+<li><p>下载mysql8.0.31 arm64版本（适用于macOS m2芯片）。mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz<br>下载地址：<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+</li>
+<li><p>将下载好的mySQL安装包上传到linux并解压</p>
+</li>
+</ol>
+<ul>
+<li><p>在本地终端，用sftp传输该安装包<br><code>put /Users/kathy/Downloads/linux-software/mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz /root/</code></p>
+</li>
+<li><p>在虚拟机终端，解压安装包到&#x2F;usr&#x2F;local&#x2F;mysql(先用mkdir mysql创建好)<br><code>tar -zxvf mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz -C /usr/local/mysql</code></p>
+</li>
+<li><p>在虚拟机终端，在&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;下，创建包data和log</p>
+</li>
+</ul>
+<ol start="3">
+<li>修改环境变量：<br><code>cd ~</code></li>
+</ol>
+<p><code>vim .bash_profile</code></p>
+<p>其中添加：PATH&#x3D;$PATH:$HOME&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;bin</p>
+<p>修改完后<code>source .bash_profile</code></p>
+<p><code>which mysql</code> - 会显示&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;bin&#x2F;mysql</p>
+<ol start="4">
+<li>创建mysql用户和用户组
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">在Linux服务器上部署项目</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-21 18:23:34" itemprop="dateCreated datePublished" datetime="2023-11-21T18:23:34+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-22 11:28:14" itemprop="dateModified" datetime="2023-11-22T11:28:14+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="手工部署项目"><a href="#手工部署项目" class="headerlink" title="手工部署项目"></a>手工部署项目</h1><ol>
+<li>打包：在IDEA中开发一个Springboot项目，并打成jar包</li>
+</ol>
+<p>IDEA右侧maven，点击package即可打包。打包为target&#x2F;helloworld-0.0.1-SNAPSHOT.jar。</p>
+<ol start="2">
+<li>将jar包上传到linux服务器</li>
+</ol>
+<ul>
+<li><code>mkdir /usr/local/app</code> 创建目录，准备将项目jar包放在此目录</li>
+<li>打开终端，点击菜单中的shell，选择新建远程连接</li>
+<li>选择安全文件传输sftp，点击右边服务器下的加号，添加你要连接的远程服务器ip地址（例如192.168.50.158）</li>
+<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#64;&#x31;&#x39;&#x32;&#46;&#x31;&#x36;&#56;&#x2e;&#x35;&#48;&#x2e;&#49;&#53;&#56;">&#x72;&#x6f;&#x6f;&#x74;&#64;&#x31;&#x39;&#x32;&#46;&#x31;&#x36;&#56;&#x2e;&#x35;&#48;&#x2e;&#49;&#53;&#56;</a>”，点击连接。</li>
+<li>输入密码，连接成功</li>
+<li>输入<code>put 本地文件路径 远程主机路径</code>命令，即<code>put /Users/kathy/Desktop/workspace_idea/helloworld/target/helloworld-0.0.1-SNAPSHOT.jar /usr/local/app/</code>，上传文件到&#x2F;usr&#x2F;local&#x2F;app&#x2F;。</li>
+</ul>
+<ol start="3">
+<li>启动springboot程序</li>
+</ol>
+<p>在虚拟机终端执行 <code>java -jar helloworld-0.0.1-SNAPSHOT.jar</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Linux常用命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-21 18:22:19" itemprop="dateCreated datePublished" datetime="2023-11-21T18:22:19+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-22 10:56:49" itemprop="dateModified" datetime="2023-11-22T10:56:49+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>英文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ls</td>
+<td>list</td>
+<td>查看当前目录下的内容(文件&#x2F;文件夹)</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>print work directory</td>
+<td>查看当前所在目录</td>
+</tr>
+<tr>
+<td>cd[目录名]</td>
+<td>change directory</td>
+<td>切换目录</td>
+</tr>
+<tr>
+<td>touch [文件名]</td>
+<td>touch</td>
+<td>如果文件不存在，新建文件</td>
+</tr>
+<tr>
+<td>mkdir[目录名]</td>
+<td>make directory</td>
+<td>创建目录</td>
+</tr>
+<tr>
+<td>rm[文件名]</td>
+<td>remove</td>
+<td>删除指定文件</td>
+</tr>
+</tbody></table>
+<h2 id="使用技巧："><a href="#使用技巧：" class="headerlink" title="使用技巧："></a>使用技巧：</h2><ul>
+<li>Tab键自动补全</li>
+<li>连续两次Tab键，给出操作提示</li>
+<li>使用上下箭头快速调出曾经使用过的命令</li>
+<li>使用clear命令或者Ctrl+!快捷键实现清屏
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/21/IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8git/" class="post-title-link" itemprop="url">IDEA中使用git</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-21 11:26:02 / 修改时间：11:29:00" itemprop="dateCreated datePublished" datetime="2023-11-21T11:26:02+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="总结常用方法"><a href="#总结常用方法" class="headerlink" title="总结常用方法"></a>总结常用方法</h1><h2 id="一、将IDEA上自己创建的项目上传到远程仓库："><a href="#一、将IDEA上自己创建的项目上传到远程仓库：" class="headerlink" title="一、将IDEA上自己创建的项目上传到远程仓库："></a>一、将IDEA上自己创建的项目上传到远程仓库：</h2><h3 id="1、本地初始化仓库"><a href="#1、本地初始化仓库" class="headerlink" title="1、本地初始化仓库"></a>1、本地初始化仓库</h3><p>用IDEA创建maven项目，希望通过本地git仓库对该项目进行管理</p>
+<p>先创建好maven项目；</p>
+<p>顶部菜单VCS(Version Control) - <strong>Create Git Repository</strong> - 选择你的项目目录后，该项目目录就会变成仓库目录 - IDEA顶部也会出现几个git图标</p>
+<h3 id="2、将本地仓库关联gitee上的远程仓库"><a href="#2、将本地仓库关联gitee上的远程仓库" class="headerlink" title="2、将本地仓库关联gitee上的远程仓库"></a>2、将本地仓库关联gitee上的远程仓库</h3><p>右键项目名 - Git - <strong>Manage Remotes</strong> - 在弹出的Git Remotes点击“+”，输入name(例如origin) &amp; url(例如<a target="_blank" rel="noopener" href="https://gitee.com/kxzhu93/git_test.git">https://gitee.com/kxzhu93/git_test.git</a>) 即可让本地仓库关联该远程仓库；</p>
+<h3 id="3、将本地IDEA中修改的内容add、commit-选Unversioned-Files-、push到远程仓库（使用git图标即可）"><a href="#3、将本地IDEA中修改的内容add、commit-选Unversioned-Files-、push到远程仓库（使用git图标即可）" class="headerlink" title="3、将本地IDEA中修改的内容add、commit(选Unversioned Files)、push到远程仓库（使用git图标即可）"></a>3、将本地IDEA中修改的内容add、commit(选Unversioned Files)、push到远程仓库（使用git图标即可）</h3><h2 id="二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库"><a href="#二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库" class="headerlink" title="二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库"></a>二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库</h2><p>1、远程克隆仓库</p>
+<p>克隆了gitee上的一个仓库，希望在本地查看、修改、推送</p>
+<p>方法：</p>
+<ul>
+<li>IDEA顶部菜单VCS(Version Control) - Get from Version Control - 输入远程仓库复制的的url地址(https) - 输入gitee的账号密码 - 即可克隆</li>
+<li>或者从刚进IDEA还没打开任何项目的页面 - Get from Version Control 也可以找到此页面</li>
+<li>或者点Git - clone - 也可以找到此页面</li>
+</ul>
+<p>2、将本地IDEA中修改的内容add、commit(选Unversioned Files)、push到远程仓库（使用git图标即可）</p>
+<h2 id="三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取"><a href="#三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取" class="headerlink" title="三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取"></a>三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取</h2><p>方法：点git工具图标的“update project” - ok</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>安装git之后，在IDEA的设置-version control - Git - Path to git executable处会自动检测到git安装位置。点击右侧Test，如果出现了版本号，说明位置没问题。</p>
+<h1 id="获取git仓库"><a href="#获取git仓库" class="headerlink" title="获取git仓库"></a>获取git仓库</h1><h2 id="本地初始化仓库"><a href="#本地初始化仓库" class="headerlink" title="本地初始化仓库"></a>本地初始化仓库</h2><p>用IDEA创建maven项目，现在希望通过git仓库对该项目进行管理</p>
+<p>方法：顶部菜单VCS(Version Control) - <strong>Create Git Repository</strong> - 选择你的项目目录后，该项目目录就会变成仓库目录 - IDEA顶部也会出现几个git图标</p>
+<h2 id="远程克隆仓库（常用）"><a href="#远程克隆仓库（常用）" class="headerlink" title="远程克隆仓库（常用）"></a>远程克隆仓库（常用）</h2><p>克隆了gitee上的一个仓库，希望在本地查看、修改、推送</p>
+<p>方法：</p>
+<ul>
+<li>IDEA顶部菜单VCS(Version Control) - Get from Version Control - 输入远程仓库复制的的url地址(https) - 输入gitee的账号密码 - 即可克隆</li>
+<li>或者从刚进IDEA还没打开任何项目的页面 - Get from Version Control 也可以找到此页面</li>
+<li>或者点Git - clone - 也可以找到此页面</li>
+</ul>
+<h1 id="gitignore文件"><a href="#gitignore文件" class="headerlink" title=".gitignore文件"></a>.gitignore文件</h1><p>作用：定义当前仓库里哪些文件不需要git管理。例如.git, target文件夹, .iml文件等都不需要git管理</p>
+<p>如何创建：在gitee创建远程仓库时，选择“初始化仓库” ，语言选择Java，添加.gitignore选择Java，这样创建后仓库根目录就会有该文件</p>
+<h1 id="本地仓库操作"><a href="#本地仓库操作" class="headerlink" title="本地仓库操作"></a>本地仓库操作</h1><h2 id="将文件加入暂存区"><a href="#将文件加入暂存区" class="headerlink" title="将文件加入暂存区"></a>将文件加入暂存区</h2><p>方法1: 新创建一个类，弹出的对话框点“add“，就是将该类加到了暂存区。相当于git add命令。</p>
+<p>方法2: 如果没有点“add”，可以选中文件，点右键-Git-Add</p>
+<p>红色的是没加到暂存区</p>
+<p>绿色的是加到暂存区了</p>
+<p>黑色的是已经纳入git管理</p>
+<h2 id="将暂存区的文件提交到版本库-提交到本地仓库"><a href="#将暂存区的文件提交到版本库-提交到本地仓库" class="headerlink" title="将暂存区的文件提交到版本库(提交到本地仓库)"></a>将暂存区的文件提交到版本库(提交到本地仓库)</h2><p>相当于git commit -m “注释”</p>
+<p>方法1：选中文件，点右键-Git-Commit File - 选中要提交的文件 - Commit Message中可以输入注释</p>
+<p>方法2: 上方git工具中点绿色对勾。相当于：加到暂存区+提交</p>
+<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>相当于git log</p>
+<p>方法：上方git工具中点时钟按钮（show history）可以看本地修改的(Local Changes)、整个项目所有修改的(Log)。可以点每个版本修改了哪里</p>
+<h1 id="远程仓库操作"><a href="#远程仓库操作" class="headerlink" title="远程仓库操作"></a>远程仓库操作</h1><h2 id="查看当前项目关联的远程仓库"><a href="#查看当前项目关联的远程仓库" class="headerlink" title="查看当前项目关联的远程仓库"></a>查看当前项目关联的远程仓库</h2><p>右键项目名 - Git - Manage Remotes</p>
+<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><p>将本地仓库关联gitee上的远程仓库。</p>
+<p>方法：右键项目名 - Git - <strong>Manage Remotes</strong> - 在弹出的Git Remotes点击“+”，输入name(例如origin) &amp; url(例如<a target="_blank" rel="noopener" href="https://gitee.com/kxzhu93/git_test.git">https://gitee.com/kxzhu93/git_test.git</a>) 即可让本地仓库关联该远程仓库</p>
+<p>一个本地仓库可以对应多个远程仓库</p>
+<h2 id="推送至远程仓库"><a href="#推送至远程仓库" class="headerlink" title="推送至远程仓库"></a>推送至远程仓库</h2><p>方法：右键项目名 - Git - Push</p>
+<p>master→origin:master的意思是，将本地仓库的master分支推送到远程仓库origin的master分支</p>
+<h2 id="从远程仓库拉取"><a href="#从远程仓库拉取" class="headerlink" title="从远程仓库拉取"></a>从远程仓库拉取</h2><p>已经关联了远程仓库，远程仓库的代码更新了，想要从仓库拉取下来</p>
+<p>方法：git - pull</p>
+<p>或者点git工具图标的“update project”</p>
+<p>可以从Remote这一项，看到从哪个远程仓库、哪个分支拉取</p>
+<h1 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h1><h2 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h2><p>方法：git-braches</p>
+<p>或者IDEA右下角会显示分支</p>
+<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>IDEA右下角点分支 - new branch </p>
+<p>如果选择“checkout branch”，就是创建的同时切换到该新分支</p>
+<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>IDEA右下角点分支 - 在local branches中选择要切换的分支 - checkout切换</p>
+<h2 id="将分支推送到远程仓库"><a href="#将分支推送到远程仓库" class="headerlink" title="将分支推送到远程仓库"></a>将分支推送到远程仓库</h2><p>希望将本地仓库创建的分支推送到远程仓库</p>
+<p>方法：IDEA右下角点分支 - 选择要推送的分支 - 点push</p>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><p>IDEA右下角先切换到你的主分支 - 点要合并的分支 - merge into current(例如merge ‘b1’ into ‘main’，将b1分支合并到main分支中)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">git常用命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-21 11:14:28 / 修改时间：11:24:51" itemprop="dateCreated datePublished" datetime="2023-11-21T11:14:28+08:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/solutions/" itemprop="url" rel="index"><span itemprop="name">solutions</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="git全局设置"><a href="#git全局设置" class="headerlink" title="git全局设置"></a>git全局设置</h1><p>安装git后（macOS安装Xcode即可），就可以设置用户信息(用户名和邮箱)。每次git提交时都会使用该用户信息。</p>
+<h2 id="设置用户信息"><a href="#设置用户信息" class="headerlink" title="设置用户信息"></a>设置用户信息</h2><p>打开终端，输入</p>
+<p>git config –global user.name “随便写用户名 只是一个标识符”</p>
+<p>例如，<code>~ % git config --global user.name &quot;kxzhu&quot;</code></p>
+<p>git config –global user.email “随便写邮箱”</p>
+<p>例如，<code>~ % git config --global user.email &quot;xxxxxx@qq.com&quot;</code></p>
+<h2 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h2><p><code>git config --list</code></p>
+<h1 id="获取git仓库"><a href="#获取git仓库" class="headerlink" title="获取git仓库"></a>获取git仓库</h1><p>要使用git进行版本控制，首先要获取git仓库</p>
+<p>获取git仓库有两种方式：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -587,640 +1284,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/" class="post-title-link" itemprop="url">瑞吉外卖06-用户端+管理后台订单</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-13 23:28:45" itemprop="dateCreated datePublished" datetime="2023-05-13T23:28:45+08:00">2023-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 10:59:39" itemprop="dateModified" datetime="2023-11-21T10:59:39+08:00">2023-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<h1 id="1-个人页面功能开发"><a href="#1-个人页面功能开发" class="headerlink" title="1. 个人页面功能开发"></a>1. 个人页面功能<strong><strong>开发</strong></strong></h1><h2 id="1-1-地址管理"><a href="#1-1-地址管理" class="headerlink" title="1.1 地址管理"></a>1.1 地址管理</h2><h3 id="1-1-1-需求分析"><a href="#1-1-1-需求分析" class="headerlink" title="1.1.1 需求分析"></a>1.1.1 需求分析</h3><p>地址簿，指的是移动端消费者用户的地址信息，用户登录成功后可以维护自己的地址信息。同一个用户可以有多个地址信息，但是只能有一个默认地址。</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/1.png" alt="图片"></p>
-<h3 id="1-1-2-数据模型"><a href="#1-1-2-数据模型" class="headerlink" title="1.1.2 数据模型"></a>1.1.2 <strong>数据模型</strong></h3><p>用户的地址信息会存储在address_book表，即地址簿表中。具体表结构如下：</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/2.png" alt="图片"></p>
-<h3 id="1-1-3-准备工作"><a href="#1-1-3-准备工作" class="headerlink" title="1.1.3 准备工作"></a>1.1.3 准备工作</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9606-%E7%94%A8%E6%88%B7%E7%AB%AF-%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E8%AE%A2%E5%8D%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">瑞吉外卖05-套餐管理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-13 23:27:01" itemprop="dateCreated datePublished" datetime="2023-05-13T23:27:01+08:00">2023-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 10:59:29" itemprop="dateModified" datetime="2023-11-21T10:59:29+08:00">2023-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<h1 id="1-套餐管理业务开发"><a href="#1-套餐管理业务开发" class="headerlink" title="1. 套餐管理业务开发"></a>1. <strong><strong>套餐管理业务开发</strong></strong></h1><h2 id="1-1-新增套餐"><a href="#1-1-新增套餐" class="headerlink" title="1.1 新增套餐"></a>1.1 <strong><strong>新增套餐</strong></strong></h2><h3 id="1-1-1-需求分析"><a href="#1-1-1-需求分析" class="headerlink" title="1.1.1 需求分析"></a>1.1.1 需求分析</h3><p>套餐就是菜品的集合。</p>
-<p>后台系统中可以管理套餐信息，通过”新增套餐”功能来添加一个新的套餐，在添加套餐时，需要选择当前套餐所属的套餐分类和包含的菜品，并且需要上传套餐对应的图片，在移动端会按照套餐分类来展示对应的套餐。</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/1.png" alt="图片"></p>
-<h3 id="1-1-2-数据模型"><a href="#1-1-2-数据模型" class="headerlink" title="1.1.2 数据模型"></a>1.1.2 <strong>数据模型</strong></h3><p>新增套餐，其实就是将新增页面录入的套餐信息插入到setmeal表，还需要向setmeal_dish表插入套餐和菜品关联数据。所以在新增套餐时，涉及到两个表：</p>
-<p>1、setmeal表（套餐表）</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/2.png" alt="图片"></p>
-<p>2、setmeal_dish表（套餐-菜品关系表）</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/3.png" alt="图片"></p>
-<h3 id="1-1-3-准备工作"><a href="#1-1-3-准备工作" class="headerlink" title="1.1.3 准备工作"></a>1.1.3 <strong>准备工作</strong></h3><p>在开发业务功能前，先将需要用到的类和接口基本结构创建好：</p>
-<p>1、实体类SetmealDish（从课程资料中导入，Setmeal实体类前面已经导入过了）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SetmealDish</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//套餐id-和setmeal表关联</span></span><br><span class="line">    <span class="keyword">private</span> Long setmealId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//菜品id-和dish表关联</span></span><br><span class="line">    <span class="keyword">private</span> Long dishId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//菜品名称-和dish表关联（冗余字段 可以没有 可以根据dish_id从dish表里现场查，也可以存在setmeal_dish表里）</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SetmealDto</span> <span class="keyword">extends</span> <span class="title class_">Setmeal</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;SetmealDish&gt; setmealDishes;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String categoryName;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">//菜品原价</span></span><br><span class="line">    <span class="keyword">private</span> BigDecimal price;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//份数</span></span><br><span class="line">    <span class="keyword">private</span> Integer copies;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//排序</span></span><br><span class="line">    <span class="keyword">private</span> Integer sort;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line">    <span class="keyword">private</span> Long createUser;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line">    <span class="keyword">private</span> Long updateUser;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//是否删除</span></span><br><span class="line">    <span class="keyword">private</span> Integer isDeleted;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9605-%E5%A5%97%E9%A4%90%E7%AE%A1%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">瑞吉外卖04-菜品管理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-13 23:26:14" itemprop="dateCreated datePublished" datetime="2023-05-13T23:26:14+08:00">2023-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 10:59:20" itemprop="dateModified" datetime="2023-11-21T10:59:20+08:00">2023-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<h1 id="1-菜品管理业务开发"><a href="#1-菜品管理业务开发" class="headerlink" title="1. 菜品管理业务开发"></a>1. <strong><strong>菜品管理业务开发</strong></strong></h1><h2 id="1-1-文件上传下载"><a href="#1-1-文件上传下载" class="headerlink" title="1.1 文件上传下载"></a>1.1 <strong><strong>文件上传下载</strong></strong></h2><h3 id="1-1-1-文件上传介绍"><a href="#1-1-1-文件上传介绍" class="headerlink" title="1.1.1 文件上传介绍"></a>1.1.1 <strong><strong>文件上传介绍</strong></strong></h3><p>文件上传，也称为upload，是指将本地图片、视频、音频等文件上传到服务器上，可以供其他用户浏览或下载的过程。文件上传在项目中应用非常广泛，我们经常发微博、发微信朋友圈都用到了文件上传功能。</p>
-<p>文件上传时，需要使用form表单上传文件，且对页面的form表单有如下要求：</p>
-<ul>
-<li>method&#x3D;”post”　method为post</li>
-<li>enctype&#x3D;”multipart&#x2F;form-data”　form表单的enctype属性值为”multipart&#x2F;form-data”</li>
-<li>type&#x3D;”file”　form标签中使用input type&#x3D;”file”添加上传的文件</li>
-</ul>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/1.png" alt="1"></p>
-<p>目前一些前端组件库也提供了相应的上传组件，但是底层原理还是基于form表单的文件上传。例如ElementUI中提供的upload上传组件：</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/2.png" alt="2"></p>
-<p>服务端要接收客户端页面上传的文件，通常都会使用Apache的两个组件:</p>
-<ul>
-<li>commons-fileupload</li>
-<li>commons-io</li>
-</ul>
-<p>Spring框架在spring-web包中对“文件上传”进行了封装，大大简化了服务端代码。</p>
-<p>我们只需要在Controller的方法中，声明一个MultipartFile类型的参数，即可接收上传的文件。</p>
-<p>步骤为：</p>
-<p>1、新建一个控制器类CommonController，专门负责文件上传和下载</p>
-<p>2、在upload()方法的形参位置，声明MultipartFile类型的参数，对象名与「html页面传来的form表单中的name」一致，也就是和浏览器请求体form-data处的name值一致。</p>
-<p>具体实现在1.1.3中。</p>
-<h3 id="1-1-2-文件下载介绍"><a href="#1-1-2-文件下载介绍" class="headerlink" title="1.1.2 文件下载介绍"></a>1.1.2 <strong>文件下载介绍</strong></h3><p>文件下载，也称为download，是指将文件从服务器传输到本地计算机的过程。通过浏览器进行文件下载，通常有两种表现形式:</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9604-%E8%8F%9C%E5%93%81%E7%AE%A1%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/" class="post-title-link" itemprop="url">瑞吉外卖03-管理分类</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-13 23:24:40" itemprop="dateCreated datePublished" datetime="2023-05-13T23:24:40+08:00">2023-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 10:59:12" itemprop="dateModified" datetime="2023-11-21T10:59:12+08:00">2023-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<h1 id="1-分类管理业务开发"><a href="#1-分类管理业务开发" class="headerlink" title="1. 分类管理业务开发"></a>1. <strong><strong>分类管理业务开发</strong></strong></h1><h2 id="1-1-公共字段自动填充"><a href="#1-1-公共字段自动填充" class="headerlink" title="1.1 公共字段自动填充"></a>1.1 <strong><strong>公共字段自动填充</strong></strong></h2><h3 id="1-1-1-问题分析"><a href="#1-1-1-问题分析" class="headerlink" title="1.1.1 问题分析"></a>1.1.1 <strong><strong>问题分析</strong></strong></h3><p>前面我们已经完成了后台系统的员工管理功能开发，在新增员工时需要设置创建时间、创建人、修改时间、修改人等字段，在编辑员工时需要设置修改时间和修改人等字段。这些字段属于公共字段，也就是很多表中都有这些字段，如下：</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/1.png" alt="1"></p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/2.png" alt="2"></p>
-<p>能不能对于这些公共字段在某个地方统一处理，来简化开发呢？答案就是使用Mybatis Plus提供的<strong>公共字段自动填充</strong>功能。</p>
-<h3 id="1-1-2-代码实现"><a href="#1-1-2-代码实现" class="headerlink" title="1.1.2 代码实现"></a>1.1.2 <strong>代码实现</strong></h3><p>Mybatis Plus公共字段自动填充，也就是在插入或者更新的时候，为指定字段赋予指定的值，使用它的好处就是可以统一对这些字段进行处理，避免了重复代码。</p>
-<p><strong>实现步骤：</strong></p>
-<p>1、在实体类的属性上加入@TableField注解，指定自动填充的策略</p>
-<p>2、按照框架要求编写元数据对象处理器，在此类中统一为公共字段赋值，此类需要实现MetaObjectHandler接口</p>
-<p><strong>具体实现：</strong></p>
-<p>1、在实体类的属性上加入@TableField注解，指定自动填充的策略</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span><span class="comment">//插入的时候，填充字段的值</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line"></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span><span class="comment">//插入和更新时填充字段的值</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line"></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line"><span class="keyword">private</span> Long createUser;</span><br><span class="line"></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line"><span class="keyword">private</span> Long updateUser;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9603-%E7%AE%A1%E7%90%86%E5%88%86%E7%B1%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">瑞吉外卖02-员工管理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-13 23:07:12" itemprop="dateCreated datePublished" datetime="2023-05-13T23:07:12+08:00">2023-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 10:59:03" itemprop="dateModified" datetime="2023-11-21T10:59:03+08:00">2023-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<h1 id="1-完善登录功能"><a href="#1-完善登录功能" class="headerlink" title="1. 完善登录功能"></a>1. <strong><strong>完善登录功能</strong></strong></h1><h2 id="1-1-问题分析"><a href="#1-1-问题分析" class="headerlink" title="1.1 问题分析"></a>1.1 <strong><strong>问题分析</strong></strong></h2><p>前面我们已经完成了后台系统的员工登录功能开发，但是还存在一个问题：用户如果不登录，直接访问系统首页面，照样可以正常访问。</p>
-<p>这种设计并不合理，我们希望看到的效果应该是，<strong>只有登录后才能访问后台管理页面</strong>，<strong>如果没有登录，则跳转到登录页面。</strong></p>
-<p>那么，具体应该怎么实现呢？</p>
-<p>答案就是使用<strong>过滤器或者拦截器</strong>，在过滤器或者拦截器中判断用户是否已经完成登录，如果没有登录则跳转到登录页面。</p>
-<h2 id="1-2-代码实现"><a href="#1-2-代码实现" class="headerlink" title="1.2 代码实现"></a>1.2 <strong><strong>代码实现</strong></strong></h2><h3 id="1-2-1-实现思路"><a href="#1-2-1-实现思路" class="headerlink" title="1.2.1 实现思路"></a>1.2.1 实现思路</h3><ol>
-<li>创建自定义过滤器LoginCheckFilter</li>
-<li>在启动类上加入注解@ServletComponentScan</li>
-<li>完善过滤器的处理逻辑</li>
-</ol>
-<h3 id="1-2-2-具体实现"><a href="#1-2-2-具体实现" class="headerlink" title="1.2.2 具体实现"></a>1.2.2 具体实现</h3><p>1、创建filter包，在其中创建LoginCheckFilter类，实现Filter接口，并重写doFilter()方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 登录检查过滤器（也可以用拦截器interceptor实现，此项目中用过滤器实现）</span></span><br><span class="line"><span class="comment"> * 检查用户是否已经完成登录</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebFilter(filterName = &quot;LoginCheckFilter&quot;,urlPatterns = &quot;/*&quot;)</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginCheckFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        HttpServletRequest request=(HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response=(HttpServletResponse) servletResponse;</span><br><span class="line">        log.info(<span class="string">&quot;拦截到请求：&#123;&#125;&quot;</span>,request.getRequestURI());</span><br><span class="line">        filterChain.doFilter(request,response); <span class="comment">// 放行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<ol>
-<li>@WebFilter替代web.xml配置过滤器。filterName指定过滤器名称（随意）；urlPatterns指定拦截的请求。<code>urlPatterns = &quot;/*&quot;</code>表示工程路径下所有请求路径都拦截。</li>
-<li>继承Filter时不要导错包，import javax.servlet.*</li>
-</ol>
-<p>2、在启动类上加入注解@ServletComponentScan</p>
-<p>加上这个注解后，才会扫描@WebFilter注解，使得过滤器生效。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReggieApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class,args);</span><br><span class="line">        log.info(<span class="string">&quot;项目启动成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9602-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/" class="post-title-link" itemprop="url">瑞吉外卖01-介绍+环境搭建+后台登录和退出</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-13 22:46:45" itemprop="dateCreated datePublished" datetime="2023-05-13T22:46:45+08:00">2023-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 10:58:43" itemprop="dateModified" datetime="2023-11-21T10:58:43+08:00">2023-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这是一个使用Springboot+SSM的实战练习项目，实现了一个外卖系统的前后台功能。</p>
-<p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<p>下图是项目效果展示，左侧是移动端的效果，右侧是管理后台的效果。</p>
-<p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/1.png" alt="1"></p>
-<h1 id="1-软件开发整体介绍"><a href="#1-软件开发整体介绍" class="headerlink" title="1. 软件开发整体介绍"></a>1. 软件开发整体介绍</h1><h2 id="1-1-软件开发流程"><a href="#1-1-软件开发流程" class="headerlink" title="1.1 软件开发流程"></a>1.1 软件开发流程</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/2.png" alt="2"></p>
-<h2 id="1-2-角色分工"><a href="#1-2-角色分工" class="headerlink" title="1.2 角色分工"></a>1.2 角色分工</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/3.png" alt="3"></p>
-<h2 id="1-3-软件环境"><a href="#1-3-软件环境" class="headerlink" title="1.3 软件环境"></a>1.3 软件环境</h2><p><img src="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/4.png" alt="4"></p>
-<h1 id="2-外卖项目介绍"><a href="#2-外卖项目介绍" class="headerlink" title="2. 外卖项目介绍"></a>2. 外卖项目介绍</h1><h2 id="2-1-项目介绍"><a href="#2-1-项目介绍" class="headerlink" title="2.1 项目介绍"></a>2.1 项目介绍</h2><p>本外卖项目是专门为餐饮企业(餐厅、饭店）定制的一款软件产品，包括系统管理后台和移动端应用两部分。其中系统管理后台主要提供给餐饮企业内部员工使用，可以对餐厅的菜品、套餐、订单等进行管理维护。移动端应用主要提供给消费者使用，可以在线浏览菜品、添加购物车、下单等。</p>
-<p>本项目共分为3期进行开发：</p>
-<p>第一期主要实现基本需求，其中移动端应用通过H5实现，用户可以通过手机浏览器访问。</p>
-<p>第二期主要针对移动端应用进行改进，使用微信小程序实现，用户使用起来更加方便。</p>
-<p>第三期主要针对系统进行优化升级，提高系统的访问性能。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/13/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%9601-%E4%BB%8B%E7%BB%8D+%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA+%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
