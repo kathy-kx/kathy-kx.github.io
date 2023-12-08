@@ -200,7 +200,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-30 22:01:48" itemprop="dateModified" datetime="2023-11-30T22:01:48+08:00">2023-11-30</time>
+      <time title="修改时间：2023-12-01 09:40:55" itemprop="dateModified" datetime="2023-12-01T09:40:55+08:00">2023-12-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -557,7 +557,7 @@
 <li><code>mkdir /usr/local/app</code> 创建目录，准备将项目jar包放在此目录</li>
 <li>打开终端，点击菜单中的shell，选择新建远程连接</li>
 <li>选择安全文件传输sftp，点击右边服务器下的加号，添加你要连接的远程服务器ip地址（例如192.168.50.158）</li>
-<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#x72;&#111;&#111;&#116;&#64;&#49;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#x2e;&#53;&#48;&#46;&#x31;&#53;&#56;">&#x72;&#111;&#111;&#116;&#64;&#49;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#x2e;&#53;&#48;&#46;&#x31;&#53;&#56;</a>”，点击连接。</li>
+<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x39;&#50;&#x2e;&#49;&#54;&#56;&#x2e;&#53;&#x30;&#x2e;&#x31;&#53;&#56;">&#114;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x39;&#50;&#x2e;&#49;&#54;&#56;&#x2e;&#53;&#x30;&#x2e;&#x31;&#53;&#56;</a>”，点击连接。</li>
 <li>输入密码，连接成功</li>
 <li>输入<code>put 本地文件路径 远程主机路径</code>命令，即<code>put /Users/kathy/Desktop/workspace_idea/helloworld/target/helloworld-0.0.1-SNAPSHOT.jar /usr/local/app/</code>，上传文件到&#x2F;usr&#x2F;local&#x2F;app&#x2F;。</li>
 </ul>
@@ -769,7 +769,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-22 11:59:39" itemprop="dateModified" datetime="2023-11-22T11:59:39+08:00">2023-11-22</time>
+      <time title="修改时间：2023-12-01 09:42:27" itemprop="dateModified" datetime="2023-12-01T09:42:27+08:00">2023-12-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -795,57 +795,14 @@
 <p>先创建好maven项目；</p>
 <p>顶部菜单VCS(Version Control) - <strong>Create Git Repository</strong> - 选择你的项目目录后，该项目目录就会变成仓库目录 - IDEA顶部也会出现几个git图标</p>
 <h3 id="2、将本地仓库关联gitee上的远程仓库"><a href="#2、将本地仓库关联gitee上的远程仓库" class="headerlink" title="2、将本地仓库关联gitee上的远程仓库"></a>2、将本地仓库关联gitee上的远程仓库</h3><p>右键项目名 - Git - <strong>Manage Remotes</strong> - 在弹出的Git Remotes点击“+”，输入name(例如origin) &amp; url(例如<a target="_blank" rel="noopener" href="https://gitee.com/kxzhu93/git_test.git">https://gitee.com/kxzhu93/git_test.git</a>) 即可让本地仓库关联该远程仓库；</p>
-<h3 id="3、将本地IDEA中修改的内容add、commit-选Unversioned-Files-、push到远程仓库（使用git图标即可）"><a href="#3、将本地IDEA中修改的内容add、commit-选Unversioned-Files-、push到远程仓库（使用git图标即可）" class="headerlink" title="3、将本地IDEA中修改的内容add、commit(选Unversioned Files)、push到远程仓库（使用git图标即可）"></a>3、将本地IDEA中修改的内容add、commit(选Unversioned Files)、push到远程仓库（使用git图标即可）</h3><h2 id="二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库"><a href="#二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库" class="headerlink" title="二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库"></a>二、从远程仓库克隆项目，在本地修改后，再推送到远程仓库</h2><p>1、远程克隆仓库</p>
-<p>克隆了gitee上的一个仓库，希望在本地查看、修改、推送</p>
-<p>方法：</p>
-<ul>
-<li>IDEA顶部菜单VCS(Version Control) - Get from Version Control - 输入远程仓库复制的的url地址(https) - 输入gitee的账号密码 - 即可克隆</li>
-<li>或者从刚进IDEA还没打开任何项目的页面 - Get from Version Control 也可以找到此页面</li>
-<li>或者点Git - clone - 也可以找到此页面</li>
-</ul>
-<p>2、将本地IDEA中修改的内容add、commit(选Unversioned Files)、push到远程仓库（使用git图标即可）</p>
-<h2 id="三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取"><a href="#三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取" class="headerlink" title="三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取"></a>三、已经关联了远程仓库，远程仓库的代码更新了，需要从仓库拉取</h2><p>方法：点git工具图标的“update project” - ok</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>安装git之后，在IDEA的设置-version control - Git - Path to git executable处会自动检测到git安装位置。点击右侧Test，如果出现了版本号，说明位置没问题。</p>
-<h1 id="获取git仓库"><a href="#获取git仓库" class="headerlink" title="获取git仓库"></a>获取git仓库</h1><h2 id="本地初始化仓库"><a href="#本地初始化仓库" class="headerlink" title="本地初始化仓库"></a>本地初始化仓库</h2><p>用IDEA创建maven项目，现在希望通过git仓库对该项目进行管理</p>
-<p>方法：顶部菜单VCS(Version Control) - <strong>Create Git Repository</strong> - 选择你的项目目录后，该项目目录就会变成仓库目录 - IDEA顶部也会出现几个git图标</p>
-<h2 id="远程克隆仓库（常用）"><a href="#远程克隆仓库（常用）" class="headerlink" title="远程克隆仓库（常用）"></a>远程克隆仓库（常用）</h2><p>克隆了gitee上的一个仓库，希望在本地查看、修改、推送</p>
-<p>方法：</p>
-<ul>
-<li>IDEA顶部菜单VCS(Version Control) - Get from Version Control - 输入远程仓库复制的的url地址(https) - 输入gitee的账号密码 - 即可克隆</li>
-<li>或者从刚进IDEA还没打开任何项目的页面 - Get from Version Control 也可以找到此页面</li>
-<li>或者点Git - clone - 也可以找到此页面</li>
-</ul>
-<h1 id="gitignore文件"><a href="#gitignore文件" class="headerlink" title=".gitignore文件"></a>.gitignore文件</h1><p>作用：定义当前仓库里哪些文件不需要git管理。例如.git, target文件夹, .iml文件等都不需要git管理</p>
-<p>如何创建：在gitee创建远程仓库时，选择“初始化仓库” ，语言选择Java，添加.gitignore选择Java，这样创建后仓库根目录就会有该文件</p>
-<h1 id="本地仓库操作"><a href="#本地仓库操作" class="headerlink" title="本地仓库操作"></a>本地仓库操作</h1><h2 id="将文件加入暂存区"><a href="#将文件加入暂存区" class="headerlink" title="将文件加入暂存区"></a>将文件加入暂存区</h2><p>方法1: 新创建一个类，弹出的对话框点“add“，就是将该类加到了暂存区。相当于git add命令。</p>
-<p>方法2: 如果没有点“add”，可以选中文件，点右键-Git-Add</p>
-<p>红色的是没加到暂存区</p>
-<p>绿色的是加到暂存区了</p>
-<p>黑色的是已经纳入git管理</p>
-<h2 id="将暂存区的文件提交到版本库-提交到本地仓库"><a href="#将暂存区的文件提交到版本库-提交到本地仓库" class="headerlink" title="将暂存区的文件提交到版本库(提交到本地仓库)"></a>将暂存区的文件提交到版本库(提交到本地仓库)</h2><p>相当于git commit -m “注释”</p>
-<p>方法1：选中文件，点右键-Git-Commit File - 选中要提交的文件 - Commit Message中可以输入注释</p>
-<p>方法2: 上方git工具中点绿色对勾。相当于：加到暂存区+提交</p>
-<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>相当于git log</p>
-<p>方法：上方git工具中点时钟按钮（show history）可以看本地修改的(Local Changes)、整个项目所有修改的(Log)。可以点每个版本修改了哪里</p>
-<h1 id="远程仓库操作"><a href="#远程仓库操作" class="headerlink" title="远程仓库操作"></a>远程仓库操作</h1><h2 id="查看当前项目关联的远程仓库"><a href="#查看当前项目关联的远程仓库" class="headerlink" title="查看当前项目关联的远程仓库"></a>查看当前项目关联的远程仓库</h2><p>右键项目名 - Git - Manage Remotes</p>
-<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><p>将本地仓库关联gitee上的远程仓库。</p>
-<p>方法：右键项目名 - Git - <strong>Manage Remotes</strong> - 在弹出的Git Remotes点击“+”，输入name(例如origin) &amp; url(例如<a target="_blank" rel="noopener" href="https://gitee.com/kxzhu93/git_test.git">https://gitee.com/kxzhu93/git_test.git</a>) 即可让本地仓库关联该远程仓库</p>
-<p>一个本地仓库可以对应多个远程仓库</p>
-<h2 id="推送至远程仓库"><a href="#推送至远程仓库" class="headerlink" title="推送至远程仓库"></a>推送至远程仓库</h2><p>方法：右键项目名 - Git - Push</p>
-<p>master→origin:master的意思是，将本地仓库的master分支推送到远程仓库origin的master分支</p>
-<h2 id="从远程仓库拉取"><a href="#从远程仓库拉取" class="headerlink" title="从远程仓库拉取"></a>从远程仓库拉取</h2><p>已经关联了远程仓库，远程仓库的代码更新了，想要从仓库拉取下来</p>
-<p>方法：git - pull</p>
-<p>或者点git工具图标的“update project”</p>
-<p>可以从Remote这一项，看到从哪个远程仓库、哪个分支拉取</p>
-<h1 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h1><h2 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h2><p>方法：git-braches</p>
-<p>或者IDEA右下角会显示分支</p>
-<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>IDEA右下角点分支 - new branch </p>
-<p>如果选择“checkout branch”，就是创建的同时切换到该新分支</p>
-<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>IDEA右下角点分支 - 在local branches中选择要切换的分支 - checkout切换</p>
-<h2 id="将分支推送到远程仓库"><a href="#将分支推送到远程仓库" class="headerlink" title="将分支推送到远程仓库"></a>将分支推送到远程仓库</h2><p>希望将本地仓库创建的分支推送到远程仓库</p>
-<p>方法：IDEA右下角点分支 - 选择要推送的分支 - 点push</p>
-<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><p>IDEA右下角先切换到你的主分支 - 点要合并的分支 - merge into current(例如merge ‘b1’ into ‘main’，将b1分支合并到main分支中)</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/21/IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8git/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1068,7 +1025,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1086,7 +1043,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" class="post-title-link" itemprop="url">瑞吉外卖优化03-前后端分离</a>
+          <a href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">瑞吉外卖优化03-前后端分离项目部署</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1104,7 +1061,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-21 11:00:11" itemprop="dateModified" datetime="2023-11-21T11:00:11+08:00">2023-11-21</time>
+      <time title="修改时间：2023-12-08 11:08:05" itemprop="dateModified" datetime="2023-12-08T11:08:05+08:00">2023-12-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1127,7 +1084,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<p>问题说明：<br><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/1.png" alt="图片"></p>
+<p>问题说明：<br><img src="/1.png" alt="图片"></p>
 <ul>
 <li>开发人员同时负责前端和后端代码开发，分工不明确</li>
 <li>开发效率低</li>
@@ -1138,7 +1095,7 @@
 <p>前后端代码混合开发 → 前后端代码分离开发</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/#more" rel="contents">
+              <a class="btn" href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1205,7 +1162,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-30 16:56:44" itemprop="dateModified" datetime="2023-11-30T16:56:44+08:00">2023-11-30</time>
+      <time title="修改时间：2023-12-04 23:25:09" itemprop="dateModified" datetime="2023-12-04T23:25:09+08:00">2023-12-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1241,7 +1198,7 @@
 <li>slave将master的binary log拷贝到它的中继日志（relay log）</li>
 <li>slave重做中继日志中的事件，将改变应用到自己的数据库中</li>
 </ul>
-<h3 id="1-1-2-配置-前置条件"><a href="#1-1-2-配置-前置条件" class="headerlink" title="1.1.2 配置-前置条件"></a>1.1.2 <strong>配置-前置条件</strong></h3><p><a target="_blank" rel="noopener" href="https://kathy-kx.github.io/2023/11/21/%E4%BD%BF%E7%94%A8VMware-Fusion%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA/">克隆虚拟机</a></p>
+<h3 id="1-1-2-配置-前置条件"><a href="#1-1-2-配置-前置条件" class="headerlink" title="1.1.2 配置-前置条件"></a>1.1.2 <strong>配置-前置条件</strong></h3><p><a target="_blank" rel="noopener" href="https://kathy-kx.github.io/2023/11/21/%E4%BD%BF%E7%94%A8VMware-Fusion%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA/">克隆虚拟机的方法见此笔记</a></p>
 <p>提前准备好两台服务器，分别安装Mysql并启动服务、用navicat连接上。</p>
 <p>登录mysql：<code>mysql -u root -p</code></p>
 <p>navicat连接方法：</p>
