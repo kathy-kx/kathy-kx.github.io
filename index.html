@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -228,6 +228,113 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/11/23/How%20to%20Use%20Redis%20in%20Java/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/" class="post-title-link" itemprop="url">Data Types and Common Commands in Redis</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-23 16:27:29" itemprop="dateCreated datePublished" datetime="2023-11-23T16:27:29-05:00">2023-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-01-23 21:47:24" itemprop="dateModified" datetime="2025-01-23T21:47:24-05:00">2025-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="String-Operations"><a href="#String-Operations" class="headerlink" title="String Operations"></a>String Operations</h2><p>Common commands for string operations in Redis:</p>
+<ul>
+<li><code>SET key value</code>: Sets the value of a specified key.<ul>
+<li>Example: <code>127.0.0.1:6379&gt; set age 20</code></li>
+<li>The value set using the <code>SET</code> command is always stored as a string.</li>
+<li>If the key already exists, the value will be updated; if the key does not exist, a new key-value pair will be created.</li>
+</ul>
+</li>
+<li><code>GET key</code>: Retrieves the value of a specified key.<ul>
+<li>Example: <code>127.0.0.1:6379&gt; get age</code></li>
+</ul>
+</li>
+<li><code>SETEX key seconds value</code>: Sets the value of a specified key and its expiration time in seconds (commonly used for storing verification codes).</li>
+<li><code>SETNX key value</code>: Sets the value of a key only if the key does not already exist (commonly used for distributed locks).</li>
+</ul>
+<h2 id="Hash-Operations"><a href="#Hash-Operations" class="headerlink" title="Hash Operations"></a>Hash Operations</h2><p>Redis hashes are mapping tables of string-type fields and values, particularly suitable for storing objects.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -551,7 +658,7 @@
 <li><code>mkdir /usr/local/app</code> 创建目录，准备将项目jar包放在此目录</li>
 <li>打开终端，点击菜单中的shell，选择新建远程连接</li>
 <li>选择安全文件传输sftp，点击右边服务器下的加号，添加你要连接的远程服务器ip地址（例如192.168.50.158）</li>
-<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#x39;&#x32;&#46;&#49;&#54;&#x38;&#46;&#53;&#48;&#x2e;&#49;&#x35;&#x38;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#x39;&#x32;&#46;&#49;&#54;&#x38;&#46;&#53;&#48;&#x2e;&#49;&#x35;&#x38;</a>”，点击连接。</li>
+<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#53;&#x30;&#x2e;&#x31;&#x35;&#56;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#53;&#x30;&#x2e;&#x31;&#x35;&#56;</a>”，点击连接。</li>
 <li>输入密码，连接成功</li>
 <li>输入<code>put 本地文件路径 远程主机路径</code>命令，即<code>put /Users/kathy/Desktop/workspace_idea/helloworld/target/helloworld-0.0.1-SNAPSHOT.jar /usr/local/app/</code>，上传文件到&#x2F;usr&#x2F;local&#x2F;app&#x2F;。</li>
 </ul>
@@ -1019,7 +1126,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/18/Optimization%20of%20Reggie%20Takeout%2003(Deployment%20of%20Frontend%20&%20Backend%20Separated%20Project)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1037,7 +1144,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">瑞吉外卖优化03-前后端分离项目部署</a>
+          <a href="/2023/11/18/Optimization%20of%20Reggie%20Takeout%2003(Deployment%20of%20Frontend%20&%20Backend%20Separated%20Project)/" class="post-title-link" itemprop="url">Optimization of Reggie Takeout 03(Deployment of Frontend & Backend Separated Project)</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1055,7 +1162,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-07 22:08:05" itemprop="dateModified" datetime="2023-12-07T22:08:05-05:00">2023-12-07</time>
+      <time title="Modified: 2025-01-24 00:04:40" itemprop="dateModified" datetime="2025-01-24T00:04:40-05:00">2025-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1077,134 +1184,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<p>问题说明：<br><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/1.png" alt="图片"></p>
-<ul>
-<li>开发人员同时负责前端和后端代码开发，分工不明确</li>
-<li>开发效率低</li>
-<li>前后端代码混合在一个工程中，不便于管理</li>
-<li>对开发人员要求高，人员招聘困难</li>
-</ul>
-<p>解决方法：</p>
-<p>前后端代码混合开发 → 前后端代码分离开发</p>
+          <p>This blog is based on the video course <strong>“Reggie Takeout”</strong> by Black Horse Programmers. It summarizes <strong>course notes</strong>, related <strong>knowledge points</strong>, and potential <strong>solutions to issues</strong>. Additionally, it includes <strong>features not implemented in the course</strong> for your reference. The notes are comprehensive and well-organized, aiming to help you in learning and understanding this takeout project. </p>
+<p>For the full project notes, visit: <a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">Food Delivery System Notes Collection</a></p>
+<h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description:"></a>Problem Description:</h3><ul>
+<li>Developers are responsible for both frontend and backend code development, leading to unclear division of tasks.</li>
+<li>Low development efficiency.</li>
+<li>Frontend and backend code are mixed in a single project, making management difficult.</li>
+<li>High skill requirements for developers, making recruitment challenging.
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9603-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9602-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-Nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kathy-kx">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kathy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9602-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-Nginx/" class="post-title-link" itemprop="url">瑞吉外卖优化02-主从复制+Nginx</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-11-18 23:32:31" itemprop="dateCreated datePublished" datetime="2023-11-18T23:32:31-05:00">2023-11-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-04 10:25:09" itemprop="dateModified" datetime="2023-12-04T10:25:09-05:00">2023-12-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Food-Delivery-System/" itemprop="url" rel="index"><span itemprop="name">Food Delivery System</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本笔记源自黑马程序员的视频课程——《瑞吉外卖》，总结了<strong>课程笔记</strong>、相关<strong>知识点</strong>以及可能遇到的<strong>问题解决方案</strong>，并且<strong>增加了课程中未实现的功能</strong>，供读者参考。笔记全面且条理清晰，希望帮助读者学习和理解这个外卖项目。<br>本项目全部笔记见：<a target="_blank" rel="noopener" href="https://kathy-kx.github.io/categories/Food-Delivery-System/">外卖项目笔记合集</a></p>
-<h1 id="1-读写分离"><a href="#1-读写分离" class="headerlink" title="1. 读写分离"></a>1. 读写分离</h1><p>问题说明</p>
-<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9602-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-Nginx/1.png" alt="图片"></p>
-<p>以两台数据库为例：</p>
-<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9602-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-Nginx/2.png" alt="图片"></p>
-<p>读写分离，降低单台数据库的访问压力。</p>
-<h2 id="1-1-MySQL主从复制"><a href="#1-1-MySQL主从复制" class="headerlink" title="1.1 MySQL主从复制"></a>1.1 MySQL主从复制</h2><h3 id="1-1-1-介绍"><a href="#1-1-1-介绍" class="headerlink" title="1.1.1 介绍"></a>1.1.1 <strong>介绍</strong></h3><p>MySQL主从复制是一个异步的复制过程，底层是基于Mysql数据库自带的<strong>二进制日志</strong>功能。就是一台或多台MySQL数据库(slave，即<strong>从库</strong>）从另一台MySQL数据库(master，即<strong>主库</strong>）进行日志的复制然后再解析日志并应用到自身，最终实现<strong>从库</strong>的数据和<strong>主库</strong>的数据保持一致。MySQL主从复制是MySQL数据库自带功能，无需借助第三方工具。</p>
-<p><img src="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9602-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-Nginx/3.png" alt="图片"></p>
-<p>MySQL复制过程分成三步：</p>
-<ul>
-<li>master将改变记录到二进制日志（binary log)</li>
-<li>slave将master的binary log拷贝到它的中继日志（relay log）</li>
-<li>slave重做中继日志中的事件，将改变应用到自己的数据库中</li>
-</ul>
-<h3 id="1-1-2-配置-前置条件"><a href="#1-1-2-配置-前置条件" class="headerlink" title="1.1.2 配置-前置条件"></a>1.1.2 <strong>配置-前置条件</strong></h3><p><a target="_blank" rel="noopener" href="https://kathy-kx.github.io/2023/11/21/%E4%BD%BF%E7%94%A8VMware-Fusion%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA/">克隆虚拟机的方法见此笔记</a></p>
-<p>提前准备好两台服务器，分别安装Mysql并启动服务、用navicat连接上。</p>
-<p>登录mysql：<code>mysql -u root -p</code></p>
-<p>navicat连接方法：</p>
-<ul>
-<li>打开navicat，新建连接（Connection - mySQL），连接名任意，主机或IP地址填虚拟机端的IP地址196.168.xxx.xxx，用户名root，密码xxx。</li>
-<li>将虚拟机端端口3306开放，<code>firewall-cmd --zone=public --add-port=3306/tcp --permanent</code>以及<code>firewall-cmd --reload</code>。</li>
-<li>在navicat双击新建的连接，即可连接上。</li>
-</ul>
-<h3 id="1-1-3-配置-主库Master"><a href="#1-1-3-配置-主库Master" class="headerlink" title="1.1.3 配置-主库Master"></a>1.1.3 <strong>配置-主库Master</strong></h3><p>第一步：修改Mysql数据库的配置文件 <code>vim /etc/my.cnf</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/18/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%9602-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-Nginx/#more" rel="contents">
+              <a class="btn" href="/2023/11/18/Optimization%20of%20Reggie%20Takeout%2003(Deployment%20of%20Frontend%20&%20Backend%20Separated%20Project)/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

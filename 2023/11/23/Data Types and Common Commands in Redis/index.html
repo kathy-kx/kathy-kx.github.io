@@ -19,29 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="服务启动方法一：执行&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录中的redis-servercd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;，即你安装redis的目录下的src文件夹，执行.&#x2F;redis-server 方法二：启动服务并加载配置文件（推荐，可以后台运行red">
+    <meta name="description" content="String OperationsCommon commands for string operations in Redis:  SET key value: Sets the value of a specified key. Example: 127.0.0.1:6379&gt; set age 20 The value set using the SET command is always">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux系统中配置和启动Redis服务">
-<meta property="og:url" content="http://example.com/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:title" content="Data Types and Common Commands in Redis">
+<meta property="og:url" content="http://example.com/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/index.html">
 <meta property="og:site_name" content="Kathy&#39;s Blog">
-<meta property="og:description" content="服务启动方法一：执行&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录中的redis-servercd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;，即你安装redis的目录下的src文件夹，执行.&#x2F;redis-server 方法二：启动服务并加载配置文件（推荐，可以后台运行red">
+<meta property="og:description" content="String OperationsCommon commands for string operations in Redis:  SET key value: Sets the value of a specified key. Example: 127.0.0.1:6379&gt; set age 20 The value set using the SET command is always">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-22T16:49:39.000Z">
-<meta property="article:modified_time" content="2023-11-23T08:39:25.795Z">
+<meta property="article:published_time" content="2023-11-23T21:27:29.000Z">
+<meta property="article:modified_time" content="2025-01-24T02:47:24.358Z">
 <meta property="article:author" content="Kathy-kx">
 <meta property="article:tag" content="Redis">
-<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/">
+<link rel="canonical" href="http://example.com/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/","path":"2023/11/22/Linux系统中配置和启动Redis服务/","title":"Linux系统中配置和启动Redis服务"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/","path":"2023/11/23/Data Types and Common Commands in Redis/","title":"Data Types and Common Commands in Redis"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Linux系统中配置和启动Redis服务 | Kathy's Blog</title>
+<title>Data Types and Common Commands in Redis | Kathy's Blog</title>
   
 
 
@@ -113,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8"><span class="nav-text">服务启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8A%A1"><span class="nav-text">停止服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5"><span class="nav-text">连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E8%BF%9E%E6%8E%A5"><span class="nav-text">退出连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-text">设置后台运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%8C%E6%9C%9B%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5redis%E6%9C%8D%E5%8A%A1%E6%97%B6%E9%9C%80%E8%A6%81%E6%8F%90%E4%BE%9B%E5%AF%86%E7%A0%81"><span class="nav-text">希望客户端连接redis服务时需要提供密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-text">允许远程连接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Operations"><span class="nav-text">String Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash-Operations"><span class="nav-text">Hash Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List-Operations"><span class="nav-text">List Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Operations"><span class="nav-text">Set Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sorted-Set-Operations"><span class="nav-text">Sorted Set Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#General-Key-Commands"><span class="nav-text">General Key Commands</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,7 +171,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,12 +184,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Linux系统中配置和启动Redis服务 | Kathy's Blog">
+      <meta itemprop="name" content="Data Types and Common Commands in Redis | Kathy's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux系统中配置和启动Redis服务
+          Data Types and Common Commands in Redis
         </h1>
 
         <div class="post-meta-container">
@@ -201,14 +200,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-11-22 11:49:39" itemprop="dateCreated datePublished" datetime="2023-11-22T11:49:39-05:00">2023-11-22</time>
+      <time title="Created: 2023-11-23 16:27:29" itemprop="dateCreated datePublished" datetime="2023-11-23T16:27:29-05:00">2023-11-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-23 03:39:25" itemprop="dateModified" datetime="2023-11-23T03:39:25-05:00">2023-11-23</time>
+      <time title="Modified: 2025-01-23 21:47:24" itemprop="dateModified" datetime="2025-01-23T21:47:24-05:00">2025-01-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -230,56 +229,92 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h3><p>方法一：执行&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录中的redis-server<br>cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;，即你安装redis的目录下的src文件夹，执行<code>./redis-server</code></p>
-<p>方法二：启动服务并加载配置文件（<strong>推荐</strong>，可以后台运行redis）<br>cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;，执行 <code>src/redis-server ./redis.conf</code></p>
-<h3 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h3><p>在服务启动界面control+C</p>
-<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><ol>
-<li><p>无密码连接：<br> 新建一个终端窗口，cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录，执行<code>./redis-cli</code><br> 出现127.0.0.1:6379&gt; 说明已经连接上本地6379</p>
-</li>
-<li><p>带密码连接：cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;，<code>src/redis-cli -h localhost -p 6379 -a 你的密码</code></p>
-</li>
-</ol>
-<h3 id="退出连接"><a href="#退出连接" class="headerlink" title="退出连接"></a>退出连接</h3><p>localhost:6379&gt;<code>exit</code></p>
-<h3 id="设置后台运行"><a href="#设置后台运行" class="headerlink" title="设置后台运行"></a>设置后台运行</h3><p>先停止服务，修改&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;redis.conf配置文件。修改过程具体如下：</p>
+        <h2 id="String-Operations"><a href="#String-Operations" class="headerlink" title="String Operations"></a>String Operations</h2><p>Common commands for string operations in Redis:</p>
 <ul>
-<li>cd &#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;</li>
-<li>vim redis.conf</li>
-<li>&#x2F;dae 回车 查找关键词</li>
-<li>i，将daemonize 的no改为yes，配置redis服务启动后在后台运行</li>
-<li>再启动一次，但是需要显式加载哪个配置文件：<ul>
-<li><code>cd /usr/local/redis-5.0.9</code></li>
-<li>执行<code>src/redis-server ./redis.conf</code></li>
+<li><code>SET key value</code>: Sets the value of a specified key.<ul>
+<li>Example: <code>127.0.0.1:6379&gt; set age 20</code></li>
+<li>The value set using the <code>SET</code> command is always stored as a string.</li>
+<li>If the key already exists, the value will be updated; if the key does not exist, a new key-value pair will be created.</li>
 </ul>
 </li>
-</ul>
-<h3 id="希望客户端连接redis服务时需要提供密码"><a href="#希望客户端连接redis服务时需要提供密码" class="headerlink" title="希望客户端连接redis服务时需要提供密码"></a>希望客户端连接redis服务时需要提供密码</h3><span id="more"></span>
-<p>以linux为例：</p>
-<ul>
-<li>在&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;redis.conf配置文件中，找到requirepass这句，删掉注释，并指定密码123456。并将e masterauth <master-password>这句的<master-password>替换为实际密码123456</li>
-<li><code>ps -ef | grep redis</code>找到redis进程号</li>
-<li>kill -9 <pid> 杀进程</li>
-<li>重新启动，执行<code>src/redis-server ./redis.conf</code></li>
-<li>重新连接<ul>
-<li>方法一：执行<code>src/redis-cli -h localhost -p 6379</code><br>  h是host，连接本地redis服务，-p是端口号<br>  再提供密码，执行<code>auth 123456</code>(123456是密码)</li>
-<li>方法二：执行<code>src/redis-cli -h localhost -p 6379 -a 123456</code>登录的同时提供密码</li>
+<li><code>GET key</code>: Retrieves the value of a specified key.<ul>
+<li>Example: <code>127.0.0.1:6379&gt; get age</code></li>
 </ul>
 </li>
+<li><code>SETEX key seconds value</code>: Sets the value of a specified key and its expiration time in seconds (commonly used for storing verification codes).</li>
+<li><code>SETNX key value</code>: Sets the value of a key only if the key does not already exist (commonly used for distributed locks).</li>
 </ul>
-<h3 id="允许远程连接"><a href="#允许远程连接" class="headerlink" title="允许远程连接"></a>允许远程连接</h3><p>本地目前无法连接虚拟机的redis服务。解决方法：</p>
+<h2 id="Hash-Operations"><a href="#Hash-Operations" class="headerlink" title="Hash Operations"></a>Hash Operations</h2><p>Redis hashes are mapping tables of string-type fields and values, particularly suitable for storing objects.</p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>field1</th>
+<th>value1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>field2</td>
+<td>value2</td>
+</tr>
+</tbody></table>
+<p>Common commands:</p>
 <ul>
-<li>修改虚拟机&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;redis.conf配置文件，找到bind 127.0.0.1这一行，注释掉。</li>
-<li>把虚拟机上防火墙该端口打开，不要拦截。<ul>
-<li><code>firewall-cmd --zone=public --add-port=6379/tcp --permanent</code></li>
-<li><code>firewall-cmd --reload</code></li>
+<li><code>HSET key field value</code>: Sets the value of a field in the hash stored at a key.</li>
+<li><code>HGET key field</code>: Retrieves the value of a specified field in a hash.</li>
+<li><code>HDEL key field</code>: Deletes a specified field from a hash.</li>
+<li><code>HKEYS key</code>: Retrieves all fields in a hash (returns all fields of the specified key).</li>
+<li><code>HVALS key</code>: Retrieves all values in a hash.</li>
+<li><code>HGETALL key</code>: Retrieves all fields and values in a hash.</li>
 </ul>
-</li>
-</ul>
-<p>接下来测试本地连接远程虚拟机redis服务：</p>
+<h2 id="List-Operations"><a href="#List-Operations" class="headerlink" title="List Operations"></a>List Operations</h2><p>Redis lists are simple string lists sorted by insertion order (ordered and can contain duplicates).</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+</tr>
+</thead>
+</table>
+<p>Common commands:</p>
 <ul>
-<li>虚拟机<code>ps -ef | grep redis</code>找到redis进程号</li>
-<li>虚拟机<code>kill -9 &lt;pid&gt;</code> 杀进程</li>
-<li>虚拟机中重新启动redis服务，在redis目录下执行<code>src/redis-server ./redis.conf</code></li>
-<li>本地重新连接虚拟机redis，在任意目录执行<code>redis-cli -h 192.168.50.158 -p 6379 -a 123456</code></li>
+<li><code>LPUSH key value1 [value2]</code>: Pushes one or more values onto the head of a list.</li>
+<li><code>LRANGE key start stop</code>: Retrieves elements within a specified range of a list. Use <code>-1</code> for the last element (e.g., <code>LRANGE key 0 -1</code>).</li>
+<li><code>RPOP key</code>: Removes and retrieves the last element in a list.</li>
+<li><code>LLEN key</code>: Returns the length of a list.</li>
+<li><code>BRPOP key1 [key2] timeout</code>: Removes and retrieves the last element of a list. If the list is empty, the command blocks until a timeout or an element is available (commonly used for task queues).</li>
+</ul>
+<h2 id="Set-Operations"><a href="#Set-Operations" class="headerlink" title="Set Operations"></a>Set Operations</h2><p>Redis sets are unordered collections of string-type elements, where each element is unique (unordered and non-repeating).</p>
+<p>Common commands:</p>
+<ul>
+<li><code>SADD key member1 [member2]</code>: Adds one or more members to a set.</li>
+<li><code>SMEMBERS key</code>: Retrieves all members of a set.</li>
+<li><code>SCARD key</code>: Returns the number of members in a set.</li>
+<li><code>SINTER key1 [key2]</code>: Returns the intersection of two or more sets.</li>
+<li><code>SUNION key1 [key2]</code>: Returns the union of two or more sets.</li>
+<li><code>SDIFF key1 [key2]</code>: Returns the difference between sets (elements unique to the first set).</li>
+<li><code>SREM key member1 [member2]</code>: Removes one or more members from a set.</li>
+</ul>
+<h2 id="Sorted-Set-Operations"><a href="#Sorted-Set-Operations" class="headerlink" title="Sorted Set Operations"></a>Sorted Set Operations</h2><p>Redis sorted sets are collections of unique string elements, each associated with a double-precision score for sorting.</p>
+<p>Common commands:</p>
+<ul>
+<li><code>ZADD key score1 member1 [score2 member2]</code>: Adds one or more members to a sorted set or updates the score of existing members.</li>
+<li><code>ZRANGE key start stop [WITHSCORES]</code>: Retrieves members within a specified index range. Use <code>[WITHSCORES]</code> to include scores.</li>
+<li><code>ZINCRBY key increment member</code>: Increments the score of a specified member by a given value.</li>
+<li><code>ZREM key member [member ...]</code>: Removes one or more members from a sorted set.</li>
+</ul>
+<h2 id="General-Key-Commands"><a href="#General-Key-Commands" class="headerlink" title="General Key Commands"></a>General Key Commands</h2><ul>
+<li><code>KEYS pattern</code>: Finds all keys matching a given pattern (e.g., <code>keys *</code>).</li>
+<li><code>EXISTS key</code>: Checks if a key exists.</li>
+<li><code>TYPE key</code>: Returns the data type of the value stored at a key.</li>
+<li><code>TTL key</code>: Retrieves the time-to-live (TTL) of a key in seconds. A <code>-1</code> indicates the key is set to persist indefinitely.</li>
+<li><code>DEL key</code>: Deletes a key if it exists.</li>
 </ul>
 
     </div>
@@ -291,20 +326,19 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Redis/" rel="tag"># Redis</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/" rel="prev" title="在Linux服务器上安装MySQL">
-                  <i class="fa fa-chevron-left"></i> 在Linux服务器上安装MySQL
+                <a href="/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/" rel="prev" title="Linux系统中配置和启动Redis服务">
+                  <i class="fa fa-chevron-left"></i> Linux系统中配置和启动Redis服务
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/11/23/Data%20Types%20and%20Common%20Commands%20in%20Redis/" rel="next" title="Data Types and Common Commands in Redis">
-                  Data Types and Common Commands in Redis <i class="fa fa-chevron-right"></i>
+                <a href="/2023/11/23/How%20to%20Use%20Redis%20in%20Java/" rel="next" title="How to Use Redis in Java">
+                  How to Use Redis in Java <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
