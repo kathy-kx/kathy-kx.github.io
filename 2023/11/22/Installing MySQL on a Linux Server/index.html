@@ -27,7 +27,7 @@
 <meta property="og:description" content="Checking for Existing MySQL InstallationsFirst, check if MySQL is already installed on the current system.  rpm -qa: Lists all installed software on the system (qa means query all). rpm -qa | grep mys">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-22T16:07:31.000Z">
-<meta property="article:modified_time" content="2025-01-24T16:07:32.062Z">
+<meta property="article:modified_time" content="2025-01-24T16:11:08.916Z">
 <meta property="article:author" content="Kathy-kx">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="MySQL">
@@ -208,7 +208,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-01-24 11:07:32" itemprop="dateModified" datetime="2025-01-24T11:07:32-05:00">2025-01-24</time>
+      <time title="Modified: 2025-01-24 11:11:08" itemprop="dateModified" datetime="2025-01-24T11:11:08-05:00">2025-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,8 +249,10 @@
 <p>File name: <code>mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz</code></p>
 <h3 id="2-Upload-and-Extract-MySQL"><a href="#2-Upload-and-Extract-MySQL" class="headerlink" title="2. Upload and Extract MySQL"></a>2. Upload and Extract MySQL</h3><ol>
 <li><p>Use <code>sftp</code> to upload the installation package to the Linux server:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put /Users/kathy/Downloads/linux-software/mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz /root/</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put /Users/kathy/Downloads/linux-software/mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz /root/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<span id="more"></span>
+<ol start="2">
 <li><p>On the virtual machine, extract the package to <code>/usr/local/mysql</code> (create the directory first):</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz -C /usr/local/mysql</span><br></pre></td></tr></table></figure>
 </li>
