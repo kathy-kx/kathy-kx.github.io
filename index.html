@@ -365,7 +365,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/Configuring%20and%20Starting%20Redis%20Service%20on%20Linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -383,7 +383,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">Linux系统中配置和启动Redis服务</a>
+          <a href="/2023/11/22/Configuring%20and%20Starting%20Redis%20Service%20on%20Linux/" class="post-title-link" itemprop="url">Configuring and Starting Redis Service on Linux</a>
         </h2>
 
         <div class="post-meta-container">
@@ -401,7 +401,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-23 03:39:25" itemprop="dateModified" datetime="2023-11-23T03:39:25-05:00">2023-11-23</time>
+      <time title="Modified: 2025-01-24 10:37:31" itemprop="dateModified" datetime="2025-01-24T10:37:31-05:00">2025-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -423,37 +423,71 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h3><p>方法一：执行&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录中的redis-server<br>cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;，即你安装redis的目录下的src文件夹，执行<code>./redis-server</code></p>
-<p>方法二：启动服务并加载配置文件（<strong>推荐</strong>，可以后台运行redis）<br>cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;，执行 <code>src/redis-server ./redis.conf</code></p>
-<h3 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h3><p>在服务启动界面control+C</p>
-<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><ol>
-<li><p>无密码连接：<br> 新建一个终端窗口，cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;src&#x2F;目录，执行<code>./redis-cli</code><br> 出现127.0.0.1:6379&gt; 说明已经连接上本地6379</p>
+          <h2 id="Starting-the-Service"><a href="#Starting-the-Service" class="headerlink" title="Starting the Service"></a>Starting the Service</h2><h3 id="Method-1-Start-Redis-Server-Directly"><a href="#Method-1-Start-Redis-Server-Directly" class="headerlink" title="Method 1: Start Redis Server Directly"></a>Method 1: Start Redis Server Directly</h3><p>Navigate to the <code>/usr/local/redis-5.0.9/src/</code> directory (the <code>src</code> folder under your Redis installation path) and execute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="Method-2-Start-Redis-with-Configuration-File-Recommended-for-running-Redis-in-the-background"><a href="#Method-2-Start-Redis-with-Configuration-File-Recommended-for-running-Redis-in-the-background" class="headerlink" title="Method 2: Start Redis with Configuration File (Recommended for running Redis in the background)"></a>Method 2: Start Redis with Configuration File (<strong>Recommended</strong> for running Redis in the background)</h3><p>Navigate to the <code>/usr/local/redis-5.0.9/</code> directory and execute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src/redis-server ./redis.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="Stopping-the-Service"><a href="#Stopping-the-Service" class="headerlink" title="Stopping the Service"></a>Stopping the Service</h2><p>To stop the service, press <code>Ctrl + C</code> in the service terminal.</p>
+<h2 id="Connecting-to-Redis"><a href="#Connecting-to-Redis" class="headerlink" title="Connecting to Redis"></a>Connecting to Redis</h2><ol>
+<li><p><strong>Connecting Without a Password</strong>:<br>Open a new terminal window, navigate to <code>/usr/local/redis-5.0.9/src/</code>, and execute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-cli</span><br></pre></td></tr></table></figure>
+
+<p>If you see <code>127.0.0.1:6379&gt;</code>, the connection to the local Redis server (port 6379) is successful.</p>
 </li>
-<li><p>带密码连接：cd到&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;，<code>src/redis-cli -h localhost -p 6379 -a 你的密码</code></p>
+<li><p><strong>Connecting with a Password</strong>:<br>Navigate to <code>/usr/local/redis-5.0.9/</code> and execute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src/redis-cli -h localhost -p 6379 -a your_password</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Exiting-the-Connection"><a href="#Exiting-the-Connection" class="headerlink" title="Exiting the Connection"></a>Exiting the Connection</h2><p>To exit the Redis connection, type:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h2 id="Configuring-Redis-to-Run-in-the-Background"><a href="#Configuring-Redis-to-Run-in-the-Background" class="headerlink" title="Configuring Redis to Run in the Background"></a>Configuring Redis to Run in the Background</h2><ol>
+<li>Stop the Redis service.</li>
+<li>Modify the <code>/usr/local/redis-5.0.9/redis.conf</code> configuration file as follows:<ul>
+<li>Navigate to the directory:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/redis-5.0.9/</span><br></pre></td></tr></table></figure></li>
+<li>Open the configuration file:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure></li>
+<li>Search for the keyword <code>daemonize</code>:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dae</span><br></pre></td></tr></table></figure>
+Press Enter.</li>
+<li>Change <code>daemonize no</code> to <code>daemonize yes</code> to enable background operation. Save and exit.</li>
+</ul>
+</li>
+<li>Restart Redis and explicitly load the configuration file:<ul>
+<li>Navigate to the Redis directory:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/redis-5.0.9</span><br></pre></td></tr></table></figure></li>
+<li>Execute:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src/redis-server ./redis.conf</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
 </ol>
-<h3 id="退出连接"><a href="#退出连接" class="headerlink" title="退出连接"></a>退出连接</h3><p>localhost:6379&gt;<code>exit</code></p>
-<h3 id="设置后台运行"><a href="#设置后台运行" class="headerlink" title="设置后台运行"></a>设置后台运行</h3><p>先停止服务，修改&#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;redis.conf配置文件。修改过程具体如下：</p>
-<ul>
-<li>cd &#x2F;usr&#x2F;local&#x2F;redis-5.0.9&#x2F;</li>
-<li>vim redis.conf</li>
-<li>&#x2F;dae 回车 查找关键词</li>
-<li>i，将daemonize 的no改为yes，配置redis服务启动后在后台运行</li>
-<li>再启动一次，但是需要显式加载哪个配置文件：<ul>
-<li><code>cd /usr/local/redis-5.0.9</code></li>
-<li>执行<code>src/redis-server ./redis.conf</code></li>
+<h2 id="Requiring-a-Password-for-Client-Connections"><a href="#Requiring-a-Password-for-Client-Connections" class="headerlink" title="Requiring a Password for Client Connections"></a>Requiring a Password for Client Connections</h2><p>To require a password for connecting to Redis (using Linux as an example):</p>
+<ol>
+<li>In the <code>/usr/local/redis-5.0.9/redis.conf</code> configuration file:<ul>
+<li>Locate the <code>requirepass</code> line, uncomment it, and set the password to <code>123456</code>.</li>
+<li>Find the line <code>masterauth &lt;master-password&gt;</code>, replace <code>&lt;master-password&gt;</code> with <code>123456</code>.</li>
 </ul>
 </li>
+<li>Find the Redis process:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure></li>
+<li>Kill the Redis process:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 &lt;pid&gt;</span><br></pre></td></tr></table></figure></li>
+<li>Restart Redis with the configuration file:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src/redis-server ./redis.conf</span><br></pre></td></tr></table></figure></li>
+<li>Reconnect to Redis:<ul>
+<li><strong>Method 1</strong>: Connect and then authenticate:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">src/redis-cli -h localhost -p 6379</span><br><span class="line">auth 123456</span><br></pre></td></tr></table></figure></li>
+<li><strong>Method 2</strong>: Provide the password during login:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src/redis-cli -h localhost -p 6379 -a 123456</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="希望客户端连接redis服务时需要提供密码"><a href="#希望客户端连接redis服务时需要提供密码" class="headerlink" title="希望客户端连接redis服务时需要提供密码"></a>希望客户端连接redis服务时需要提供密码</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/22/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%92%8C%E5%90%AF%E5%8A%A8Redis%E6%9C%8D%E5%8A%A1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+</li>
+</ol>
+<h2 id="Allowing-Remote-Connections"><a href="#Allowing-Remote-Connections" class="headerlink" title="Allowing Remote Connections"></a>Allowing Remote Connections</h2><p>If your local machine cannot connect to the Redis service running on a virtual machine, follow these steps:</p>
+<ol>
+<li>Modify the <code>/usr/local/redis-5.0.9/redis.conf</code> configuration file on the virtual machine:<ul>
+<li>Locate the line <code>bind 127.0.0.1</code> and comment it out.</li>
+</ul>
+</li>
+<li>Open the Redis port on the firewall and reload the configuration:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=6379/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Testing-Remote-Connections"><a href="#Testing-Remote-Connections" class="headerlink" title="Testing Remote Connections:"></a>Testing Remote Connections:</h3><ol>
+<li>On the virtual machine, find the Redis process:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure></li>
+<li>Kill the Redis process:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 &lt;pid&gt;</span><br></pre></td></tr></table></figure></li>
+<li>Restart Redis with the configuration file:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src/redis-server ./redis.conf</span><br></pre></td></tr></table></figure></li>
+<li>On the local machine, connect to the Redis service on the virtual machine:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 192.168.50.158 -p 6379 -a 123456</span><br></pre></td></tr></table></figure></li>
+</ol>
+
       
     </div>
 
@@ -479,7 +513,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/Installing%20MySQL%20on%20a%20Linux%20Server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -497,7 +531,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/" class="post-title-link" itemprop="url">在Linux服务器上安装MySQL</a>
+          <a href="/2023/11/22/Installing%20MySQL%20on%20a%20Linux%20Server/" class="post-title-link" itemprop="url">Installing MySQL on a Linux Server</a>
         </h2>
 
         <div class="post-meta-container">
@@ -515,7 +549,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-23 03:44:47" itemprop="dateModified" datetime="2023-11-23T03:44:47-05:00">2023-11-23</time>
+      <time title="Modified: 2025-01-24 11:07:32" itemprop="dateModified" datetime="2025-01-24T11:07:32-05:00">2025-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -537,39 +571,144 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>首先检测当前系统中是否安装MySQL数据库。<br>rpm -qa 查询当前系统中安装的所有软件。qa意思是query all<br><code>rpm -qa | grep mysql</code> 查询当前系统中安装的名称带mysql的软件<br><code>rpm -qa | grep mariadb</code> 查询当前系统中安装的名称带mariadb的软件</p>
-<p>RPM (Red-Hat Package Manager)RPM软件包管理器，是红帽Linux用于管理和安装软件的工具。<br>注：如果安装过了mariadb，需要先卸载。否则mysql会安装失败。<br>卸载软件命令：<code>rpm -e --nodeps 软件名称</code>。例如<code>rpm -e --nodeps mariadb-libs-xxxxxxx</code></p>
-<h1 id="安装和配置MySQL的步骤"><a href="#安装和配置MySQL的步骤" class="headerlink" title="安装和配置MySQL的步骤"></a>安装和配置MySQL的步骤</h1><ol>
-<li><p>下载mysql8.0.31 arm64版本（适用于macOS m2芯片）。mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz<br>下载地址：<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
-</li>
-<li><p>将下载好的mySQL安装包上传到linux并解压</p>
-</li>
-</ol>
+          <h2 id="Checking-for-Existing-MySQL-Installations"><a href="#Checking-for-Existing-MySQL-Installations" class="headerlink" title="Checking for Existing MySQL Installations"></a>Checking for Existing MySQL Installations</h2><p>First, check if MySQL is already installed on the current system.</p>
 <ul>
-<li><p>在本地终端，用sftp传输该安装包<br><code>put /Users/kathy/Downloads/linux-software/mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz /root/</code></p>
-</li>
-<li><p>在虚拟机终端，解压安装包到&#x2F;usr&#x2F;local&#x2F;mysql(先用mkdir mysql创建好)<br><code>tar -zxvf mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz -C /usr/local/mysql</code></p>
-</li>
-<li><p>在虚拟机终端，在&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;下，创建包data和log</p>
-</li>
+<li><code>rpm -qa</code>: Lists all installed software on the system (<code>qa</code> means query all).</li>
+<li><code>rpm -qa | grep mysql</code>: Finds installed software containing “mysql” in its name.</li>
+<li><code>rpm -qa | grep mariadb</code>: Finds installed software containing “mariadb” in its name.</li>
 </ul>
-<ol start="3">
-<li>修改环境变量：<br><code>cd ~</code></li>
+<p><strong>Note</strong>: If MariaDB is installed, it must be uninstalled first; otherwise, the MySQL installation will fail.  </p>
+<p>Uninstall command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps package_name</span><br></pre></td></tr></table></figure>
+
+<p>For example:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps mariadb-libs-xxxxxxx</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Steps-to-Install-and-Configure-MySQL"><a href="#Steps-to-Install-and-Configure-MySQL" class="headerlink" title="Steps to Install and Configure MySQL"></a>Steps to Install and Configure MySQL</h2><h3 id="1-Download-MySQL"><a href="#1-Download-MySQL" class="headerlink" title="1. Download MySQL"></a>1. Download MySQL</h3><p>Download the MySQL 8.0.31 ARM64 version (for macOS M2 chip):</p>
+<p><a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">Download Link</a></p>
+<p>File name: <code>mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz</code></p>
+<h3 id="2-Upload-and-Extract-MySQL"><a href="#2-Upload-and-Extract-MySQL" class="headerlink" title="2. Upload and Extract MySQL"></a>2. Upload and Extract MySQL</h3><ol>
+<li><p>Use <code>sftp</code> to upload the installation package to the Linux server:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put /Users/kathy/Downloads/linux-software/mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz /root/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>On the virtual machine, extract the package to <code>/usr/local/mysql</code> (create the directory first):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz -C /usr/local/mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Navigate to <code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/</code> and create <code>data</code> and <code>log</code> directories.</p>
+</li>
 </ol>
-<p><code>vim .bash_profile</code></p>
-<p>其中添加：PATH&#x3D;$PATH:$HOME&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;bin</p>
-<p>修改完后<code>source .bash_profile</code></p>
-<p><code>which mysql</code> - 会显示&#x2F;usr&#x2F;local&#x2F;mysql-8.0.31-linux-glibc2.17-aarch64&#x2F;bin&#x2F;mysql</p>
-<ol start="4">
-<li>创建mysql用户和用户组
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/22/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h3 id="3-Update-Environment-Variables"><a href="#3-Update-Environment-Variables" class="headerlink" title="3. Update Environment Variables"></a>3. Update Environment Variables</h3><ol>
+<li><p>Open the environment variables file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">vim .bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add the following line:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/bin:/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Apply the changes:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Verify the <code>mysql</code> command path:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> mysql</span><br></pre></td></tr></table></figure>
+
+<p>Output: <code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysql</code></p>
+</li>
+</ol>
+<h3 id="4-Create-MySQL-User-and-Group"><a href="#4-Create-MySQL-User-and-Group" class="headerlink" title="4. Create MySQL User and Group"></a>4. Create MySQL User and Group</h3><ol>
+<li><p>Create the <code>mysql</code> group and user:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd mysql</span><br><span class="line">useradd -r -g mysql -s /bin/false mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Set permissions for the MySQL directory:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R mysql:mysql /usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create and set permissions for the <code>/var/lib/mysql</code> directory:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /var/lib/mysql</span><br><span class="line">sudo <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="5-Configure-MySQL-Parameters"><a href="#5-Configure-MySQL-Parameters" class="headerlink" title="5. Configure MySQL Parameters"></a>5. Configure MySQL Parameters</h3><ol>
+<li><p>Edit the configuration file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add the following content:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8mb4</span><br><span class="line"><span class="attr">socket</span>=/var/lib/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="attr">socket</span>=/var/lib/mysql/mysql.sock</span><br><span class="line"><span class="attr">basedir</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64</span><br><span class="line"><span class="attr">character-set-server</span>=utf8mb4</span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br><span class="line"><span class="attr">innodb_buffer_pool_size</span>=<span class="number">200</span>M</span><br><span class="line"><span class="attr">max_allowed_packet</span>=<span class="number">16</span>M</span><br><span class="line"><span class="attr">explicit_defaults_for_timestamp</span>=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log-output</span>=FILE</span><br><span class="line"><span class="attr">general_log</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">general_log_file</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/log/general.err</span><br><span class="line"><span class="attr">slow_query_log</span>=<span class="literal">ON</span></span><br><span class="line"><span class="attr">slow_query_log_file</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/log/query.err</span><br><span class="line"><span class="attr">long_query_time</span>=<span class="number">10</span></span><br><span class="line"><span class="attr">log-error</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/log/error.err</span><br><span class="line"><span class="attr">default-authentication-plugin</span>=mysql_native_password</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="6-Initialize-and-Start-MySQL"><a href="#6-Initialize-and-Start-MySQL" class="headerlink" title="6. Initialize and Start MySQL"></a>6. Initialize and Start MySQL</h3><ol>
+<li><p>Initialize MySQL:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64 --datadir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/data</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explanation</strong>:</p>
+<ul>
+<li><code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysqld</code>: Start the MySQL mysqld service</li>
+<li><code>--initialize</code>: Initializes the MySQL data directory.</li>
+<li><code>--user=mysql</code>: Runs the MySQL service as the <code>mysql</code> user.</li>
+<li><code>--basedir</code>: Specifies the MySQL installation root directory.</li>
+<li><code>--datadir</code>: Specifies the MySQL data directory.</li>
+</ul>
+</li>
+<li><p>Retrieve the generated temporary root password:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/log/error.err</span><br></pre></td></tr></table></figure>
+
+<p>Example output:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A temporary password is generated for root@localhost: **********</span><br></pre></td></tr></table></figure>
+<p>You can save this temporary password.</p>
+</li>
+</ol>
+<h3 id="7-Add-MySQL-to-systemd-Management"><a href="#7-Add-MySQL-to-systemd-Management" class="headerlink" title="7. Add MySQL to systemd Management"></a>7. Add MySQL to systemd Management</h3><ol>
+<li><p>Create a systemd service file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/mysqld.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add the following content:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=MySQL Server</span><br><span class="line"><span class="attr">Documentation</span>=man:mysqld(<span class="number">8</span>)</span><br><span class="line"><span class="attr">Documentation</span>=http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line"><span class="attr">After</span>=network.target</span><br><span class="line"><span class="attr">After</span>=syslog.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">User</span>=mysql</span><br><span class="line"><span class="attr">Group</span>=mysql</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line"><span class="attr">LimitNOFILE</span>=<span class="number">65536</span></span><br><span class="line"><span class="attr">LimitNPROC</span>=<span class="number">65536</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="8-Enable-and-Start-MySQL-Service"><a href="#8-Enable-and-Start-MySQL-Service" class="headerlink" title="8. Enable and Start MySQL Service"></a>8. Enable and Start MySQL Service</h3><ol>
+<li><p>Reload systemd configuration:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Start the MySQL service:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Enable MySQL to start on boot:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br></pre></td></tr></table></figure>
+<p>After execution, it displays: Created symlink &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;multi-user.target.wants&#x2F;mysqld.service → &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;mysqld.service.</p>
+</li>
+</ol>
+<h3 id="9-Check-MySQL-Service-Status"><a href="#9-Check-MySQL-Service-Status" class="headerlink" title="9. Check MySQL Service Status"></a>9. Check MySQL Service Status</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+
+<p>This command to check the status of the MySQL service allows you to verify whether the MySQL service is running, view the process ID of the service, and see the most recent status change time. If the MySQL service fails to start properly, this command can also provide error information to help diagnose the issue.</p>
+<p>To see active network connections (optional):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Log-in-to-MySQL"><a href="#10-Log-in-to-MySQL" class="headerlink" title="10. Log in to MySQL"></a>10. Log in to MySQL</h3><p>Log in using the root user:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>If you encounter an error like <code>libtinfo.so.5</code> missing, then execute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/lib64/libtinfo.so.6 /usr/lib64/libtinfo.so.5</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Change-the-Root-Password"><a href="#11-Change-the-Root-Password" class="headerlink" title="11. Change the Root Password"></a>11. Change the Root Password</h3><ol>
+<li><p>Switch to the MySQL database:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql;   </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Allow external access (optional):</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;PASSWORD&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
+<li><p>Update the root password:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter user root@&quot;localhost&quot; identified with mysql_native_password by &#x27;new_password&#x27;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="12-Exit-MySQL-and-Restart"><a href="#12-Exit-MySQL-and-Restart" class="headerlink" title="12. Exit MySQL and Restart"></a>12. Exit MySQL and Restart</h3><p>Exit the MySQL database using:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   mysql&gt; exit</span><br><span class="line">```  </span><br><span class="line">Then restart the MySQL service with the following command:  </span><br><span class="line">```bash</span><br><span class="line">   systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-External-Connection"><a href="#13-External-Connection" class="headerlink" title="13. External Connection"></a>13. External Connection</h3><ol>
+<li><p>Open port 3306 on the firewall:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use Navicat to connect to the MySQL server (Connection - MySQL):</p>
+<ul>
+<li>Host&#x2F;IP: <code>192.168.50.158</code></li>
+<li>Username: <code>root</code></li>
+<li>Password: <code>your_password</code></li>
+</ul>
+</li>
+</ol>
+<p>Set the connection name to anything, enter the virtual machine’s IP address 192.168.50.158 as the host or IP address.</p>
+
       
     </div>
 
@@ -658,7 +797,7 @@
 <li><code>mkdir /usr/local/app</code> 创建目录，准备将项目jar包放在此目录</li>
 <li>打开终端，点击菜单中的shell，选择新建远程连接</li>
 <li>选择安全文件传输sftp，点击右边服务器下的加号，添加你要连接的远程服务器ip地址（例如192.168.50.158）</li>
-<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x39;&#50;&#x2e;&#49;&#54;&#x38;&#x2e;&#x35;&#x30;&#46;&#49;&#x35;&#x38;">&#114;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x39;&#50;&#x2e;&#49;&#54;&#x38;&#x2e;&#x35;&#x30;&#46;&#49;&#x35;&#x38;</a>”，点击连接。</li>
+<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#64;&#x31;&#57;&#x32;&#46;&#x31;&#54;&#56;&#x2e;&#x35;&#48;&#x2e;&#x31;&#53;&#56;">&#x72;&#x6f;&#x6f;&#116;&#64;&#x31;&#57;&#x32;&#46;&#x31;&#54;&#56;&#x2e;&#x35;&#48;&#x2e;&#x31;&#53;&#56;</a>”，点击连接。</li>
 <li>输入密码，连接成功</li>
 <li>输入<code>put 本地文件路径 远程主机路径</code>命令，即<code>put /Users/kathy/Desktop/workspace_idea/helloworld/target/helloworld-0.0.1-SNAPSHOT.jar /usr/local/app/</code>，上传文件到&#x2F;usr&#x2F;local&#x2F;app&#x2F;。</li>
 </ul>

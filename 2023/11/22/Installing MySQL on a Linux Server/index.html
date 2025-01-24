@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-K.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-K.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-K.png">
+  <link rel="mask-icon" href="/images/logo-K.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Checking for Existing MySQL InstallationsFirst, check if MySQL is already installed on the current system.  rpm -qa: Lists all installed software on the system (qa means query all). rpm -qa | grep mys">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Installing MySQL on a Linux Server">
+<meta property="og:url" content="http://example.com/2023/11/22/Installing%20MySQL%20on%20a%20Linux%20Server/index.html">
+<meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="Checking for Existing MySQL InstallationsFirst, check if MySQL is already installed on the current system.  rpm -qa: Lists all installed software on the system (qa means query all). rpm -qa | grep mys">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-22T16:07:31.000Z">
+<meta property="article:modified_time" content="2025-01-24T16:07:32.062Z">
+<meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/11/22/Installing%20MySQL%20on%20a%20Linux%20Server/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/22/Installing%20MySQL%20on%20a%20Linux%20Server/","path":"2023/11/22/Installing MySQL on a Linux Server/","title":"Installing MySQL on a Linux Server"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Installing MySQL on a Linux Server | Kathy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kathy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Checking-for-Existing-MySQL-Installations"><span class="nav-text">Checking for Existing MySQL Installations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Steps-to-Install-and-Configure-MySQL"><span class="nav-text">Steps to Install and Configure MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Download-MySQL"><span class="nav-text">1. Download MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Upload-and-Extract-MySQL"><span class="nav-text">2. Upload and Extract MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Update-Environment-Variables"><span class="nav-text">3. Update Environment Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Create-MySQL-User-and-Group"><span class="nav-text">4. Create MySQL User and Group</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Configure-MySQL-Parameters"><span class="nav-text">5. Configure MySQL Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Initialize-and-Start-MySQL"><span class="nav-text">6. Initialize and Start MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Add-MySQL-to-systemd-Management"><span class="nav-text">7. Add MySQL to systemd Management</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Enable-and-Start-MySQL-Service"><span class="nav-text">8. Enable and Start MySQL Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Check-MySQL-Service-Status"><span class="nav-text">9. Check MySQL Service Status</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Log-in-to-MySQL"><span class="nav-text">10. Log in to MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Change-the-Root-Password"><span class="nav-text">11. Change the Root Password</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Exit-MySQL-and-Restart"><span class="nav-text">12. Exit MySQL and Restart</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-External-Connection"><span class="nav-text">13. External Connection</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kathy-kx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kathy-kx" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kathy-kx" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kzhu011@uottawa.ca" title="E-Mail → mailto:kzhu011@uottawa.ca" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/Installing%20MySQL%20on%20a%20Linux%20Server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Installing MySQL on a Linux Server | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Installing MySQL on a Linux Server
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-22 11:07:31" itemprop="dateCreated datePublished" datetime="2023-11-22T11:07:31-05:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-01-24 11:07:32" itemprop="dateModified" datetime="2025-01-24T11:07:32-05:00">2025-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Checking-for-Existing-MySQL-Installations"><a href="#Checking-for-Existing-MySQL-Installations" class="headerlink" title="Checking for Existing MySQL Installations"></a>Checking for Existing MySQL Installations</h2><p>First, check if MySQL is already installed on the current system.</p>
+<ul>
+<li><code>rpm -qa</code>: Lists all installed software on the system (<code>qa</code> means query all).</li>
+<li><code>rpm -qa | grep mysql</code>: Finds installed software containing “mysql” in its name.</li>
+<li><code>rpm -qa | grep mariadb</code>: Finds installed software containing “mariadb” in its name.</li>
+</ul>
+<p><strong>Note</strong>: If MariaDB is installed, it must be uninstalled first; otherwise, the MySQL installation will fail.  </p>
+<p>Uninstall command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps package_name</span><br></pre></td></tr></table></figure>
+
+<p>For example:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps mariadb-libs-xxxxxxx</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Steps-to-Install-and-Configure-MySQL"><a href="#Steps-to-Install-and-Configure-MySQL" class="headerlink" title="Steps to Install and Configure MySQL"></a>Steps to Install and Configure MySQL</h2><h3 id="1-Download-MySQL"><a href="#1-Download-MySQL" class="headerlink" title="1. Download MySQL"></a>1. Download MySQL</h3><p>Download the MySQL 8.0.31 ARM64 version (for macOS M2 chip):</p>
+<p><a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">Download Link</a></p>
+<p>File name: <code>mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz</code></p>
+<h3 id="2-Upload-and-Extract-MySQL"><a href="#2-Upload-and-Extract-MySQL" class="headerlink" title="2. Upload and Extract MySQL"></a>2. Upload and Extract MySQL</h3><ol>
+<li><p>Use <code>sftp</code> to upload the installation package to the Linux server:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put /Users/kathy/Downloads/linux-software/mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz /root/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>On the virtual machine, extract the package to <code>/usr/local/mysql</code> (create the directory first):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf mysql-8.0.31-linux-glibc2.17-aarch64.tar.gz -C /usr/local/mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Navigate to <code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/</code> and create <code>data</code> and <code>log</code> directories.</p>
+</li>
+</ol>
+<h3 id="3-Update-Environment-Variables"><a href="#3-Update-Environment-Variables" class="headerlink" title="3. Update Environment Variables"></a>3. Update Environment Variables</h3><ol>
+<li><p>Open the environment variables file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">vim .bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add the following line:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/bin:/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Apply the changes:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Verify the <code>mysql</code> command path:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> mysql</span><br></pre></td></tr></table></figure>
+
+<p>Output: <code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysql</code></p>
+</li>
+</ol>
+<h3 id="4-Create-MySQL-User-and-Group"><a href="#4-Create-MySQL-User-and-Group" class="headerlink" title="4. Create MySQL User and Group"></a>4. Create MySQL User and Group</h3><ol>
+<li><p>Create the <code>mysql</code> group and user:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd mysql</span><br><span class="line">useradd -r -g mysql -s /bin/false mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Set permissions for the MySQL directory:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R mysql:mysql /usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create and set permissions for the <code>/var/lib/mysql</code> directory:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /var/lib/mysql</span><br><span class="line">sudo <span class="built_in">chown</span> -R mysql:mysql /var/lib/mysql</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="5-Configure-MySQL-Parameters"><a href="#5-Configure-MySQL-Parameters" class="headerlink" title="5. Configure MySQL Parameters"></a>5. Configure MySQL Parameters</h3><ol>
+<li><p>Edit the configuration file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add the following content:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8mb4</span><br><span class="line"><span class="attr">socket</span>=/var/lib/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="attr">socket</span>=/var/lib/mysql/mysql.sock</span><br><span class="line"><span class="attr">basedir</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64</span><br><span class="line"><span class="attr">character-set-server</span>=utf8mb4</span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br><span class="line"><span class="attr">innodb_buffer_pool_size</span>=<span class="number">200</span>M</span><br><span class="line"><span class="attr">max_allowed_packet</span>=<span class="number">16</span>M</span><br><span class="line"><span class="attr">explicit_defaults_for_timestamp</span>=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log-output</span>=FILE</span><br><span class="line"><span class="attr">general_log</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">general_log_file</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/log/general.err</span><br><span class="line"><span class="attr">slow_query_log</span>=<span class="literal">ON</span></span><br><span class="line"><span class="attr">slow_query_log_file</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/log/query.err</span><br><span class="line"><span class="attr">long_query_time</span>=<span class="number">10</span></span><br><span class="line"><span class="attr">log-error</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/log/error.err</span><br><span class="line"><span class="attr">default-authentication-plugin</span>=mysql_native_password</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="6-Initialize-and-Start-MySQL"><a href="#6-Initialize-and-Start-MySQL" class="headerlink" title="6. Initialize and Start MySQL"></a>6. Initialize and Start MySQL</h3><ol>
+<li><p>Initialize MySQL:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64 --datadir=/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/data</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explanation</strong>:</p>
+<ul>
+<li><code>/usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/bin/mysqld</code>: Start the MySQL mysqld service</li>
+<li><code>--initialize</code>: Initializes the MySQL data directory.</li>
+<li><code>--user=mysql</code>: Runs the MySQL service as the <code>mysql</code> user.</li>
+<li><code>--basedir</code>: Specifies the MySQL installation root directory.</li>
+<li><code>--datadir</code>: Specifies the MySQL data directory.</li>
+</ul>
+</li>
+<li><p>Retrieve the generated temporary root password:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /usr/local/mysql-8.0.31-linux-glibc2.17-aarch64/log/error.err</span><br></pre></td></tr></table></figure>
+
+<p>Example output:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A temporary password is generated for root@localhost: **********</span><br></pre></td></tr></table></figure>
+<p>You can save this temporary password.</p>
+</li>
+</ol>
+<h3 id="7-Add-MySQL-to-systemd-Management"><a href="#7-Add-MySQL-to-systemd-Management" class="headerlink" title="7. Add MySQL to systemd Management"></a>7. Add MySQL to systemd Management</h3><ol>
+<li><p>Create a systemd service file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/mysqld.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add the following content:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=MySQL Server</span><br><span class="line"><span class="attr">Documentation</span>=man:mysqld(<span class="number">8</span>)</span><br><span class="line"><span class="attr">Documentation</span>=http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line"><span class="attr">After</span>=network.target</span><br><span class="line"><span class="attr">After</span>=syslog.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">User</span>=mysql</span><br><span class="line"><span class="attr">Group</span>=mysql</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/local/mysql-<span class="number">8.0</span>.<span class="number">31</span>-linux-glibc2.<span class="number">17</span>-aarch64/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line"><span class="attr">LimitNOFILE</span>=<span class="number">65536</span></span><br><span class="line"><span class="attr">LimitNPROC</span>=<span class="number">65536</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="8-Enable-and-Start-MySQL-Service"><a href="#8-Enable-and-Start-MySQL-Service" class="headerlink" title="8. Enable and Start MySQL Service"></a>8. Enable and Start MySQL Service</h3><ol>
+<li><p>Reload systemd configuration:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Start the MySQL service:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Enable MySQL to start on boot:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br></pre></td></tr></table></figure>
+<p>After execution, it displays: Created symlink &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;multi-user.target.wants&#x2F;mysqld.service → &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;mysqld.service.</p>
+</li>
+</ol>
+<h3 id="9-Check-MySQL-Service-Status"><a href="#9-Check-MySQL-Service-Status" class="headerlink" title="9. Check MySQL Service Status"></a>9. Check MySQL Service Status</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+
+<p>This command to check the status of the MySQL service allows you to verify whether the MySQL service is running, view the process ID of the service, and see the most recent status change time. If the MySQL service fails to start properly, this command can also provide error information to help diagnose the issue.</p>
+<p>To see active network connections (optional):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Log-in-to-MySQL"><a href="#10-Log-in-to-MySQL" class="headerlink" title="10. Log in to MySQL"></a>10. Log in to MySQL</h3><p>Log in using the root user:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>If you encounter an error like <code>libtinfo.so.5</code> missing, then execute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/lib64/libtinfo.so.6 /usr/lib64/libtinfo.so.5</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Change-the-Root-Password"><a href="#11-Change-the-Root-Password" class="headerlink" title="11. Change the Root Password"></a>11. Change the Root Password</h3><ol>
+<li><p>Switch to the MySQL database:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql;   </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Allow external access (optional):</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;PASSWORD&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
+<li><p>Update the root password:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter user root@&quot;localhost&quot; identified with mysql_native_password by &#x27;new_password&#x27;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="12-Exit-MySQL-and-Restart"><a href="#12-Exit-MySQL-and-Restart" class="headerlink" title="12. Exit MySQL and Restart"></a>12. Exit MySQL and Restart</h3><p>Exit the MySQL database using:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   mysql&gt; exit</span><br><span class="line">```  </span><br><span class="line">Then restart the MySQL service with the following command:  </span><br><span class="line">```bash</span><br><span class="line">   systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-External-Connection"><a href="#13-External-Connection" class="headerlink" title="13. External Connection"></a>13. External Connection</h3><ol>
+<li><p>Open port 3306 on the firewall:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use Navicat to connect to the MySQL server (Connection - MySQL):</p>
+<ul>
+<li>Host&#x2F;IP: <code>192.168.50.158</code></li>
+<li>Username: <code>root</code></li>
+<li>Password: <code>your_password</code></li>
+</ul>
+</li>
+</ol>
+<p>Set the connection name to anything, enter the virtual machine’s IP address 192.168.50.158 as the host or IP address.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/" rel="prev" title="在Linux服务器上部署项目">
+                  <i class="fa fa-chevron-left"></i> 在Linux服务器上部署项目
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/22/Configuring%20and%20Starting%20Redis%20Service%20on%20Linux/" rel="next" title="Configuring and Starting Redis Service on Linux">
+                  Configuring and Starting Redis Service on Linux <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kathy-kx</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
