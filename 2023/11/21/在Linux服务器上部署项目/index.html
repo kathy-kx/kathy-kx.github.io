@@ -19,17 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="手工部署项目 打包：在IDEA中开发一个Springboot项目，并打成jar包  IDEA右侧maven，点击package即可打包。打包为target&#x2F;helloworld-0.0.1-SNAPSHOT.jar。  将jar包上传到linux服务器   mkdir &#x2F;usr&#x2F;local&#x2F;app 创建目录，准备将项目jar包放在此目录 打开终端，点击菜单中的shell，选择新建远程连接">
+    <meta name="description" content="Manual Deployment1. Package the ProjectDevelop a Spring Boot project in IDEA and package it as a JAR file.Use the Maven tool on the right-hand side of IDEA and click package to build the project.The J">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Linux服务器上部署项目">
+<meta property="og:title" content="Deploying Projects on a Linux Server">
 <meta property="og:url" content="http://example.com/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="Kathy&#39;s Blog">
-<meta property="og:description" content="手工部署项目 打包：在IDEA中开发一个Springboot项目，并打成jar包  IDEA右侧maven，点击package即可打包。打包为target&#x2F;helloworld-0.0.1-SNAPSHOT.jar。  将jar包上传到linux服务器   mkdir &#x2F;usr&#x2F;local&#x2F;app 创建目录，准备将项目jar包放在此目录 打开终端，点击菜单中的shell，选择新建远程连接">
+<meta property="og:description" content="Manual Deployment1. Package the ProjectDevelop a Spring Boot project in IDEA and package it as a JAR file.Use the Maven tool on the right-hand side of IDEA and click package to build the project.The J">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-21T23:23:34.000Z">
-<meta property="article:modified_time" content="2023-11-22T03:28:14.615Z">
+<meta property="article:modified_time" content="2025-01-26T01:19:50.741Z">
 <meta property="article:author" content="Kathy-kx">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Linux - Deployment">
 <meta name="twitter:card" content="summary">
 
 
@@ -37,10 +37,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/","path":"2023/11/21/在Linux服务器上部署项目/","title":"在Linux服务器上部署项目"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/21/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/","path":"2023/11/21/在Linux服务器上部署项目/","title":"Deploying Projects on a Linux Server"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>在Linux服务器上部署项目 | Kathy's Blog</title>
+<title>Deploying Projects on a Linux Server | Kathy's Blog</title>
   
 
 
@@ -112,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%8B%E5%B7%A5%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE"><span class="nav-text">手工部署项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="nav-text">自动部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%EF%BC%9A"><span class="nav-text">准备：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-text">操作步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85Git"><span class="nav-text">1、在Linux中安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85maven"><span class="nav-text">2、在Linux中安装maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E5%86%99Shell%E8%84%9A%E6%9C%AC%EF%BC%88%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E3%80%81%E7%BC%96%E8%AF%91%E3%80%81%E6%89%93%E5%8C%85%E3%80%81%E5%90%AF%E5%8A%A8%EF%BC%89"><span class="nav-text">3、编写Shell脚本（拉取代码、编译、打包、启动）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E4%B8%BA%E7%94%A8%E6%88%B7%E6%8E%88%E4%BA%88%E6%89%A7%E8%A1%8CShell%E8%84%9A%E6%9C%AC%E7%9A%84%E6%9D%83%E9%99%90"><span class="nav-text">4、为用户授予执行Shell脚本的权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%88%E6%9D%83"><span class="nav-text">授权</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E6%89%A7%E8%A1%8CShell%E8%84%9A%E6%9C%AC"><span class="nav-text">5、执行Shell脚本</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Manual-Deployment"><span class="nav-text">Manual Deployment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Package-the-Project"><span class="nav-text">1. Package the Project</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Upload-the-JAR-File-to-the-Linux-Server"><span class="nav-text">2. Upload the JAR File to the Linux Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Start-the-Spring-Boot-Application"><span class="nav-text">3. Start the Spring Boot Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Access-the-Application-Externally"><span class="nav-text">4. Access the Application Externally</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Run-the-Application-in-the-Background"><span class="nav-text">5. Run the Application in the Background</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Stop-the-Spring-Boot-Application"><span class="nav-text">6. Stop the Spring Boot Application</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Automated-Deployment"><span class="nav-text">Automated Deployment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preparation"><span class="nav-text">Preparation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Steps"><span class="nav-text">Steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Install-Git-on-Linux"><span class="nav-text">1. Install Git on Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Install-Maven-on-Linux"><span class="nav-text">2. Install Maven on Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Write-a-Shell-Script-Pull-Code-Compile-Package-Start"><span class="nav-text">3. Write a Shell Script (Pull Code, Compile, Package, Start)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Grant-Execution-Permissions"><span class="nav-text">4. Grant Execution Permissions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Granting-Permissions"><span class="nav-text">Granting Permissions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81Execute-the-Shell-Script"><span class="nav-text">5、Execute the Shell Script</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -136,7 +136,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -184,12 +184,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="在Linux服务器上部署项目 | Kathy's Blog">
+      <meta itemprop="name" content="Deploying Projects on a Linux Server | Kathy's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          在Linux服务器上部署项目
+          Deploying Projects on a Linux Server
         </h1>
 
         <div class="post-meta-container">
@@ -199,9 +199,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-11-21 18:23:34 / Modified: 22:28:14" itemprop="dateCreated datePublished" datetime="2023-11-21T18:23:34-05:00">2023-11-21</time>
+      <time title="Created: 2023-11-21 18:23:34" itemprop="dateCreated datePublished" datetime="2023-11-21T18:23:34-05:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-01-25 20:19:50" itemprop="dateModified" datetime="2025-01-25T20:19:50-05:00">2025-01-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -223,105 +229,129 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="手工部署项目"><a href="#手工部署项目" class="headerlink" title="手工部署项目"></a>手工部署项目</h1><ol>
-<li>打包：在IDEA中开发一个Springboot项目，并打成jar包</li>
-</ol>
-<p>IDEA右侧maven，点击package即可打包。打包为target&#x2F;helloworld-0.0.1-SNAPSHOT.jar。</p>
-<ol start="2">
-<li>将jar包上传到linux服务器</li>
-</ol>
+        <h1 id="Manual-Deployment"><a href="#Manual-Deployment" class="headerlink" title="Manual Deployment"></a>Manual Deployment</h1><h3 id="1-Package-the-Project"><a href="#1-Package-the-Project" class="headerlink" title="1. Package the Project"></a>1. Package the Project</h3><p>Develop a Spring Boot project in IDEA and package it as a JAR file.<br>Use the Maven tool on the right-hand side of IDEA and click <code>package</code> to build the project.<br>The JAR file will be located in <code>target/helloworld-0.0.1-SNAPSHOT.jar</code>.</p>
+<h3 id="2-Upload-the-JAR-File-to-the-Linux-Server"><a href="#2-Upload-the-JAR-File-to-the-Linux-Server" class="headerlink" title="2. Upload the JAR File to the Linux Server"></a>2. Upload the JAR File to the Linux Server</h3><ol>
+<li><p>Create a directory on the Linux server to store the JAR file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /usr/local/app</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Open a terminal and create a remote connection:</p>
 <ul>
-<li><code>mkdir /usr/local/app</code> 创建目录，准备将项目jar包放在此目录</li>
-<li>打开终端，点击菜单中的shell，选择新建远程连接</li>
-<li>选择安全文件传输sftp，点击右边服务器下的加号，添加你要连接的远程服务器ip地址（例如192.168.50.158）</li>
-<li>选中右边的服务器，在“用户”一栏输入服务器对应的用户名（例如root），下方出现“sftp <a href="mailto:&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#53;&#48;&#46;&#x31;&#53;&#x38;">&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x39;&#x32;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#53;&#48;&#46;&#x31;&#53;&#x38;</a>”，点击连接。</li>
-<li>输入密码，连接成功</li>
-<li>输入<code>put 本地文件路径 远程主机路径</code>命令，即<code>put /Users/kathy/Desktop/workspace_idea/helloworld/target/helloworld-0.0.1-SNAPSHOT.jar /usr/local/app/</code>，上传文件到&#x2F;usr&#x2F;local&#x2F;app&#x2F;。</li>
+<li>Use the <code>shell</code> menu to open a new remote connection.</li>
+<li>Select <code>Secure File Transfer (sftp)</code> and add the remote server’s IP address (e.g., <code>192.168.50.158</code>).</li>
+<li>Enter the server’s username (e.g., <code>root</code>) and connect by providing the server’s password.</li>
 </ul>
-<ol start="3">
-<li>启动springboot程序</li>
-</ol>
-<p>在虚拟机终端执行 <code>java -jar helloworld-0.0.1-SNAPSHOT.jar</code></p>
-<span id="more"></span>
-<ol start="4">
-<li>从外部访问。</li>
-</ol>
-<p>访问前需要先确认8080端口对外开放</p>
-<p>重新打开一个窗口，<code>firewall-cmd --zone=public --list-ports</code></p>
-<p>在浏览器访问：IP地址:端口号&#x2F;路径 <a target="_blank" rel="noopener" href="http://192.168.50.158:8080/hello">http://192.168.50.158:8080/hello</a></p>
-<ol start="5">
-<li>附加：改为后台运行</li>
-</ol>
-<p>需求：改为后台运行SpringBoot程序，并将日志输出到日志文件。</p>
-<p>目前的问题：</p>
-<ul>
-<li>线上程序不会采用控制台霸屏的形式运行程序，而是将程序在后台运行。现在的如果屏幕关闭就访问不到了。</li>
-<li>线上程序一般不会将日志输出到控制台，而是输出到日志文件，方便运维查阅信息</li>
-</ul>
-<p>解决方法：</p>
-<p><code>nohup</code>命令：英文全称 nohang up（不挂起），用于不挂断地运行指定命令，退出终端不会影响程序的运行</p>
-<p>语法格式：<code>nohup Command [Arg...][&amp;]</code></p>
-<p>参数说明：</p>
-<p>command：要执行的命令。例如<code>java -jar</code></p>
-<p>Arg：一些参数，可以指定输出文件</p>
-<p>＆：让命令在后台运行</p>
-<p>举例：<br><code>nohup java -jar helloworld-0.0.1-SNAPSHOT.jar &amp;&gt; hello.log &amp;</code> 意思是：后台运行java-jar命令，并将日志输出到hello.log文件。其中<code>&amp;&gt; hello.log</code>是输出到日志文件的固定写法，此处hello.log写的是相对路径，会在当前所在的目录下生成该日志。可以通过<code>more hello.log</code>来查看输出的信息</p>
-<ol start="6">
-<li>停止SpringBoot程序</li>
-</ol>
-<p>需要通过杀进程的方式停服务。</p>
-<p><code>ps -ef|grep java</code> 先查出springboot程序的进程号</p>
-<p><code>kill -9 [进程号]</code> 杀进程</p>
-<h1 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h1><h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><p>gitee上创建远程仓库，把本地IDEA创建的代码推送到远程git仓库</p>
-<h2 id="操作步骤："><a href="#操作步骤：" class="headerlink" title="操作步骤："></a>操作步骤：</h2><h3 id="1、在Linux中安装Git"><a href="#1、在Linux中安装Git" class="headerlink" title="1、在Linux中安装Git"></a>1、在Linux中安装Git</h3><ul>
-<li><code>yum list git</code> 列出git安装包</li>
-</ul>
-<p>结果：可安装的软件包<br>git.aarch64                       **** 2.39.1-1.el9                        appstream</p>
-<ul>
-<li><p><code>yum install git</code> 在线安装git</p>
 </li>
-<li><p>使用git克隆代码</p>
-<p>  <code>cd /usr/local</code></p>
-<p>  <code>git clone &lt;gitee某代码仓库的地址&gt;</code></p>
-<p>  例如 <code>git clone https://gitee.com/kathy/helloworld.git</code></p>
-<p>  就可以将该仓库克隆至当前的目录&#x2F;usr&#x2F;local</p>
-</li>
-</ul>
-<h3 id="2、在Linux中安装maven"><a href="#2、在Linux中安装maven" class="headerlink" title="2、在Linux中安装maven"></a>2、在Linux中安装maven</h3><ul>
-<li><p>在官网下载apache-maven-3.6.3-bin.tar.gz，通过sftp传到linux的&#x2F;usr&#x2F;local中</p>
-<p>  <code>sftp&gt; put /Users/kxzhu/Downloads/apache-maven-3.6.3-bin.tar.gz /usr/local</code></p>
-</li>
-<li><p>解压：<code>tar -zxvf apache-maven-3.6.3-bin.tar.gz [-C /usr/local]</code> </p>
-</li>
-<li><p>修改配置文件：<code>vim /etc/profile</code></p>
-<p>  export MAVEN_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;apache-maven-3.6.3<br>  export PATH&#x3D;$JAVA_HOME&#x2F;bin:$MAVEN_HOME&#x2F;bin:$PATH</p>
-</li>
-<li><p>使配置文件修改生效：<code>source /etc/profile</code></p>
-</li>
-<li><p>查看maven是否安装好：<code>mvn -version</code></p>
-</li>
-<li><p>修改配置文件 设置本地仓库：<code>vim /usr/local/apache-maven-3.6.3/conf/settings.xml</code></p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>/usr/local/repo<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span> （注意：提前mkdir repo）</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="3、编写Shell脚本（拉取代码、编译、打包、启动）"><a href="#3、编写Shell脚本（拉取代码、编译、打包、启动）" class="headerlink" title="3、编写Shell脚本（拉取代码、编译、打包、启动）"></a>3、编写Shell脚本（拉取代码、编译、打包、启动）</h3><p>Shell脚本(shell script)：需要一个能编写代码的文本编辑器，和一个能解释执行的脚本解释器。</p>
-<p>在linux环境下，由linux系统解释、执行。</p>
-<p>步骤：</p>
-<ul>
-<li>在&#x2F;usr&#x2F;local&#x2F;目录下创建sh目录。<code>mkdir sh</code></li>
-<li>在sh文件夹中创建sh脚本文件。<code>vim bootStart.sh</code></li>
-<li>将提供的shell脚本文件bootStart.sh复制到linux的bootStart.sh文件中</li>
-</ul>
-<p>bootStart.sh如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> ==============================</span><br><span class="line"><span class="built_in">echo</span>  自动化部署脚本启动</span><br><span class="line"><span class="built_in">echo</span> ==============================</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 停止原来运行中的工程 <span class="comment">#echo 类似java中的sout</span></span><br><span class="line">APP_NAME=helloworld</span><br><span class="line"></span><br><span class="line">tpid=`ps -ef|grep <span class="variable">$APP_NAME</span>|grep -v grep|grep -v <span class="built_in">kill</span>|awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;tpid&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;Stop Process...&#x27;</span></span><br><span class="line">	<span class="built_in">kill</span> -15 <span class="variable">$tpid</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">sleep</span> 2</span><br><span class="line">tpid=`ps -ef|grep <span class="variable">$APP_NAME</span>|grep -v grep|grep -v <span class="built_in">kill</span>|awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;tpid&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;Kill Process!&#x27;</span></span><br><span class="line">	<span class="built_in">kill</span> -9 <span class="variable">$tpid</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;Stop Success!&#x27;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 准备从Git仓库拉取最新代码</span><br><span class="line"><span class="built_in">cd</span> /usr/local/helloworld</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 开始从Git仓库拉取最新代码</span><br><span class="line">git pull</span><br><span class="line"><span class="built_in">echo</span> 代码拉取完成</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 开始打包</span><br><span class="line">output=`mvn clean package -Dmaven.test.skip=<span class="literal">true</span>`</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> target</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 启动项目</span><br><span class="line"><span class="built_in">nohup</span> java -jar helloworld-0.0.1-SNAPSHOT.jar &amp;&gt; helloworld.log &amp;</span><br><span class="line"><span class="built_in">echo</span> 项目启动完成</span><br></pre></td></tr></table></figure>
+<li><p>Upload the file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put /Users/kathy/Desktop/workspace_idea/helloworld/target/helloworld-0.0.1-SNAPSHOT.jar /usr/local/app/</span><br></pre></td></tr></table></figure>
 
+<p>This command uploads the JAR file to <code>/usr/local/app/</code>.</p>
+</li>
+</ol>
+<h3 id="3-Start-the-Spring-Boot-Application"><a href="#3-Start-the-Spring-Boot-Application" class="headerlink" title="3. Start the Spring Boot Application"></a>3. Start the Spring Boot Application</h3><p>On the Linux terminal, navigate(cd) to the directory and execute the following command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar helloworld-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<h3 id="4-Access-the-Application-Externally"><a href="#4-Access-the-Application-Externally" class="headerlink" title="4. Access the Application Externally"></a>4. Access the Application Externally</h3><ol>
+<li><p>Ensure that port <code>8080</code> is open:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Access the application in a browser:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.50.158:8080/hello</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="5-Run-the-Application-in-the-Background"><a href="#5-Run-the-Application-in-the-Background" class="headerlink" title="5. Run the Application in the Background"></a>5. Run the Application in the Background</h3><p><strong>Requirement</strong>: Run the Spring Boot application in the background and log outputs to a file.</p>
+<p><strong>Problem</strong>:</p>
 <ul>
-<li>:wq保存</li>
+<li>Programs running in the foreground will stop if the terminal is closed.</li>
+<li>Logs displayed in the console are inconvenient for maintenance.</li>
 </ul>
-<h3 id="4、为用户授予执行Shell脚本的权限"><a href="#4、为用户授予执行Shell脚本的权限" class="headerlink" title="4、为用户授予执行Shell脚本的权限"></a>4、为用户授予执行Shell脚本的权限</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>非root用户需要授权才能执行某些操作。</p>
-<p>chmod(英文全拼：change mode）命令是控制用户对文件的权限的命令</p>
-<p>Linux中的权限分为：读(r）、写(W)、执行(x)三种权限</p>
-<p>Linux的文件调用权限分为三级：文件所有者（Owner）、用户组（Group-某个组内所有的用户）、其它用户 (Other Users)</p>
-<p>只有文件的所有者和超级用户(root)可以修改文件或目录的权限，要执行Shell脚本需要有对此脚本文件的执行权限，如果没有则不能执行。</p>
+<p><strong>Solution</strong>: Use the <code>nohup</code> command to run the application without hanging up.</p>
+<p><strong>Syntax</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> Command [Arg...] [&amp;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> java -jar helloworld-0.0.1-SNAPSHOT.jar &amp;&gt; hello.log &amp;</span><br></pre></td></tr></table></figure>
+
+<p>Explanation:</p>
+<ul>
+<li><code>nohup</code>: Ensures the command continues to run after the terminal is closed.</li>
+<li><code>&amp;&gt;</code>: Redirects the log output to <code>hello.log</code> in the current directory.</li>
+<li><code>&amp;</code>: Runs the command in the background.</li>
+<li>Use <code>more hello.log</code> to view the log.</li>
+</ul>
+<h3 id="6-Stop-the-Spring-Boot-Application"><a href="#6-Stop-the-Spring-Boot-Application" class="headerlink" title="6. Stop the Spring Boot Application"></a>6. Stop the Spring Boot Application</h3><p>To stop the application, terminate its process:</p>
+<ol>
+<li><p>Find the process ID (PID):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Kill the process:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 [PID]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h1 id="Automated-Deployment"><a href="#Automated-Deployment" class="headerlink" title="Automated Deployment"></a>Automated Deployment</h1><h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h2><p>Create a remote repository on Gitee&#x2F;Github and push your local IDEA project code to the repository.</p>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="1-Install-Git-on-Linux"><a href="#1-Install-Git-on-Linux" class="headerlink" title="1. Install Git on Linux"></a>1. Install Git on Linux</h3><ol>
+<li><p>List available Git packages:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Install Git:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Clone the project from the Gitee repository:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local</span><br><span class="line">git <span class="built_in">clone</span> &lt;repository_url&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Example:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/kathy/helloworld.git</span><br></pre></td></tr></table></figure>
+
+<p>The project will be cloned to <code>/usr/local</code>.</p>
+</li>
+</ol>
+<h3 id="2-Install-Maven-on-Linux"><a href="#2-Install-Maven-on-Linux" class="headerlink" title="2. Install Maven on Linux"></a>2. Install Maven on Linux</h3><ol>
+<li><p>Download <code>apache-maven-3.6.3-bin.tar.gz</code> from the official website and upload it to <code>/usr/local</code> on Linux Server using SFTP:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sftp&gt; put /Users/kxzhu/Downloads/apache-maven-3.6.3-bin.tar.gz /usr/local</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Extract the package:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.6.3-bin.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Update environment variables:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>Add the following:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> MAVEN_HOME=/usr/local/apache-maven-3.6.3</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$MAVEN_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Apply the changes:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Verify Maven installation:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Configure the local repository in Maven:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/apache-maven-3.6.3/conf/settings.xml</span><br></pre></td></tr></table></figure>
+
+<p>Add:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>/usr/local/repo<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-Write-a-Shell-Script-Pull-Code-Compile-Package-Start"><a href="#3-Write-a-Shell-Script-Pull-Code-Compile-Package-Start" class="headerlink" title="3. Write a Shell Script (Pull Code, Compile, Package, Start)"></a>3. Write a Shell Script (Pull Code, Compile, Package, Start)</h3><p>A Shell script requires a text editor to write the code and a script interpreter to execute it.</p>
+<p>In a Linux environment, it is interpreted and executed by the Linux system.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li><p>Create a directory for scripts:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /usr/local/sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create a shell script file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/sh/bootStart.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add the following content to <code>bootStart.sh</code>:</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> ==============================</span><br><span class="line"><span class="built_in">echo</span>  Automated Deployment Script Starting</span><br><span class="line"><span class="built_in">echo</span> ==============================</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Stopping the running application</span><br><span class="line">APP_NAME=helloworld</span><br><span class="line"></span><br><span class="line">tpid=`ps -ef|grep <span class="variable">$APP_NAME</span>|grep -v grep|grep -v <span class="built_in">kill</span>|awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;tpid&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;Stop Process...&#x27;</span></span><br><span class="line">	<span class="built_in">kill</span> -15 <span class="variable">$tpid</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">sleep</span> 2</span><br><span class="line">tpid=`ps -ef|grep <span class="variable">$APP_NAME</span>|grep -v grep|grep -v <span class="built_in">kill</span>|awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;tpid&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;Kill Process!&#x27;</span></span><br><span class="line">	<span class="built_in">kill</span> -9 <span class="variable">$tpid</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;Stop Success!&#x27;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Pulling the latest code from Git repository</span><br><span class="line"><span class="built_in">cd</span> /usr/local/helloworld</span><br><span class="line">git pull</span><br><span class="line"><span class="built_in">echo</span> Code pulled successfully</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Packaging the application</span><br><span class="line">output=`mvn clean package -Dmaven.test.skip=<span class="literal">true</span>`</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> target</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Starting the application</span><br><span class="line"><span class="built_in">nohup</span> java -jar helloworld-0.0.1-SNAPSHOT.jar &amp;&gt; helloworld.log &amp;</span><br><span class="line"><span class="built_in">echo</span> Application started successfully </span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Save and exit (<code>:wq</code>).</li>
+</ol>
+<h3 id="4-Grant-Execution-Permissions"><a href="#4-Grant-Execution-Permissions" class="headerlink" title="4. Grant Execution Permissions"></a>4. Grant Execution Permissions</h3><p>Non-root users need to be granted permissions to execute certain operations.</p>
+<p>The chmod command (short for change mode) is used to control file permissions for users.</p>
+<p>In Linux, permissions are divided into three types:<br>   •  Read (r): Allows reading the file or listing the directory contents.<br>   •  Write (w): Allows modifying the file or creating&#x2F;deleting files in a directory.<br>   •  Execute (x): Allows executing the file or accessing a directory.</p>
+<p>File permissions in Linux are categorized into three levels:<br>   •  Owner: The file’s owner.<br>   •  Group: The group of users who have access to the file.<br>   •  Other Users: All other users who are neither the owner nor part of the group.</p>
+<p>Only the file owner and the root user can modify file or directory permissions. To execute a Shell script, the user must have execution permissions for the script; otherwise, it cannot be executed.</p>
 <table>
 <thead>
 <tr>
@@ -338,7 +368,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>文件类型</td>
+<td>File Type</td>
 <td></td>
 <td></td>
 <td></td>
@@ -350,16 +380,14 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>-代表目录或文件。</p>
-<p>后面三位 代表文件所有者Owner的读、写、执行权限。如果对应位是-，说明无权限。</p>
-<p>再后面三位 代表owner所在用户组Group的读、写、执行权限。如果对应位是-，说明无权限。</p>
-<p>最后面三位 代表其它用户的读、写、执行权限。如果对应位是-，说明无权限。</p>
-<h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4><p>chmod命令可以使用三位八进制数来指定权限。<code>chmod 三位八进制数权限 文件名</code></p>
-<p>八进制数对应8种权限（2^3）：</p>
+<p>The <code>-</code> represents a file, while <code>d</code> represents a directory.<br>The first three positions after the file type indicate the owner’s read, write, and execute permissions.<br>The next three positions represent the group’s permissions.<br>The last three positions represent the permissions for other users.</p>
+<p>If any position contains <code>-</code>, it indicates that the corresponding permission is not granted.</p>
+<h4 id="Granting-Permissions"><a href="#Granting-Permissions" class="headerlink" title="Granting Permissions"></a>Granting Permissions</h4><p>The chmod command uses a three-digit octal number to specify file permissions: <code>chmod [octal permission] filename</code></p>
+<p>Each octal digit corresponds to specific permissions (2^3 combinations)：</p>
 <table>
 <thead>
 <tr>
-<th>八进制数</th>
+<th>Octal Value</th>
 <th>0</th>
 <th>1</th>
 <th>2</th>
@@ -371,15 +399,15 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>权限</td>
-<td>无</td>
-<td>只执行</td>
-<td>只写</td>
-<td>写+执行</td>
-<td>只读</td>
-<td>读+执行</td>
-<td>读+写</td>
-<td>读+写+执行</td>
+<td>Permission</td>
+<td>None</td>
+<td>Execute Only</td>
+<td>Write Only</td>
+<td>write + Execute</td>
+<td>Read Only</td>
+<td>Read + Execute</td>
+<td>Read + Write</td>
+<td>Read + Write + Execute</td>
 </tr>
 <tr>
 <td>rwx</td>
@@ -393,20 +421,23 @@
 <td>rwx</td>
 </tr>
 </tbody></table>
-<p>三位数字分别代表不同用户的权限：</p>
+<p>The three digits represent the permissions for:</p>
 <ul>
-<li>第1位表示文件拥有者的权限</li>
-<li>第2位表示同组用户的权限</li>
-<li>第3位表示其他用户的权限</li>
+<li>First digit: The owner’s permissions.</li>
+<li>Second digit: The group’s permissions.</li>
+<li>Third digit: Other users’ permissions.</li>
 </ul>
-<p>例子：</p>
+<p><strong>Examples</strong>:</p>
 <ul>
-<li><code>chmod 777 bootStart.sh</code> 为所有用户授予读、写、执行权限</li>
-<li><code>chmod 755 bootStart.sh</code> 为文件拥有者授予读、写、执行权限，同组用户和其他用户授予读、执行权限</li>
-<li><code>chmod 210 bootStart.sh</code> 为文件拥有者授予写权限，同组用户授予执行权限，其他用户没有任何权限</li>
+<li><code>chmod 777 bootStart.sh</code> Grant full permissions to all users</li>
+<li><code>chmod 755 bootStart.sh</code> Grant full permissions to the owner, and read&#x2F;execute permissions to others</li>
+<li><code>chmod 210 bootStart.sh</code> Grant write permissions to the owner, execute permissions to the group, and no permissions to others</li>
 </ul>
-<h3 id="5、执行Shell脚本"><a href="#5、执行Shell脚本" class="headerlink" title="5、执行Shell脚本"></a>5、执行Shell脚本</h3><p>授权可执行后，<code>./shell文件名</code>。例如<code>./bootStart.sh</code></p>
-<p>启动后，访问<a target="_blank" rel="noopener" href="http://192.168.50.158:8080/hello">http://192.168.50.158:8080/hello</a> ,就会显示OK。</p>
+<h3 id="5、Execute-the-Shell-Script"><a href="#5、Execute-the-Shell-Script" class="headerlink" title="5、Execute the Shell Script"></a>5、Execute the Shell Script</h3><p>Run the script:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bootStart.sh</span><br></pre></td></tr></table></figure>
+
+<p>Access the application:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.50.158:8080/hello</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -416,7 +447,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Linux-Deployment/" rel="tag"># Linux - Deployment</a>
           </div>
 
         
