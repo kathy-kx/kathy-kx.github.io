@@ -821,7 +821,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8git/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/Using%20Git%20in%20IntelliJ%20IDEA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -839,7 +839,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/21/IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8git/" class="post-title-link" itemprop="url">IDEA中使用git</a>
+          <a href="/2023/11/21/Using%20Git%20in%20IntelliJ%20IDEA/" class="post-title-link" itemprop="url">Using Git in IntelliJ IDEA</a>
         </h2>
 
         <div class="post-meta-container">
@@ -857,7 +857,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-30 20:42:27" itemprop="dateModified" datetime="2023-11-30T20:42:27-05:00">2023-11-30</time>
+      <time title="Modified: 2025-01-25 21:04:30" itemprop="dateModified" datetime="2025-01-25T21:04:30-05:00">2025-01-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -879,13 +879,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="一、将IDEA上自己创建的项目上传到远程仓库："><a href="#一、将IDEA上自己创建的项目上传到远程仓库：" class="headerlink" title="一、将IDEA上自己创建的项目上传到远程仓库："></a>一、将IDEA上自己创建的项目上传到远程仓库：</h2><h3 id="1、本地初始化仓库"><a href="#1、本地初始化仓库" class="headerlink" title="1、本地初始化仓库"></a>1、本地初始化仓库</h3><p>用IDEA创建maven项目，希望通过本地git仓库对该项目进行管理</p>
-<p>先创建好maven项目；</p>
-<p>顶部菜单VCS(Version Control) - <strong>Create Git Repository</strong> - 选择你的项目目录后，该项目目录就会变成仓库目录 - IDEA顶部也会出现几个git图标</p>
-<h3 id="2、将本地仓库关联gitee上的远程仓库"><a href="#2、将本地仓库关联gitee上的远程仓库" class="headerlink" title="2、将本地仓库关联gitee上的远程仓库"></a>2、将本地仓库关联gitee上的远程仓库</h3><p>右键项目名 - Git - <strong>Manage Remotes</strong> - 在弹出的Git Remotes点击“+”，输入name(例如origin) &amp; url(例如<a target="_blank" rel="noopener" href="https://gitee.com/kxzhu93/git_test.git">https://gitee.com/kxzhu93/git_test.git</a>) 即可让本地仓库关联该远程仓库；</p>
+          <h2 id="1-Uploading-a-Project-Created-in-IDEA-to-a-Remote-Repository"><a href="#1-Uploading-a-Project-Created-in-IDEA-to-a-Remote-Repository" class="headerlink" title="1. Uploading a Project Created in IDEA to a Remote Repository"></a>1. Uploading a Project Created in IDEA to a Remote Repository</h2><h3 id="1-1-Initialize-a-Local-Repository"><a href="#1-1-Initialize-a-Local-Repository" class="headerlink" title="1.1 Initialize a Local Repository"></a>1.1 Initialize a Local Repository</h3><p>Create a Maven project in IDEA and manage it with a local Git repository:</p>
+<ol>
+<li>Create a Maven project in IDEA.</li>
+<li>Go to the top menu: <strong>VCS (Version Control)</strong> -&gt; <strong>Create Git Repository</strong>.</li>
+<li>Select your project directory. The directory will become a repository, and Git icons will appear at the top of the IDEA interface.</li>
+</ol>
+<h2 id="1-2-Associate-the-Local-Repository-with-a-Remote-Repository-on-Gitee"><a href="#1-2-Associate-the-Local-Repository-with-a-Remote-Repository-on-Gitee" class="headerlink" title="1.2 Associate the Local Repository with a Remote Repository on Gitee"></a>1.2 Associate the Local Repository with a Remote Repository on Gitee</h2><ol>
+<li>Right-click the project name -&gt; <strong>Git</strong> -&gt; <strong>Manage Remotes</strong>.</li>
+<li>In the <strong>Git Remotes</strong> dialog, click the <code>+</code> button.</li>
+<li>Enter the remote name (e.g., <code>origin</code>) and URL (e.g., <code>https://gitee.com/kxzhu93/git_test.git</code>) to associate the local repository with the remote one.</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/21/IDEA%E4%B8%AD%E4%BD%BF%E7%94%A8git/#more" rel="contents">
+              <a class="btn" href="/2023/11/21/Using%20Git%20in%20IntelliJ%20IDEA/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-K.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-K.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-K.png">
+  <link rel="mask-icon" href="/images/logo-K.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. Uploading a Project Created in IDEA to a Remote Repository1.1 Initialize a Local RepositoryCreate a Maven project in IDEA and manage it with a local Git repository:  Create a Maven project in IDEA.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using Git in IntelliJ IDEA">
+<meta property="og:url" content="http://example.com/2023/11/21/Using%20Git%20in%20IntelliJ%20IDEA/index.html">
+<meta property="og:site_name" content="Kathy&#39;s Blog">
+<meta property="og:description" content="1. Uploading a Project Created in IDEA to a Remote Repository1.1 Initialize a Local RepositoryCreate a Maven project in IDEA and manage it with a local Git repository:  Create a Maven project in IDEA.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-21T16:26:02.000Z">
+<meta property="article:modified_time" content="2025-01-26T02:04:30.688Z">
+<meta property="article:author" content="Kathy-kx">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="IntelliJ IDEA">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/11/21/Using%20Git%20in%20IntelliJ%20IDEA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/21/Using%20Git%20in%20IntelliJ%20IDEA/","path":"2023/11/21/Using Git in IntelliJ IDEA/","title":"Using Git in IntelliJ IDEA"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Using Git in IntelliJ IDEA | Kathy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kathy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Uploading-a-Project-Created-in-IDEA-to-a-Remote-Repository"><span class="nav-text">1. Uploading a Project Created in IDEA to a Remote Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Initialize-a-Local-Repository"><span class="nav-text">1.1 Initialize a Local Repository</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Associate-the-Local-Repository-with-a-Remote-Repository-on-Gitee"><span class="nav-text">1.2 Associate the Local Repository with a Remote Repository on Gitee</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Add-Commit-and-Push-Changes-from-IDEA-to-the-Remote-Repository"><span class="nav-text">1.3 Add, Commit, and Push Changes from IDEA to the Remote Repository</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Cloning-a-Remote-Repository-and-Pushing-Changes-Back"><span class="nav-text">2. Cloning a Remote Repository and Pushing Changes Back</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Clone-a-Remote-Repository"><span class="nav-text">2.1 Clone a Remote Repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Push-Changes-Back-to-the-Remote-Repository"><span class="nav-text">2.2 Push Changes Back to the Remote Repository</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Pulling-Updates-from-a-Remote-Repository"><span class="nav-text">3. Pulling Updates from a Remote Repository</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configuration"><span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Working-with-Git-Repositories"><span class="nav-text">Working with Git Repositories</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Initialize-a-Local-Repository"><span class="nav-text">1. Initialize a Local Repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Clone-a-Remote-Repository"><span class="nav-text">2. Clone a Remote Repository</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-gitignore-File"><span class="nav-text">The .gitignore File</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Local-Repository-Operations"><span class="nav-text">Local Repository Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Add-Files-to-the-Staging-Area"><span class="nav-text">1. Add Files to the Staging Area</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Commit-Files-from-Staging-Area-to-Local-Repository"><span class="nav-text">2. Commit Files from Staging Area to Local Repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-View-Logs"><span class="nav-text">3. View Logs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Remote-Repository-Operations"><span class="nav-text">Remote Repository Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-View-Associated-Remote-Repositories"><span class="nav-text">1. View Associated Remote Repositories</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Add-a-Remote-Repository"><span class="nav-text">2. Add a Remote Repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Push-to-a-Remote-Repository"><span class="nav-text">3. Push to a Remote Repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Pull-from-a-Remote-Repository"><span class="nav-text">4. Pull from a Remote Repository</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch-Operations"><span class="nav-text">Branch Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-View-Branches"><span class="nav-text">1. View Branches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Create-a-Branch"><span class="nav-text">2. Create a Branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Switch-Branches"><span class="nav-text">3. Switch Branches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Push-a-Branch-to-a-Remote-Repository"><span class="nav-text">4. Push a Branch to a Remote Repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Merge-Branches"><span class="nav-text">5. Merge Branches</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Kathy-kx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kathy-kx" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kathy-kx" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kzhu011@uottawa.ca" title="E-Mail → mailto:kzhu011@uottawa.ca" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/Using%20Git%20in%20IntelliJ%20IDEA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kathy-kx">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Using Git in IntelliJ IDEA | Kathy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Using Git in IntelliJ IDEA
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-21 11:26:02" itemprop="dateCreated datePublished" datetime="2023-11-21T11:26:02-05:00">2023-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-01-25 21:04:30" itemprop="dateModified" datetime="2025-01-25T21:04:30-05:00">2025-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-Uploading-a-Project-Created-in-IDEA-to-a-Remote-Repository"><a href="#1-Uploading-a-Project-Created-in-IDEA-to-a-Remote-Repository" class="headerlink" title="1. Uploading a Project Created in IDEA to a Remote Repository"></a>1. Uploading a Project Created in IDEA to a Remote Repository</h2><h3 id="1-1-Initialize-a-Local-Repository"><a href="#1-1-Initialize-a-Local-Repository" class="headerlink" title="1.1 Initialize a Local Repository"></a>1.1 Initialize a Local Repository</h3><p>Create a Maven project in IDEA and manage it with a local Git repository:</p>
+<ol>
+<li>Create a Maven project in IDEA.</li>
+<li>Go to the top menu: <strong>VCS (Version Control)</strong> -&gt; <strong>Create Git Repository</strong>.</li>
+<li>Select your project directory. The directory will become a repository, and Git icons will appear at the top of the IDEA interface.</li>
+</ol>
+<h2 id="1-2-Associate-the-Local-Repository-with-a-Remote-Repository-on-Gitee"><a href="#1-2-Associate-the-Local-Repository-with-a-Remote-Repository-on-Gitee" class="headerlink" title="1.2 Associate the Local Repository with a Remote Repository on Gitee"></a>1.2 Associate the Local Repository with a Remote Repository on Gitee</h2><ol>
+<li>Right-click the project name -&gt; <strong>Git</strong> -&gt; <strong>Manage Remotes</strong>.</li>
+<li>In the <strong>Git Remotes</strong> dialog, click the <code>+</code> button.</li>
+<li>Enter the remote name (e.g., <code>origin</code>) and URL (e.g., <code>https://gitee.com/kxzhu93/git_test.git</code>) to associate the local repository with the remote one.</li>
+</ol>
+<span id="more"></span>
+<h3 id="1-3-Add-Commit-and-Push-Changes-from-IDEA-to-the-Remote-Repository"><a href="#1-3-Add-Commit-and-Push-Changes-from-IDEA-to-the-Remote-Repository" class="headerlink" title="1.3 Add, Commit, and Push Changes from IDEA to the Remote Repository"></a>1.3 Add, Commit, and Push Changes from IDEA to the Remote Repository</h3><p>Use the Git icons to add, commit (select <strong>Unversioned Files</strong>), and push changes from your local repository to the remote repository.</p>
+<h2 id="2-Cloning-a-Remote-Repository-and-Pushing-Changes-Back"><a href="#2-Cloning-a-Remote-Repository-and-Pushing-Changes-Back" class="headerlink" title="2. Cloning a Remote Repository and Pushing Changes Back"></a>2. Cloning a Remote Repository and Pushing Changes Back</h2><h3 id="2-1-Clone-a-Remote-Repository"><a href="#2-1-Clone-a-Remote-Repository" class="headerlink" title="2.1 Clone a Remote Repository"></a>2.1 Clone a Remote Repository</h3><p>Clone a repository from Gitee to view, modify, and push changes locally:</p>
+<ol>
+<li>Top menu: <strong>VCS (Version Control)</strong> -&gt; <strong>Get from Version Control</strong>.</li>
+<li>Enter the repository URL (e.g., HTTPS), and log in with your Gitee credentials.</li>
+<li>Alternatively:<ul>
+<li>On IDEA’s startup page, choose <strong>Get from Version Control</strong>.</li>
+<li>Or, go to <strong>Git</strong> → <strong>Clone</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-2-Push-Changes-Back-to-the-Remote-Repository"><a href="#2-2-Push-Changes-Back-to-the-Remote-Repository" class="headerlink" title="2.2 Push Changes Back to the Remote Repository"></a>2.2 Push Changes Back to the Remote Repository</h3><p>Add, commit (select <strong>Unversioned Files</strong>), and push changes from IDEA using the Git icons.</p>
+<h2 id="3-Pulling-Updates-from-a-Remote-Repository"><a href="#3-Pulling-Updates-from-a-Remote-Repository" class="headerlink" title="3. Pulling Updates from a Remote Repository"></a>3. Pulling Updates from a Remote Repository</h2><p>If the remote repository has updates and you need to pull them locally:</p>
+<ul>
+<li>Click the Git icon -&gt; <strong>Update Project</strong> -&gt; <strong>OK</strong>.</li>
+</ul>
+<h1 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h1><p>After installing Git, configure IDEA:</p>
+<ol>
+<li>Go to <strong>Settings</strong> -&gt; <strong>Version Control</strong> -&gt; <strong>Git</strong>.</li>
+<li>IDEA should automatically detect the Git executable path. Click <strong>Test</strong> to verify. If the version number appears, the configuration is correct.</li>
+</ol>
+<h1 id="Working-with-Git-Repositories"><a href="#Working-with-Git-Repositories" class="headerlink" title="Working with Git Repositories"></a>Working with Git Repositories</h1><h2 id="1-Initialize-a-Local-Repository"><a href="#1-Initialize-a-Local-Repository" class="headerlink" title="1. Initialize a Local Repository"></a>1. Initialize a Local Repository</h2><p>To manage a Maven project in IDEA using Git:</p>
+<ul>
+<li>Top menu -&gt; <strong>VCS (Version Control)</strong> -&gt; <strong>Create Git Repository</strong>.</li>
+<li>Select the project directory. Git icons will appear in the interface.</li>
+</ul>
+<h2 id="2-Clone-a-Remote-Repository"><a href="#2-Clone-a-Remote-Repository" class="headerlink" title="2. Clone a Remote Repository"></a>2. Clone a Remote Repository</h2><p>Clone a repository from Gitee to view, modify, and push changes:</p>
+<ol>
+<li>Top menu: <strong>VCS (Version Control)</strong> -&gt; <strong>Get from Version Control</strong>.</li>
+<li>Enter the repository URL, log in with Gitee credentials, and clone.</li>
+<li>Alternatively:<ul>
+<li>On the startup page, choose <strong>Get from Version Control</strong>.</li>
+<li>Or, go to <strong>Git</strong> → <strong>Clone</strong>.</li>
+</ul>
+</li>
+</ol>
+<h1 id="The-gitignore-File"><a href="#The-gitignore-File" class="headerlink" title="The .gitignore File"></a>The <code>.gitignore</code> File</h1><p><strong>Purpose</strong>: Defines which files in the repository should be ignored by Git. Examples include <code>.git</code>, <code>target</code> folders, <code>.iml</code> files, etc.</p>
+<p><strong>How to Create</strong>:</p>
+<ol>
+<li>When creating a remote repository on Gitee:<ul>
+<li>Choose <strong>Initialize Repository</strong>.</li>
+<li>Select <strong>Java</strong> as the language.</li>
+<li>Add a <code>.gitignore</code> file for Java. The file will appear in the root directory of the repository.</li>
+</ul>
+</li>
+</ol>
+<h1 id="Local-Repository-Operations"><a href="#Local-Repository-Operations" class="headerlink" title="Local Repository Operations"></a>Local Repository Operations</h1><h2 id="1-Add-Files-to-the-Staging-Area"><a href="#1-Add-Files-to-the-Staging-Area" class="headerlink" title="1. Add Files to the Staging Area"></a>1. Add Files to the Staging Area</h2><ul>
+<li><p><strong>Method 1</strong>: When creating a new class, click <strong>Add</strong> in the dialog box to stage the file (equivalent to <code>git add</code>).</p>
+</li>
+<li><p><strong>Method 2</strong>: Right-click the file → <strong>Git</strong> → <strong>Add</strong>.</p>
+</li>
+<li><p><strong>Red</strong>: Files not staged.</p>
+</li>
+<li><p><strong>Green</strong>: Files staged.</p>
+</li>
+<li><p><strong>Black</strong>: Files under Git management.</p>
+</li>
+</ul>
+<h2 id="2-Commit-Files-from-Staging-Area-to-Local-Repository"><a href="#2-Commit-Files-from-Staging-Area-to-Local-Repository" class="headerlink" title="2. Commit Files from Staging Area to Local Repository"></a>2. Commit Files from Staging Area to Local Repository</h2><p>Equivalent to <code>git commit -m &quot;message&quot;</code>.</p>
+<ul>
+<li><strong>Method 1</strong>: Right-click the file → <strong>Git</strong> → <strong>Commit File</strong>. Select the files to commit and add a commit message.</li>
+<li><strong>Method 2</strong>: Use the green checkmark in the Git toolbar to stage and commit files in one step.</li>
+</ul>
+<h2 id="3-View-Logs"><a href="#3-View-Logs" class="headerlink" title="3. View Logs"></a>3. View Logs</h2><p>Equivalent to <code>git log</code>.</p>
+<ul>
+<li>Use the clock icon in the Git toolbar (<strong>Show History</strong>) to view:<ul>
+<li>Local Changes.</li>
+<li>Logs of all project changes. Click a version to see modifications.</li>
+</ul>
+</li>
+</ul>
+<h1 id="Remote-Repository-Operations"><a href="#Remote-Repository-Operations" class="headerlink" title="Remote Repository Operations"></a>Remote Repository Operations</h1><h2 id="1-View-Associated-Remote-Repositories"><a href="#1-View-Associated-Remote-Repositories" class="headerlink" title="1. View Associated Remote Repositories"></a>1. View Associated Remote Repositories</h2><p>Right-click the project name → <strong>Git</strong> → <strong>Manage Remotes</strong>.</p>
+<h2 id="2-Add-a-Remote-Repository"><a href="#2-Add-a-Remote-Repository" class="headerlink" title="2. Add a Remote Repository"></a>2. Add a Remote Repository</h2><p>Associate a local repository with a remote repository on Gitee:</p>
+<ol>
+<li>Right-click the project name → <strong>Git</strong> → <strong>Manage Remotes</strong>.</li>
+<li>In the <strong>Git Remotes</strong> dialog, click <code>+</code>.</li>
+<li>Enter the remote name (e.g., <code>origin</code>) and URL (e.g., <code>https://gitee.com/kxzhu93/git_test.git</code>).</li>
+</ol>
+<p>Note: A local repository can be associated with multiple remote repositories.</p>
+<h2 id="3-Push-to-a-Remote-Repository"><a href="#3-Push-to-a-Remote-Repository" class="headerlink" title="3. Push to a Remote Repository"></a>3. Push to a Remote Repository</h2><p>Right-click the project name → <strong>Git</strong> → <strong>Push</strong>.</p>
+<ul>
+<li><code>master → origin:master</code>: Pushes the local <code>master</code> branch to the remote <code>origin</code>‘s <code>master</code> branch.</li>
+</ul>
+<h2 id="4-Pull-from-a-Remote-Repository"><a href="#4-Pull-from-a-Remote-Repository" class="headerlink" title="4. Pull from a Remote Repository"></a>4. Pull from a Remote Repository</h2><p>If the remote repository has updates:</p>
+<ol>
+<li>Use <strong>Git</strong> → <strong>Pull</strong>.</li>
+<li>Or, click the Git icon → <strong>Update Project</strong>.</li>
+</ol>
+<p>You can check the remote repository and branch under <strong>Remote</strong>.</p>
+<h1 id="Branch-Operations"><a href="#Branch-Operations" class="headerlink" title="Branch Operations"></a>Branch Operations</h1><h2 id="1-View-Branches"><a href="#1-View-Branches" class="headerlink" title="1. View Branches"></a>1. View Branches</h2><ul>
+<li>Use <strong>Git → Branches</strong>.</li>
+<li>Or, check the bottom-right corner of IDEA for branch information.</li>
+</ul>
+<h2 id="2-Create-a-Branch"><a href="#2-Create-a-Branch" class="headerlink" title="2. Create a Branch"></a>2. Create a Branch</h2><ul>
+<li>Click the branch menu at the bottom-right corner of IDEA → <strong>New Branch</strong>.</li>
+<li>Select <strong>Checkout Branch</strong> to switch to the new branch upon creation.</li>
+</ul>
+<h2 id="3-Switch-Branches"><a href="#3-Switch-Branches" class="headerlink" title="3. Switch Branches"></a>3. Switch Branches</h2><ul>
+<li>Click the branch menu at the bottom-right corner of IDEA → Select the branch under <strong>Local Branches</strong> → <strong>Checkout</strong>.</li>
+</ul>
+<h2 id="4-Push-a-Branch-to-a-Remote-Repository"><a href="#4-Push-a-Branch-to-a-Remote-Repository" class="headerlink" title="4. Push a Branch to a Remote Repository"></a>4. Push a Branch to a Remote Repository</h2><p>Push a locally created branch to a remote repository:</p>
+<ul>
+<li>Click the branch menu at the bottom-right corner of IDEA → Select the branch → <strong>Push</strong>.</li>
+</ul>
+<h2 id="5-Merge-Branches"><a href="#5-Merge-Branches" class="headerlink" title="5. Merge Branches"></a>5. Merge Branches</h2><p>To merge branches in IDEA:</p>
+<ol>
+<li>Switch to the target branch (e.g., <code>main</code>).</li>
+<li>Click the branch to merge (e.g., <code>b1</code>) → <strong>Merge into Current</strong>.</li>
+</ol>
+<p>Example: Merge branch <code>b1</code> into <code>main</code>.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="git常用命令">
+                  <i class="fa fa-chevron-left"></i> git常用命令
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/21/Common%20Linux%20Commands/" rel="next" title="Common Linux Commands">
+                  Common Linux Commands <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kathy-kx</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
