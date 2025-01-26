@@ -857,7 +857,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-01-25 21:04:30" itemprop="dateModified" datetime="2025-01-25T21:04:30-05:00">2025-01-25</time>
+      <time title="Modified: 2025-01-25 21:12:43" itemprop="dateModified" datetime="2025-01-25T21:12:43-05:00">2025-01-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -923,7 +923,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/21/Common%20Git%20Commands/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -941,7 +941,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">git常用命令</a>
+          <a href="/2023/11/21/Common%20Git%20Commands/" class="post-title-link" itemprop="url">Common Git Commands</a>
         </h2>
 
         <div class="post-meta-container">
@@ -959,7 +959,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-23 03:44:59" itemprop="dateModified" datetime="2023-11-23T03:44:59-05:00">2023-11-23</time>
+      <time title="Modified: 2025-01-25 22:14:15" itemprop="dateModified" datetime="2025-01-25T22:14:15-05:00">2025-01-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -981,18 +981,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="git全局设置"><a href="#git全局设置" class="headerlink" title="git全局设置"></a>git全局设置</h1><p>安装git后（macOS安装Xcode即可），就可以设置用户信息(用户名和邮箱)。每次git提交时都会使用该用户信息。</p>
-<h2 id="设置用户信息"><a href="#设置用户信息" class="headerlink" title="设置用户信息"></a>设置用户信息</h2><p>打开终端，输入</p>
-<p>git config –global user.name “随便写用户名 只是一个标识符”</p>
-<p>例如，<code>~ % git config --global user.name &quot;kxzhu&quot;</code></p>
-<p>git config –global user.email “随便写邮箱”</p>
-<p>例如，<code>~ % git config --global user.email &quot;xxxxxx@qq.com&quot;</code></p>
-<h2 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h2><p><code>git config --list</code></p>
-<h1 id="获取git仓库"><a href="#获取git仓库" class="headerlink" title="获取git仓库"></a>获取git仓库</h1><p>要使用git进行版本控制，首先要获取git仓库</p>
-<p>获取git仓库有两种方式：</p>
+          <h1 id="Global-Git-Settings"><a href="#Global-Git-Settings" class="headerlink" title="Global Git Settings"></a>Global Git Settings</h1><p>After installing Git (macOS users can install Xcode), you need to configure user information (username and email). This user information will be used for every Git commit.</p>
+<h2 id="Setting-User-Information"><a href="#Setting-User-Information" class="headerlink" title="Setting User Information"></a>Setting User Information</h2><p>Open the terminal and enter the following commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;YourUsername&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Example: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;kxzhu&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;YourEmail&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Example: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;xxxxxx@qq.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Viewing-Configuration-Information"><a href="#Viewing-Configuration-Information" class="headerlink" title="Viewing Configuration Information"></a>Viewing Configuration Information</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+
+<h1 id="Getting-a-Git-Repository"><a href="#Getting-a-Git-Repository" class="headerlink" title="Getting a Git Repository"></a>Getting a Git Repository</h1><p>To use Git for version control, you first need to obtain a Git repository. There are two ways to do this:</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
+              <a class="btn" href="/2023/11/21/Common%20Git%20Commands/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
